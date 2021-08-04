@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc",
+    "lint": "eslint src/**/*.ts",
     "start:dev": "./node_modules/.bin/nodemon --watch ./lib --exec node --inspect lib/index.js, ./node_modules/.bin/nodemon --watch ./lib --exec \"node --inspect lib/index.js\"",
     "start:dev:services": "docker-compose --project-name=mentali up",
-    "lint": "eslint src/**/*.ts"
+    "start": "node lib/index.js",
+    "watch": "rm -rf ./lib/ && tsc --project . --watch"
   },
   "author": "",
   "license": "ISC",
