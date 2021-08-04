@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "./node_modules/.bin/nodemon --watch ./lib --exec node --inspect lib/index.js, ./node_modules/.bin/nodemon --watch ./lib --exec \"node --inspect lib/index.js\"",
+    "start:dev:services": "docker-compose --project-name=mentali up",
     "lint": "eslint src/**/*.ts"
   },
   "author": "",
