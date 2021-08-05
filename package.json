@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dev:start-services": "docker-compose --project-name=mentali up"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.5.0",
@@ -14,11 +15,13 @@
     "@chakra-ui/react": "^1.6.5",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
+    "dotenv": "^10.0.0",
     "framer-motion": "^4.1.17",
     "next": "11.0.1",
     "next-pwa": "^5.2.24",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "typeorm": "^0.2.36"
   },
   "devDependencies": {
     "@types/react": "17.0.15",
