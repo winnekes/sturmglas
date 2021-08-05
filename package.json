@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "dev:start-services": "docker-compose --project-name=mentali up"
+    "dev:start-services": "docker-compose --env-file .env.local --project-name=mentali up"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.5.0",

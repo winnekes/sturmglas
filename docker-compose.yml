@@ -5,6 +5,6 @@ services:
     ports:
     - 5432:5432
     environment:
-      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_PASSWORD=${TYPEORM_PASSWORD}
     volumes:
     - ./data/postgres:/var/lib/postgres/data
