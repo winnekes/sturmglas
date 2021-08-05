@@ -1,6 +1,6 @@
-import { Column, Entity, Index } from "typeorm";
+import {Column, Entity, Index} from "typeorm";
 
-// TODO: relations
+// TODO: add relationships
 @Entity()
 export class User {
   @Index({ unique: true })
