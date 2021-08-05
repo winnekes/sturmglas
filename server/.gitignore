@@ -1,8 +1,0 @@
-.idea
-.vscode
-.env
-.DS_Store
-node_modules
-lib/
-.env.prod
-docs/
