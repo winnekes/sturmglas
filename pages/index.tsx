@@ -9,14 +9,14 @@ export default function Home() {
   const { user, error, isLoading } = useUser();
   const router = useRouter();
 
-  // TODO nicer splash screen
-  // TODO landing page
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (user) router.push(navigation.home);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, [user]);
+  // // TODO nicer splash screen
+  // // TODO landing page
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     if (user) router.push(navigation.home);
+  //   }, 1000);
+  //   return () => clearTimeout(timer);
+  // }, [user]);
 
   // todo seo
   return (
@@ -27,7 +27,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Splash />
+      {/*<Splash />*/}
     </div>
   );
 }

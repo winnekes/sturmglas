@@ -7,45 +7,37 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
+import { useRef } from "react";
+import { padding } from "../../styles/theme";
+import { Logo } from "../logo";
+import { MobileMenu } from "./mobile-menu";
 import { navigationItems } from "./navigation";
 
 export const MobileNavigation = () => {
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
+  const btnRef = useRef(null);
   return (
     <>
       <Flex
         display={{ base: "flex", md: "none" }}
         align="center"
         justify="space-between"
-        p={2}
+        px={padding}
       >
+        <Logo size="64px" />
         <Flex align="center" justify="space-between">
           <IconButton
-            ml={5}
             onClick={onToggle}
             icon={
               isOpen ? <CloseIcon boxSize={6} /> : <HamburgerIcon boxSize={6} />
             }
+            justifyContent="flex-end"
             variant="link"
             aria-label="Toggle Navigation"
           />
         </Flex>
       </Flex>
-      <Collapse in={isOpen} animateOpacity>
-        <Stack
-          bg="white"
-          p={4}
-          spacing={7}
-          display={{ md: "none" }}
-          textAlign="right"
-        >
-          {navigationItems.map((navItem) => (
-            <Text fontWeight={600} key={navItem.label} color="gray.600">
-              {navItem.label}
-            </Text>
-          ))}
-        </Stack>
-      </Collapse>
+      <MobileMenu finalFocusRef={btnRef} isOpen={isOpen} onClose={onClose} />
     </>
   );
 };
