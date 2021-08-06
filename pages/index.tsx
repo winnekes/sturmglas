@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Splash } from "../components/splash";
-import { navigation } from "../navigation";
+import { navigation } from "../components/navigation/navigation";
 
 export default function Home() {
   const { user, error, isLoading } = useUser();
