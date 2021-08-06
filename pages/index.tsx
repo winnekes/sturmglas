@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Splash } from "../components/splash";
+import { navigation } from "../navigation";
 
 export default function Home() {
   const { user, error, isLoading } = useUser();
@@ -12,7 +13,7 @@ export default function Home() {
   // TODO landing page
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (user) router.push("/test");
+      if (user) router.push(navigation.home);
     }, 1000);
     return () => clearTimeout(timer);
   }, [user]);
