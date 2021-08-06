@@ -1,17 +1,17 @@
 import {Column, CreateDateColumn, Entity, Index, OneToMany, UpdateDateColumn,} from "typeorm";
-import {MoodEntity} from "../habit/mood-entity";
+import {Mood} from "../mood/mood-entity";
 
-// TODO: add relationships
+// TODO save email when user signs in via auth0
 @Entity()
-export class UserEntity {
+export class User {
   @Index({ unique: true })
   @Column("varchar")
   email!: string;
 
-  @OneToMany(() => MoodEntity, (mood) => mood.user, {
+  @OneToMany(() => Mood, (mood) => mood.user, {
     onDelete: "CASCADE",
   })
-  moods!: MoodEntity[];
+  moods!: Mood[];
 
   @CreateDateColumn("timestamptz")
   createdAt!: Date;

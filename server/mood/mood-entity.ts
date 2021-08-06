@@ -1,8 +1,8 @@
 import {IsDate, IsEnum} from "class-validator";
 import {Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn,} from "typeorm";
-import {UserEntity} from "../identity-access/user-entity";
+import {User} from "../identity-access/user-entity";
 
-enum Mood {
+enum Moods {
   ANGRY = "ANGRY",
   SAD = "SAD",
   ANXIOUS = "ANXIOUS",
@@ -11,23 +11,23 @@ enum Mood {
 
 // TODO: add relationships
 @Entity()
-export class MoodEntity {
+export class Mood {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @IsEnum(Mood)
+  @IsEnum(Moods)
   @Column("varchar")
-  mood!: Mood;
+  mood!: Moods;
 
   @IsDate()
   @Column()
   date!: Date;
 
-  @ManyToOne(() => UserEntity, (user) => user.moods, {
+  @ManyToOne(() => User, (user) => user.moods, {
     cascade: true,
     onDelete: "CASCADE",
   })
-  user!: UserEntity;
+  user!: User;
 
   @CreateDateColumn("timestamptz")
   createdAt!: Date;
