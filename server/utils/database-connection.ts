@@ -1,7 +1,12 @@
 import "reflect-metadata";
-import {Connection, ConnectionOptions, createConnection, getConnectionOptions,} from "typeorm";
-import {User} from "../identity-access/user-entity";
-import {Mood} from "../mood/mood-entity";
+import {
+  Connection,
+  ConnectionOptions,
+  createConnection,
+  getConnectionOptions,
+} from "typeorm";
+import { User } from "../identity-access/user-entity";
+import { Mood } from "../mood/mood-entity";
 
 export const initializeDatabase = async (
   optionOverrides: Record<string, any> = {}

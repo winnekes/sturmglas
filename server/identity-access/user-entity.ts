@@ -1,5 +1,12 @@
-import {Column, CreateDateColumn, Entity, Index, OneToMany, UpdateDateColumn,} from "typeorm";
-import {Mood} from "../mood/mood-entity";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  Index,
+  OneToMany,
+  UpdateDateColumn,
+} from "typeorm";
+import { Mood } from "../mood/mood-entity";
 
 // TODO save email when user signs in via auth0
 @Entity()
