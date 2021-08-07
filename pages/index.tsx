@@ -2,6 +2,7 @@ import { useUser } from "@auth0/nextjs-auth0";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { PageWrapper } from "../components/page-wrapper";
 import { Splash } from "../components/splash";
 import { navigation } from "../components/navigation/navigation";
 
@@ -20,14 +21,12 @@ export default function Home() {
 
   // todo seo
   return (
-    <div>
+    <PageWrapper>
       <Head>
         <title>mentali</title>
         <meta name="description" content="mentali" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      {/*<Splash />*/}
-    </div>
+    </PageWrapper>
   );
 }

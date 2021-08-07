@@ -6,10 +6,10 @@ type Props = {
   size: string;
 };
 
-export const Logo: FunctionComponent<Props> = ({ size }) => {
+export const Buddy: FunctionComponent<Props> = ({ size }) => {
   return (
     <Link href="/" passHref>
-      <Image src="/logo.png" boxSize={size} cursor="pointer" />
+      <Image src="/logo.png" boxSize={size} cursor="pointer" my={12} />
     </Link>
   );
 };

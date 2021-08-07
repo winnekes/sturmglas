@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useRef } from "react";
 import { padding } from "../../styles/theme";
-import { Logo } from "../logo";
+import { Buddy } from "../buddy";
 import { MobileMenu } from "./mobile-menu";
 import { navigationItems } from "./navigation";
 
@@ -24,18 +24,16 @@ export const MobileNavigation = () => {
         justify="space-between"
         px={padding}
       >
-        <Logo size="64px" />
-        <Flex align="center" justify="space-between">
-          <IconButton
-            onClick={onToggle}
-            icon={
-              isOpen ? <CloseIcon boxSize={6} /> : <HamburgerIcon boxSize={6} />
-            }
-            justifyContent="flex-end"
-            variant="link"
-            aria-label="Toggle Navigation"
-          />
-        </Flex>
+        Hello, Simona
+        <IconButton
+          onClick={onToggle}
+          icon={
+            isOpen ? <CloseIcon boxSize={6} /> : <HamburgerIcon boxSize={6} />
+          }
+          justifyContent="flex-end"
+          variant="link"
+          aria-label="Toggle Navigation"
+        />
       </Flex>
       <MobileMenu finalFocusRef={btnRef} isOpen={isOpen} onClose={onClose} />
     </>

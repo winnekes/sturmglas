@@ -1,7 +1,7 @@
 import { Container, Flex, Stack, Link, VStack } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { width } from "../../styles/theme";
-import { Logo } from "../logo";
+import { Buddy } from "../buddy";
 import { navigationItems } from "./navigation";
 
 export const DesktopNavigation = () => {
@@ -12,9 +12,8 @@ export const DesktopNavigation = () => {
       py={{ base: 2 }}
       //px={{ base: 4 }}
       align="center"
-      justify="space-between"
+      justify="flex-end"
     >
-      <Logo size="128px" />
       <Flex ml={10} py={5} display={{ base: "none", md: "flex" }}>
         <Stack direction="row" spacing={4}>
           {navigationItems.map((navItem) => (

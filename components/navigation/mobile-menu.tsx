@@ -9,7 +9,7 @@ import {
 import { Button, Center, Stack, Text } from "@chakra-ui/react";
 import { MutableRefObject } from "react";
 import { colors } from "../../styles/theme";
-import { Logo } from "../logo";
+import { Buddy } from "../buddy";
 import { navigationItems } from "./navigation";
 
 // TODO replace with user data
@@ -32,7 +32,7 @@ export const MobileMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
 
         <DrawerBody>
           <Center>
-            <Logo size="64px" />
+            <Buddy size="64px" />
           </Center>
           <Stack p={4} spacing={7} display={{ md: "none" }}>
             {navigationItems.map((navItem) => (
