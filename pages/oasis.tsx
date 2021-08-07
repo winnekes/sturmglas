@@ -1,5 +1,5 @@
-import { PageWrapper } from "../components/page-wrapper";
-import { Panel } from "../components/panel";
+import { PageWrapper } from "../app/components/page-wrapper";
+import { Panel } from "../app/components/panel";
 
 export default function Oasis() {
   return (

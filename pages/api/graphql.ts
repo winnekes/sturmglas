@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import type { PageConfig } from "next";
 import Cors from "micro-cors";
-import { startGraphqlServer } from "../../server/graphql/server";
+import { startGraphqlServer } from "../../server/graphql-server";
 
 const cors = Cors();
 
