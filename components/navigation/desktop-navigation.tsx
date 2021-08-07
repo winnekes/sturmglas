@@ -1,12 +1,9 @@
-import { useUser } from "@auth0/nextjs-auth0";
 import { Flex, Stack, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { padding } from "../../styles/theme";
 import { authNavigationItems, openNavigationItems } from "./navigation";
 
 export const DesktopNavigation = () => {
-  const { user } = useUser();
-
   // to render cta button
   return (
     <Flex
@@ -20,7 +17,7 @@ export const DesktopNavigation = () => {
     >
       <Flex ml={10} py={5} display={{ base: "none", md: "flex" }}>
         <Stack direction="row" spacing={4}>
-          {user ? (
+          {true ? (
             <>
               {authNavigationItems.map((navItem) => (
                 <NextLink key={navItem.label} href={navItem.href} passHref>
