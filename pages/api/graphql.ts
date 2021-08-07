@@ -1,47 +1,29 @@
 import "reflect-metadata";
-import { ApolloServer, gql } from "apollo-server-micro";
+import { ApolloServer } from "apollo-server-micro";
 import type { PageConfig } from "next";
 import Cors from "micro-cors";
+import { buildSchema } from "type-graphql";
+
+import { withApiAuthRequired, getSession } from "@auth0/nextjs-auth0";
+import { RecipeResolver } from "../../server/graphql/mood/recipe.resolver";
 
 const cors = Cors();
 
-// TODO graphql-codegen
-// TODO type-graphql
-const typeDefs = gql`
-  type Product {
-    # id
-    id: Int
-    name: String
-    price: Int
-  }
-
-  type Query {
-    blipb: [Product]
-  }
-`;
-
-// Provide resolver functions for your schema fields
-const resolvers = {
-  Query: {
-    blipb: () => {
-      return [{ id: 1, name: "", price: 30 }];
-    },
-  },
-};
-
-const apolloServer = new ApolloServer({
-  typeDefs,
-  resolvers,
-});
-
-await apolloServer.start();
-
-export default cors((req, res) => {
+export default cors(async (req, res) => {
   if (req.method === "OPTIONS") {
     res.end();
     return false;
   }
 
+  const schema = await buildSchema({
+    resolvers: [RecipeResolver],
+  });
+
+  const apolloServer = new ApolloServer({
+    schema,
+  });
+
+  await apolloServer.start();
   return apolloServer.createHandler({
     path: "/api/graphql",
   })(req, res);
