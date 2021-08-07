@@ -7,6 +7,7 @@ import { Center, Container, Flex, Spacer } from "@chakra-ui/react";
 import { Action, Fab } from "react-tiny-fab";
 import { width } from "../styles/theme";
 import { Buddy } from "./buddy";
+import { FloatingAction } from "./floating-action";
 import { Navbar } from "./navigation/navbar";
 import { Splash } from "./splash";
 
@@ -29,19 +30,12 @@ export const PageWrapper: FunctionComponent<Props> = ({
     <>
       <Container maxW={width} p={0} pt={5}>
         <Navbar />
-        <Center>
-          <Buddy size="200px" />
-        </Center>
+        {/*<Center>*/}
+        {/*  <Buddy size="200px" />*/}
+        {/*</Center>*/}
         {children}
       </Container>{" "}
-      <Fab
-        icon={<AddIcon />}
-        event={"click"}
-        alwaysShowTitle={true}
-        onClick={() => {}}
-      >
-        <Action text="Email" onClick={() => {}} />
-      </Fab>
+      <FloatingAction />
     </>
   );
 };

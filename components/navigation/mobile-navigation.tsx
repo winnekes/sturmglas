@@ -1,30 +1,20 @@
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
-import {
-  Collapse,
-  Flex,
-  IconButton,
-  Stack,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Flex, IconButton, useDisclosure } from "@chakra-ui/react";
 import { useRef } from "react";
 import { padding } from "../../styles/theme";
-import { Buddy } from "../buddy";
 import { MobileMenu } from "./mobile-menu";
-import { navigationItems } from "./navigation";
 
 export const MobileNavigation = () => {
-  const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
+  const { isOpen, onToggle, onClose } = useDisclosure();
   const btnRef = useRef(null);
   return (
     <>
       <Flex
         display={{ base: "flex", md: "none" }}
         align="center"
-        justify="space-between"
+        justify="flex-end"
         px={padding}
       >
-        Hello, Simona
         <IconButton
           onClick={onToggle}
           icon={
@@ -32,6 +22,7 @@ export const MobileNavigation = () => {
           }
           justifyContent="flex-end"
           variant="link"
+          color="white"
           aria-label="Toggle Navigation"
         />
       </Flex>
