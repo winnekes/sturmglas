@@ -1,35 +1,21 @@
 import "reflect-metadata";
-import { ApolloServer } from "apollo-server-micro";
 import type { PageConfig } from "next";
 import Cors from "micro-cors";
-import { buildSchema } from "type-graphql";
-
-import { withApiAuthRequired, getSession } from "@auth0/nextjs-auth0";
-import { RecipeResolver } from "../../server/graphql/mood/recipe.resolver";
+import { startGraphqlServer } from "../../server/graphql/server";
 
 const cors = Cors();
 
-export default cors(async (req, res) => {
+// To access GraphQL endpoint on IoT device we need to enable Cors, Next.js disables CORS by default
+export default cors((req, res) => {
   if (req.method === "OPTIONS") {
     res.end();
     return false;
   }
 
-  const schema = await buildSchema({
-    resolvers: [RecipeResolver],
-  });
-
-  const apolloServer = new ApolloServer({
-    schema,
-  });
-
-  await apolloServer.start();
-  return apolloServer.createHandler({
-    path: "/api/graphql",
-  })(req, res);
+  return startGraphqlServer(req, res);
 });
 
-// disable next js from handling this route
+// This disables Next.js from handling this route
 export const config: PageConfig = {
   api: {
     bodyParser: false,

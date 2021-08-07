@@ -1,4 +1,12 @@
-import { Arg, Field, Int, ObjectType, Query, Resolver } from "type-graphql";
+import {
+  Arg,
+  Authorized,
+  Field,
+  Int,
+  ObjectType,
+  Query,
+  Resolver,
+} from "type-graphql";
 
 @ObjectType()
 class Recipe {
@@ -14,6 +22,7 @@ class Recipe {
 
 @Resolver(Recipe)
 export class RecipeResolver {
+  @Authorized()
   @Query((returns) => Recipe)
   recipe(@Arg("id") id: string): Recipe {
     return { id: 1, title: "aaa", creationDate: new Date() };
