@@ -10,7 +10,7 @@ import { Button, Center, Stack, Text } from "@chakra-ui/react";
 import { MutableRefObject } from "react";
 import { colors } from "../../styles/theme";
 import { Buddy } from "../buddy";
-import { navigationItems } from "./navigation";
+import { openNavigationItems } from "./navigation";
 
 // TODO replace with user data
 type Props = {
@@ -18,6 +18,7 @@ type Props = {
   isOpen: boolean;
   onClose: () => void;
 };
+
 export const MobileMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
   return (
     <Drawer
@@ -35,7 +36,7 @@ export const MobileMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
             <Buddy size="64px" />
           </Center>
           <Stack p={4} spacing={7} display={{ md: "none" }}>
-            {navigationItems.map((navItem) => (
+            {openNavigationItems.map((navItem) => (
               <Text fontWeight={600} key={navItem.label}>
                 {navItem.label}
               </Text>

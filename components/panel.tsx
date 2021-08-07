@@ -7,6 +7,7 @@ export const Panel: FunctionComponent = ({ children }) => {
     <Box
       bg="white"
       borderTopRadius="25px"
+      borderBottomRadius={[null, null, "25px"]}
       r={0}
       p={padding}
       mt={10}
