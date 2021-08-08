@@ -30,15 +30,15 @@ export class Mood {
   @Column()
   date!: Date;
 
-  @ManyToOne(() => User, (user) => user.moods, {
+  @ManyToOne("User", "moods", {
     cascade: true,
     onDelete: "CASCADE",
   })
   user!: User;
 
-  @CreateDateColumn("timestamptz")
+  @CreateDateColumn()
   createdAt!: Date;
 
-  @UpdateDateColumn("timestamptz")
+  @UpdateDateColumn()
   updatedAt?: Date;
 }
