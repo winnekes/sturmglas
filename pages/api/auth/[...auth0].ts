@@ -1,5 +1,8 @@
 import { handleAuth, handleCallback, Session } from "@auth0/nextjs-auth0";
 import { NextApiRequest, NextApiResponse } from "next";
+import { getRepository, Repository } from "typeorm";
+import { initializeDatabase } from "../../../server/database-connection";
+import { User } from "../../../server/entities/user-entity";
 
 // Here magic happens through Auth0
 // This exposes the following api paths:
@@ -10,15 +13,27 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 // todo DB connection
 // store user if not exists
-const afterCallback = (
+const afterCallback = async (
   req: NextApiRequest,
   res: NextApiResponse,
   session: Session,
   state: {}
 ) => {
-  {
-    console.log({ session });
+  await initializeDatabase();
+  const userRepository = getRepository("User") as Repository<User>;
+  const existingUser = await userRepository.findOne({
+    where: { authId: session.user?.sub },
+  });
+
+  if (existingUser) {
+    return session;
   }
+
+  const user = userRepository.create();
+  user.authId = session.user.sub ?? "";
+  user.email = session.user.email ?? "";
+  await userRepository.save(user);
+
   return session;
 };
 
