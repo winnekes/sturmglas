@@ -1,5 +1,5 @@
 query ExampleQuery {
-  recipe {
+  recipes {
     id
   }
 }

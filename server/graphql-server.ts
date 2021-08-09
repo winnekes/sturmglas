@@ -2,7 +2,7 @@ import { Claims, getSession, handleCallback } from "@auth0/nextjs-auth0";
 import { ApolloServer } from "apollo-server-micro";
 import { IncomingMessage, ServerResponse } from "http";
 import { AuthChecker, buildSchema } from "type-graphql";
-import { RecipeResolver } from "./graphql/mood/recipe.resolver";
+import { RecipeResolver } from "./graphql/mood/recipe-resolver";
 
 export interface Context {
   user?: Claims | null;

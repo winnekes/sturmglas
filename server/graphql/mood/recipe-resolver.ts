@@ -20,9 +20,8 @@ class Recipe {
   creationDate!: Date;
 }
 
-@Resolver(Recipe)
+@Resolver()
 export class RecipeResolver {
-  @Authorized()
   @Query((returns) => Recipe)
   recipe(@Arg("id") id: string): Recipe {
     return { id: 1, title: "aaa", creationDate: new Date() };

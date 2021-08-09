@@ -6,7 +6,7 @@ import { startGraphqlServer } from "../../server/graphql-server";
 
 const cors = Cors();
 // TODO: check if this is acceptable or if I need to create connection on demand
-await initializeDatabase();
+//await initializeDatabase();
 
 // To access GraphQL endpoint on IoT device we need to enable Cors, Next.js disables CORS by default
 export default cors(async (req, res) => {
