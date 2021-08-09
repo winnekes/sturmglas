@@ -1,11 +1,11 @@
-import { Claims, getSession, handleCallback } from "@auth0/nextjs-auth0";
+import { Claims, getSession } from "@auth0/nextjs-auth0";
 import { ApolloServer } from "apollo-server-micro";
 import { IncomingMessage, ServerResponse } from "http";
 import { AuthChecker, buildSchema } from "type-graphql";
-import { RecipeResolver } from "./graphql/mood/recipe-resolver";
+import { MoodQueries } from "./mood/moods-query";
 
 export interface Context {
-  user?: Claims | null;
+  authId?: string | null;
 }
 export const startGraphqlServer = async (
   req: IncomingMessage,
@@ -22,9 +22,9 @@ export const startGraphqlServer = async (
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
       authChecker,
-      resolvers: [RecipeResolver],
+      resolvers: [MoodQueries],
     }),
-    context: { user: getSession(req, res)?.user },
+    context: { authId: getSession(req, res)?.user.sub },
   });
 
   await apolloServer.start();

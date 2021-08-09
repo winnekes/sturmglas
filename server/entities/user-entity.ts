@@ -7,13 +7,16 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Mood } from "../mood/mood-entity";
+import { Emotion, Mood } from "./mood-entity";
 
 // TODO save email when user signs in via auth0
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id!: number;
+
+  @Column()
+  authId!: string;
 
   @Index({ unique: true })
   @Column("varchar")

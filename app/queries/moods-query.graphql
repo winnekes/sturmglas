@@ -1,0 +1,7 @@
+query MoodsQuery {
+  moods {
+    id
+    mood
+    date
+  }
+}

@@ -1,33 +1,30 @@
 import "reflect-metadata";
 import {
-  Connection,
   ConnectionOptions,
   createConnection,
   getConnection,
   getConnectionOptions,
 } from "typeorm";
-import { User } from "./identity-access/user-entity";
-import { Mood } from "./mood/mood-entity";
+import { Mood } from "./entities/mood-entity";
+import { User } from "./entities/user-entity";
 
 export const initializeDatabase = async (
   optionOverrides: Record<string, any> = {}
 ) => {
   try {
-    const conn = getConnection();
-    console.log("dde");
-    return conn;
+    return getConnection();
   } catch (e) {
     const connectionOptions = await getConnectionOptions();
     const options: ConnectionOptions = {
       ...connectionOptions,
       synchronize: true,
       logging: true,
-      entities: [User, Mood],
+      entities: [Mood, User],
       //migrations: [__dirname + "/migrations/*.ts"],
       ...optionOverrides,
     };
 
     console.log("dd");
-    await createConnection(options);
+    return createConnection(options);
   }
 };

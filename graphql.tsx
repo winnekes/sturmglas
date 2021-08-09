@@ -17,61 +17,66 @@ export type Scalars = {
 };
 
 
+export enum Mood {
+  Angry = 'ANGRY',
+  Sad = 'SAD',
+  Anxious = 'ANXIOUS',
+  Happy = 'HAPPY'
+}
+
+export type MoodType = {
+  __typename?: 'MoodType';
+  id: Scalars['Int'];
+  mood: Mood;
+  date: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+};
+
 export type Query = {
   __typename?: 'Query';
-  recipe: Recipe;
-  recipes: Array<Recipe>;
+  moods: Array<MoodType>;
+  recipes: Array<MoodType>;
 };
 
-
-export type QueryRecipeArgs = {
-  id: Scalars['String'];
-};
-
-export type Recipe = {
-  __typename?: 'Recipe';
-  id: Scalars['Int'];
-  title: Scalars['String'];
-  creationDate: Scalars['DateTime'];
-};
-
-export type ExampleQueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type MoodsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ExampleQueryQuery = { __typename?: 'Query', recipes: Array<{ __typename?: 'Recipe', id: number }> };
+export type MoodsQueryQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, mood: Mood, date: any }> };
 
 
-export const ExampleQueryDocument = gql`
-    query ExampleQuery {
-  recipes {
+export const MoodsQueryDocument = gql`
+    query MoodsQuery {
+  moods {
     id
+    mood
+    date
   }
 }
     `;
 
 /**
- * __useExampleQueryQuery__
+ * __useMoodsQueryQuery__
  *
- * To run a query within a React component, call `useExampleQueryQuery` and pass it any options that fit your needs.
- * When your component renders, `useExampleQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useMoodsQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMoodsQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useExampleQueryQuery({
+ * const { data, loading, error } = useMoodsQueryQuery({
  *   variables: {
  *   },
  * });
  */
-export function useExampleQueryQuery(baseOptions?: Apollo.QueryHookOptions<ExampleQueryQuery, ExampleQueryQueryVariables>) {
+export function useMoodsQueryQuery(baseOptions?: Apollo.QueryHookOptions<MoodsQueryQuery, MoodsQueryQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ExampleQueryQuery, ExampleQueryQueryVariables>(ExampleQueryDocument, options);
+        return Apollo.useQuery<MoodsQueryQuery, MoodsQueryQueryVariables>(MoodsQueryDocument, options);
       }
-export function useExampleQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ExampleQueryQuery, ExampleQueryQueryVariables>) {
+export function useMoodsQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoodsQueryQuery, MoodsQueryQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ExampleQueryQuery, ExampleQueryQueryVariables>(ExampleQueryDocument, options);
+          return Apollo.useLazyQuery<MoodsQueryQuery, MoodsQueryQueryVariables>(MoodsQueryDocument, options);
         }
-export type ExampleQueryQueryHookResult = ReturnType<typeof useExampleQueryQuery>;
-export type ExampleQueryLazyQueryHookResult = ReturnType<typeof useExampleQueryLazyQuery>;
-export type ExampleQueryQueryResult = Apollo.QueryResult<ExampleQueryQuery, ExampleQueryQueryVariables>;
+export type MoodsQueryQueryHookResult = ReturnType<typeof useMoodsQueryQuery>;
+export type MoodsQueryLazyQueryHookResult = ReturnType<typeof useMoodsQueryLazyQuery>;
+export type MoodsQueryQueryResult = Apollo.QueryResult<MoodsQueryQuery, MoodsQueryQueryVariables>;

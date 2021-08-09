@@ -7,9 +7,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { User } from "../identity-access/user-entity";
+import { User } from "./user-entity";
 
-enum Moods {
+export enum Emotion {
   ANGRY = "ANGRY",
   SAD = "SAD",
   ANXIOUS = "ANXIOUS",
@@ -22,9 +22,9 @@ export class Mood {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @IsEnum(Moods)
+  @IsEnum(Emotion)
   @Column("varchar")
-  mood!: Moods;
+  mood!: Emotion;
 
   @IsDate()
   @Column()
