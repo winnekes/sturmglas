@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { User } from "./user-entity";
+import { User } from "../identity-access/user-entity";
 
 export enum Emotion {
   ANGRY = "ANGRY",
@@ -16,7 +16,6 @@ export enum Emotion {
   HAPPY = "HAPPY",
 }
 
-// TODO: add relationships
 @Entity()
 export class Mood {
   @PrimaryGeneratedColumn()

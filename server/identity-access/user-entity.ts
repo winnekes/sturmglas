@@ -7,9 +7,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Emotion, Mood } from "./mood-entity";
+import { Emotion, Mood } from "../mood/mood-entity";
 
-// TODO save email when user signs in via auth0
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()

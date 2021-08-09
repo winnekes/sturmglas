@@ -1,7 +1,7 @@
-import { Arg, Authorized, Ctx, Query, Resolver } from "type-graphql";
-import {getRepository, Repository} from "typeorm";
+import { Authorized, Ctx, Query, Resolver } from "type-graphql";
+import { getRepository, Repository } from "typeorm";
 import { Context } from "../graphql-server";
-import { Emotion, Mood } from "../entities/mood-entity";
+import { Mood } from "./mood-entity";
 import { MoodType } from "./mood-type";
 
 @Resolver()

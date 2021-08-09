@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType, registerEnumType } from "type-graphql";
-import { Emotion } from "../entities/mood-entity";
+import { Emotion } from "./mood-entity";
 
 registerEnumType(Emotion, { name: "Emotion" });
 
