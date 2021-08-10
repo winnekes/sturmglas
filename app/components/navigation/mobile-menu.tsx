@@ -6,7 +6,7 @@ import {
   DrawerOverlay,
   Drawer,
 } from "@chakra-ui/modal";
-import { Button, Center, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Stack, Text } from "@chakra-ui/react";
 import { MutableRefObject } from "react";
 import { colors } from "../../styles/theme";
 import { Buddy } from "../buddy";
@@ -37,9 +37,9 @@ export const MobileMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
           </Center>
           <Stack p={4} spacing={7} display={{ md: "none" }}>
             {openNavigationItems.map((navItem) => (
-              <Text fontWeight={600} key={navItem.label}>
+              <Box fontWeight={600} key={navItem.label}>
                 {navItem.label}
-              </Text>
+              </Box>
             ))}
           </Stack>
         </DrawerBody>

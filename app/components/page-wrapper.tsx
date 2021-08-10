@@ -5,6 +5,7 @@ import { width } from "../styles/theme";
 import { FloatingAction } from "./floating-action";
 import { Navbar } from "./navigation/navbar";
 
+// TODO: useUserHook here so we don't have to call it in every component?
 export const PageWrapper: FunctionComponent = ({ children }) => {
   const router = useRouter();
 

@@ -35,8 +35,20 @@ export type MoodType = {
 export type Query = {
   __typename?: 'Query';
   moods: Array<MoodType>;
-  recipes: Array<MoodType>;
+  mood: MoodType;
 };
+
+
+export type QueryMoodArgs = {
+  id: Scalars['Int'];
+};
+
+export type MoodQueryQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type MoodQueryQuery = { __typename?: 'Query', mood: { __typename?: 'MoodType', id: number, mood: Emotion, date: any } };
 
 export type MoodsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -44,6 +56,43 @@ export type MoodsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 export type MoodsQueryQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, mood: Emotion, date: any }> };
 
 
+export const MoodQueryDocument = gql`
+    query MoodQuery($id: Int!) {
+  mood(id: $id) {
+    id
+    mood
+    date
+  }
+}
+    `;
+
+/**
+ * __useMoodQueryQuery__
+ *
+ * To run a query within a React component, call `useMoodQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMoodQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMoodQueryQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useMoodQueryQuery(baseOptions: Apollo.QueryHookOptions<MoodQueryQuery, MoodQueryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MoodQueryQuery, MoodQueryQueryVariables>(MoodQueryDocument, options);
+      }
+export function useMoodQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoodQueryQuery, MoodQueryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MoodQueryQuery, MoodQueryQueryVariables>(MoodQueryDocument, options);
+        }
+export type MoodQueryQueryHookResult = ReturnType<typeof useMoodQueryQuery>;
+export type MoodQueryLazyQueryHookResult = ReturnType<typeof useMoodQueryLazyQuery>;
+export type MoodQueryQueryResult = Apollo.QueryResult<MoodQueryQuery, MoodQueryQueryVariables>;
 export const MoodsQueryDocument = gql`
     query MoodsQuery {
   moods {
