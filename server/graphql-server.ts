@@ -23,6 +23,7 @@ export const startGraphqlServer = async (
     schema: await buildSchema({
       authChecker,
       resolvers: [MoodQueries],
+      emitSchemaFile: true,
     }),
     context: { authId: getSession(req, res)?.user.sub },
   });
