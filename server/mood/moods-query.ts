@@ -1,4 +1,4 @@
-import { Authorized, Ctx, Query, Resolver } from "type-graphql";
+import { Arg, Authorized, Ctx, Int, Query, Resolver } from "type-graphql";
 import { getRepository, Repository } from "typeorm";
 import { Context } from "../graphql-server";
 import { Mood } from "./mood-entity";
@@ -10,18 +10,22 @@ export class MoodQueries {
 
   @Authorized()
   @Query((returns) => [MoodType])
-  async moods(@Ctx() context: Context): Promise<MoodType[]> {
-    console.log({ context });
-    const moods = await this.moodRepository.find({
+  moods(@Ctx() context: Context): Promise<MoodType[]> {
+    return this.moodRepository.find({
       relations: ["user"],
       where: { user: { authId: context.authId } },
     });
-    console.log({ moods });
-    return moods;
   }
 
-  @Query((returns) => [MoodType])
-  recipes() {
-    return [{ id: 1, title: "aaa", creationDate: new Date() }];
+  // TODO: separate class for args for easier validation
+  @Query((returns) => MoodType)
+  mood(
+    @Arg("id", (type) => Int) id: number,
+    @Ctx() context: Context
+  ): Promise<MoodType | undefined> {
+    return this.moodRepository.findOne({
+      relations: ["user"],
+      where: { user: { authId: context.authId }, id },
+    });
   }
 }
