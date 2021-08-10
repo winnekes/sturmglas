@@ -22,7 +22,10 @@ export class Mood {
   id!: number;
 
   @IsEnum(Emotion)
-  @Column("varchar")
+  @Column({
+    type: "enum",
+    enum: Emotion,
+  })
   mood!: Emotion;
 
   @IsDate()
