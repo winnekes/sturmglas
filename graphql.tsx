@@ -17,7 +17,7 @@ export type Scalars = {
 };
 
 
-export enum Mood {
+export enum Emotion {
   Angry = 'ANGRY',
   Sad = 'SAD',
   Anxious = 'ANXIOUS',
@@ -27,7 +27,7 @@ export enum Mood {
 export type MoodType = {
   __typename?: 'MoodType';
   id: Scalars['Int'];
-  mood: Mood;
+  mood: Emotion;
   date: Scalars['DateTime'];
   createdAt: Scalars['DateTime'];
 };
@@ -41,7 +41,7 @@ export type Query = {
 export type MoodsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MoodsQueryQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, mood: Mood, date: any }> };
+export type MoodsQueryQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, mood: Emotion, date: any }> };
 
 
 export const MoodsQueryDocument = gql`
