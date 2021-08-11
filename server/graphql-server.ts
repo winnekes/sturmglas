@@ -2,7 +2,9 @@ import { Claims, getSession } from "@auth0/nextjs-auth0";
 import { ApolloServer } from "apollo-server-micro";
 import { IncomingMessage, ServerResponse } from "http";
 import { AuthChecker, buildSchema } from "type-graphql";
-import { MoodQueries } from "./mood/moods-query";
+import { AddMoodMutation } from "./mood/graphql/add-mood-mutation";
+import { MoodQuery } from "./mood/graphql/mood-query";
+import { MoodsQuery } from "./mood/graphql/moods-query";
 
 export interface Context {
   authId?: string | null;
@@ -22,8 +24,7 @@ export const startGraphqlServer = async (
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
       authChecker,
-      resolvers: [MoodQueries],
-      emitSchemaFile: true,
+      resolvers: [MoodsQuery, MoodQuery, AddMoodMutation],
     }),
     context: { authId: getSession(req, res)?.user.sub },
   });
