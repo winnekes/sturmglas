@@ -5,8 +5,8 @@ import {
   getConnection,
   getConnectionOptions,
 } from "typeorm";
-import { Mood } from "./mood/mood-entity";
-import { User } from "./identity-access/user-entity";
+import { Mood } from "./mood/entities/mood-entity";
+import { User } from "./identity-access/entities/user-entity";
 
 export const initializeDatabase = async (
   optionOverrides: Record<string, any> = {}

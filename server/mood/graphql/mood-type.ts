@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType, registerEnumType } from "type-graphql";
-import { Emotion } from "./mood-entity";
+import { Emotion } from "../entities/mood-entity";
 
 registerEnumType(Emotion, { name: "Emotion" });
 
@@ -13,6 +13,9 @@ export class MoodType {
 
   @Field()
   date!: Date;
+
+  @Field()
+  description!: string;
 
   @Field()
   createdAt!: Date;

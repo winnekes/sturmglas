@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Mood } from "../mood/mood-entity";
+import { Mood } from "../../mood/entities/mood-entity";
 
 @Entity()
 export class User {

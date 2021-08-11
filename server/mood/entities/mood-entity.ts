@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { User } from "../identity-access/user-entity";
+import { User } from "../../identity-access/entities/user-entity";
 
 export enum Emotion {
   ANGRY = "ANGRY",
@@ -31,6 +31,9 @@ export class Mood {
   @IsDate()
   @Column()
   date!: Date;
+
+  @Column("text")
+  description!: string;
 
   @ManyToOne("User", "moods", {
     cascade: true,
