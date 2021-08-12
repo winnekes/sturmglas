@@ -10,7 +10,8 @@ type Emotions = {
   };
 };
 export const emotions: Emotions = {
-  ANXIOUS: { icon: AddIcon, name: "anxious" },
+  TIRED: { icon: AddIcon, name: "tired" },
+  NEUTRAL: { icon: AddIcon, name: "neutral" },
   HAPPY: { icon: AddIcon, name: "happy" },
   SAD: { icon: AddIcon, name: "sad" },
   ANGRY: { icon: AddIcon, name: "angry" },

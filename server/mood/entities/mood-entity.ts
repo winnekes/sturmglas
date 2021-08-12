@@ -12,7 +12,8 @@ import { User } from "../../identity-access/entities/user-entity";
 export enum Emotion {
   ANGRY = "ANGRY",
   SAD = "SAD",
-  ANXIOUS = "ANXIOUS",
+  NEUTRAL = "NEUTRAL",
+  TIRED = "TIRED",
   HAPPY = "HAPPY",
 }
 
