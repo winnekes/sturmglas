@@ -26,7 +26,8 @@ export type AddMoodInputType = {
 export enum Emotion {
   Angry = 'ANGRY',
   Sad = 'SAD',
-  Anxious = 'ANXIOUS',
+  Neutral = 'NEUTRAL',
+  Tired = 'TIRED',
   Happy = 'HAPPY'
 }
 
