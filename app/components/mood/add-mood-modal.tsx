@@ -1,32 +1,28 @@
 import {
+  Button,
+  HStack,
+  Icon,
   Modal,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalHeader,
   ModalOverlay,
-} from "@chakra-ui/modal";
-import { Select } from "@chakra-ui/react";
-import { FunctionComponent } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import {AddMoodInputType, Emotion} from "../../types/graphql";
+} from "@chakra-ui/react";
+import { FunctionComponent, useState } from "react";
+import { BiTired } from "react-icons/bi";
+
+import { ImAngry, ImHappy, ImNeutral, ImSad } from "react-icons/im";
+import { Emotion, useAddMoodMutationMutation } from "../../types/graphql";
 
 type Props = {
   onClose: () => void;
 };
 
 export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<AddMoodInputType>();
-  const onSubmit: SubmitHandler<AddMoodInputType> = (data) => console.log(data);
+  const [mood, setMood] = useState<Emotion | null>(null);
+  const [addMood] = useAddMoodMutationMutation();
 
-  console.log({
-    test:    Object.values(Emotion)
-    })
+  // TODO: find better icon assets
   return (
     <Modal onClose={onClose} isOpen isCentered>
       <ModalOverlay />
@@ -34,9 +30,46 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
         <ModalHeader>How are you feeling right now?</ModalHeader>
 
         <ModalBody>
-          <form onSubmit={handleSubmit(onSubmit)}>
-              <Select >}</Select>
-          </form>
+          <HStack justify="space-between">
+            <Icon
+              as={ImHappy}
+              boxSize="48px"
+              onClick={() => setMood(Emotion.Happy)}
+            />
+            <Icon
+              as={ImNeutral}
+              boxSize="48px"
+              onClick={() => setMood(Emotion.Neutral)}
+            />
+            <Icon
+              as={ImSad}
+              boxSize="48px"
+              onClick={() => setMood(Emotion.Sad)}
+            />
+            <Icon
+              as={BiTired}
+              boxSize="48px"
+              onClick={() => setMood(Emotion.Tired)}
+            />
+            <Icon
+              as={ImAngry}
+              boxSize="48px"
+              onClick={() => setMood(Emotion.Angry)}
+            />
+          </HStack>
+          <Button
+            onClick={async () => {
+              if (mood) {
+                await addMood({
+                  variables: {
+                    data: { mood, date: new Date(), description: "" },
+                  },
+                });
+              }
+            }}
+          >
+            send
+          </Button>
         </ModalBody>
       </ModalContent>
     </Modal>

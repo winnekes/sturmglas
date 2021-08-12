@@ -33,11 +33,15 @@ export class AddMoodMutation {
 
   @Authorized()
   @Mutation((returns) => MoodType)
-  addMood(
+  async addMood(
     @Arg("data") data: AddMoodInputType,
     @Ctx() context: Context
   ): Promise<MoodType> {
+    if (!context.user) {
+      throw new Error("Something went wrong");
+    }
     const mood = this.moodRepository.create();
+    mood.user = context.user;
     mood.mood = data.mood;
     mood.date = data.date;
     mood.description = data.description;
