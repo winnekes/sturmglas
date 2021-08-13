@@ -18,7 +18,7 @@ export class User {
   @Column()
   authId!: string;
 
-  @Column({ default: "" })
+  @Column()
   firstName!: string;
 
   @Index({ unique: true })
@@ -26,7 +26,7 @@ export class User {
   @Column("varchar")
   email!: string;
 
-  @Column({ default: "" })
+  @Column()
   pictureUrl!: string;
 
   @OneToMany("Mood", "user", {
