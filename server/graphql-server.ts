@@ -1,42 +1,45 @@
 import { getSession } from "@auth0/nextjs-auth0";
 import { ApolloServer } from "apollo-server-micro";
 import { IncomingMessage, ServerResponse } from "http";
-import { AuthChecker, buildSchema } from "type-graphql";
-import { getRepository, Repository } from "typeorm";
-import { User } from "./identity-access/entities/user-entity";
+import { AuthChecker, buildSchema, NonEmptyArray } from "type-graphql";
+import { User } from "./user/entities/user-entity";
 import { AddMoodMutation } from "./mood/graphql/add-mood-mutation";
+import { LatestMoodQuery } from "./mood/graphql/latest-mood-query";
 import { MoodQuery } from "./mood/graphql/mood-query";
 import { MoodsQuery } from "./mood/graphql/moods-query";
+import { ProfileQuery } from "./user/graphql/profile-query";
+import { getUser } from "./utils/get-user";
 
 export interface Context {
-  authId?: string | null;
+  authId?: string;
   user?: User;
 }
 
-const getUser = (authId: string): Promise<User | undefined> => {
-  const userRepository = getRepository("User") as Repository<User>;
-  return userRepository.findOne({
-    where: { authId },
-  });
-};
 export const startGraphqlServer = async (
   req: IncomingMessage,
   res: ServerResponse
 ) => {
-  // If GraphQL query or mutation is protected via @Authorized decorator this checks if user exists in session
-  const authChecker: AuthChecker<Context> = ({ context }) => {
-    const test = getSession(req, res);
-    return !!test?.user;
-  };
+  const queries: NonEmptyArray<Function> = [
+    LatestMoodQuery,
+    MoodsQuery,
+    MoodQuery,
+    ProfileQuery,
+  ];
+  const mutations: NonEmptyArray<Function> = [AddMoodMutation];
 
-  const authId = getSession(req, res)?.user.sub;
+  const authId: string = getSession(req, res)?.user.sub;
+  const user = authId && (await getUser(authId));
+
+  const authChecker: AuthChecker<Context> = ({ context }) => {
+    return !!context.user;
+  };
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
       authChecker,
-      resolvers: [MoodsQuery, MoodQuery, AddMoodMutation],
+      resolvers: [...queries, ...mutations],
     }),
-    context: { authId, user: authId && (await getUser(authId)) },
+    context: { authId, user },
   });
 
   await apolloServer.start();
