@@ -12,15 +12,15 @@ import { FunctionComponent, useState } from "react";
 import { BiTired } from "react-icons/bi";
 
 import { ImAngry, ImHappy, ImNeutral, ImSad } from "react-icons/im";
-import { Emotion, useAddMoodMutationMutation } from "../../types/graphql";
+import { Emotion, useAddMoodMutation } from "../../types/graphql";
 
 type Props = {
   onClose: () => void;
 };
 
 export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
-  const [mood, setMood] = useState<Emotion | null>(null);
-  const [addMood] = useAddMoodMutationMutation();
+  const [emotion, setEmotion] = useState<Emotion | null>(null);
+  const [addMood] = useAddMoodMutation();
 
   // TODO: find better icon assets
   return (
@@ -34,35 +34,35 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
             <Icon
               as={ImHappy}
               boxSize="48px"
-              onClick={() => setMood(Emotion.Happy)}
+              onClick={() => setEmotion(Emotion.Happy)}
             />
             <Icon
               as={ImNeutral}
               boxSize="48px"
-              onClick={() => setMood(Emotion.Neutral)}
+              onClick={() => setEmotion(Emotion.Neutral)}
             />
             <Icon
               as={ImSad}
               boxSize="48px"
-              onClick={() => setMood(Emotion.Sad)}
+              onClick={() => setEmotion(Emotion.Sad)}
             />
             <Icon
               as={BiTired}
               boxSize="48px"
-              onClick={() => setMood(Emotion.Tired)}
+              onClick={() => setEmotion(Emotion.Tired)}
             />
             <Icon
               as={ImAngry}
               boxSize="48px"
-              onClick={() => setMood(Emotion.Angry)}
+              onClick={() => setEmotion(Emotion.Angry)}
             />
           </HStack>
           <Button
             onClick={async () => {
-              if (mood) {
+              if (emotion) {
                 await addMood({
                   variables: {
-                    data: { mood, date: new Date(), description: "" },
+                    data: { emotion, date: new Date(), description: "" },
                   },
                 });
               }
