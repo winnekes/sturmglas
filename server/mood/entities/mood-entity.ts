@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { User } from "../../identity-access/entities/user-entity";
+import { User } from "../../user/entities/user-entity";
 
 export enum Emotion {
   ANGRY = "ANGRY",
