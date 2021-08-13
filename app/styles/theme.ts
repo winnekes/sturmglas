@@ -35,7 +35,6 @@ export const theme = extendTheme({
     global: (props) => ({
       body: {
         bg: colors.ui.background01,
-        color: "white",
       },
     }),
   },
