@@ -17,7 +17,7 @@ export type Scalars = {
 };
 
 export type AddMoodInputType = {
-  mood: Emotion;
+  emotion: Emotion;
   date: Scalars['DateTime'];
   description: Scalars['String'];
 };
@@ -34,7 +34,7 @@ export enum Emotion {
 export type MoodType = {
   __typename?: 'MoodType';
   id: Scalars['Int'];
-  mood: Emotion;
+  emotion: Emotion;
   date: Scalars['DateTime'];
   description: Scalars['String'];
   createdAt: Scalars['DateTime'];
@@ -52,6 +52,7 @@ export type MutationAddMoodArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  latestMood: MoodType;
   mood: MoodType;
   moods: Array<MoodType>;
 };
@@ -61,133 +62,174 @@ export type QueryMoodArgs = {
   id: Scalars['Int'];
 };
 
-export type AddMoodMutationMutationVariables = Exact<{
+export type AddMoodMutationVariables = Exact<{
   data: AddMoodInputType;
 }>;
 
 
-export type AddMoodMutationMutation = { __typename?: 'Mutation', addMood: { __typename?: 'MoodType', id: number, mood: Emotion, date: any, description: string, createdAt: any } };
+export type AddMoodMutation = { __typename?: 'Mutation', addMood: { __typename?: 'MoodType', id: number, emotion: Emotion, date: any, description: string, createdAt: any } };
 
-export type MoodQueryQueryVariables = Exact<{
+export type LatestMoodQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LatestMoodQuery = { __typename?: 'Query', latestMood: { __typename?: 'MoodType', id: number, emotion: Emotion, date: any } };
+
+export type MoodQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
 
-export type MoodQueryQuery = { __typename?: 'Query', mood: { __typename?: 'MoodType', id: number, mood: Emotion, date: any } };
+export type MoodQuery = { __typename?: 'Query', mood: { __typename?: 'MoodType', id: number, emotion: Emotion, date: any } };
 
-export type MoodsQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type MoodsQueryQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, mood: Emotion, date: any }> };
+export type MoodsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export const AddMoodMutationDocument = gql`
-    mutation AddMoodMutation($data: AddMoodInputType!) {
+export type MoodsQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, emotion: Emotion, date: any }> };
+
+
+export const AddMoodDocument = gql`
+    mutation AddMood($data: AddMoodInputType!) {
   addMood(data: $data) {
     id
-    mood
+    emotion
     date
     description
     createdAt
   }
 }
     `;
-export type AddMoodMutationMutationFn = Apollo.MutationFunction<AddMoodMutationMutation, AddMoodMutationMutationVariables>;
+export type AddMoodMutationFn = Apollo.MutationFunction<AddMoodMutation, AddMoodMutationVariables>;
 
 /**
- * __useAddMoodMutationMutation__
+ * __useAddMoodMutation__
  *
- * To run a mutation, you first call `useAddMoodMutationMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAddMoodMutationMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useAddMoodMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddMoodMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [addMoodMutationMutation, { data, loading, error }] = useAddMoodMutationMutation({
+ * const [addMoodMutation, { data, loading, error }] = useAddMoodMutation({
  *   variables: {
  *      data: // value for 'data'
  *   },
  * });
  */
-export function useAddMoodMutationMutation(baseOptions?: Apollo.MutationHookOptions<AddMoodMutationMutation, AddMoodMutationMutationVariables>) {
+export function useAddMoodMutation(baseOptions?: Apollo.MutationHookOptions<AddMoodMutation, AddMoodMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AddMoodMutationMutation, AddMoodMutationMutationVariables>(AddMoodMutationDocument, options);
+        return Apollo.useMutation<AddMoodMutation, AddMoodMutationVariables>(AddMoodDocument, options);
       }
-export type AddMoodMutationMutationHookResult = ReturnType<typeof useAddMoodMutationMutation>;
-export type AddMoodMutationMutationResult = Apollo.MutationResult<AddMoodMutationMutation>;
-export type AddMoodMutationMutationOptions = Apollo.BaseMutationOptions<AddMoodMutationMutation, AddMoodMutationMutationVariables>;
-export const MoodQueryDocument = gql`
-    query MoodQuery($id: Int!) {
-  mood(id: $id) {
+export type AddMoodMutationHookResult = ReturnType<typeof useAddMoodMutation>;
+export type AddMoodMutationResult = Apollo.MutationResult<AddMoodMutation>;
+export type AddMoodMutationOptions = Apollo.BaseMutationOptions<AddMoodMutation, AddMoodMutationVariables>;
+export const LatestMoodDocument = gql`
+    query LatestMood {
+  latestMood {
     id
-    mood
+    emotion
     date
   }
 }
     `;
 
 /**
- * __useMoodQueryQuery__
+ * __useLatestMoodQuery__
  *
- * To run a query within a React component, call `useMoodQueryQuery` and pass it any options that fit your needs.
- * When your component renders, `useMoodQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useLatestMoodQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLatestMoodQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useMoodQueryQuery({
+ * const { data, loading, error } = useLatestMoodQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useLatestMoodQuery(baseOptions?: Apollo.QueryHookOptions<LatestMoodQuery, LatestMoodQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<LatestMoodQuery, LatestMoodQueryVariables>(LatestMoodDocument, options);
+      }
+export function useLatestMoodLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LatestMoodQuery, LatestMoodQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<LatestMoodQuery, LatestMoodQueryVariables>(LatestMoodDocument, options);
+        }
+export type LatestMoodQueryHookResult = ReturnType<typeof useLatestMoodQuery>;
+export type LatestMoodLazyQueryHookResult = ReturnType<typeof useLatestMoodLazyQuery>;
+export type LatestMoodQueryResult = Apollo.QueryResult<LatestMoodQuery, LatestMoodQueryVariables>;
+export const MoodDocument = gql`
+    query Mood($id: Int!) {
+  mood(id: $id) {
+    id
+    emotion
+    date
+  }
+}
+    `;
+
+/**
+ * __useMoodQuery__
+ *
+ * To run a query within a React component, call `useMoodQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMoodQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMoodQuery({
  *   variables: {
  *      id: // value for 'id'
  *   },
  * });
  */
-export function useMoodQueryQuery(baseOptions: Apollo.QueryHookOptions<MoodQueryQuery, MoodQueryQueryVariables>) {
+export function useMoodQuery(baseOptions: Apollo.QueryHookOptions<MoodQuery, MoodQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MoodQueryQuery, MoodQueryQueryVariables>(MoodQueryDocument, options);
+        return Apollo.useQuery<MoodQuery, MoodQueryVariables>(MoodDocument, options);
       }
-export function useMoodQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoodQueryQuery, MoodQueryQueryVariables>) {
+export function useMoodLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoodQuery, MoodQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MoodQueryQuery, MoodQueryQueryVariables>(MoodQueryDocument, options);
+          return Apollo.useLazyQuery<MoodQuery, MoodQueryVariables>(MoodDocument, options);
         }
-export type MoodQueryQueryHookResult = ReturnType<typeof useMoodQueryQuery>;
-export type MoodQueryLazyQueryHookResult = ReturnType<typeof useMoodQueryLazyQuery>;
-export type MoodQueryQueryResult = Apollo.QueryResult<MoodQueryQuery, MoodQueryQueryVariables>;
-export const MoodsQueryDocument = gql`
-    query MoodsQuery {
+export type MoodQueryHookResult = ReturnType<typeof useMoodQuery>;
+export type MoodLazyQueryHookResult = ReturnType<typeof useMoodLazyQuery>;
+export type MoodQueryResult = Apollo.QueryResult<MoodQuery, MoodQueryVariables>;
+export const MoodsDocument = gql`
+    query Moods {
   moods {
     id
-    mood
+    emotion
     date
   }
 }
     `;
 
 /**
- * __useMoodsQueryQuery__
+ * __useMoodsQuery__
  *
- * To run a query within a React component, call `useMoodsQueryQuery` and pass it any options that fit your needs.
- * When your component renders, `useMoodsQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useMoodsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMoodsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useMoodsQueryQuery({
+ * const { data, loading, error } = useMoodsQuery({
  *   variables: {
  *   },
  * });
  */
-export function useMoodsQueryQuery(baseOptions?: Apollo.QueryHookOptions<MoodsQueryQuery, MoodsQueryQueryVariables>) {
+export function useMoodsQuery(baseOptions?: Apollo.QueryHookOptions<MoodsQuery, MoodsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MoodsQueryQuery, MoodsQueryQueryVariables>(MoodsQueryDocument, options);
+        return Apollo.useQuery<MoodsQuery, MoodsQueryVariables>(MoodsDocument, options);
       }
-export function useMoodsQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoodsQueryQuery, MoodsQueryQueryVariables>) {
+export function useMoodsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoodsQuery, MoodsQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MoodsQueryQuery, MoodsQueryQueryVariables>(MoodsQueryDocument, options);
+          return Apollo.useLazyQuery<MoodsQuery, MoodsQueryVariables>(MoodsDocument, options);
         }
-export type MoodsQueryQueryHookResult = ReturnType<typeof useMoodsQueryQuery>;
-export type MoodsQueryLazyQueryHookResult = ReturnType<typeof useMoodsQueryLazyQuery>;
-export type MoodsQueryQueryResult = Apollo.QueryResult<MoodsQueryQuery, MoodsQueryQueryVariables>;
+export type MoodsQueryHookResult = ReturnType<typeof useMoodsQuery>;
+export type MoodsLazyQueryHookResult = ReturnType<typeof useMoodsLazyQuery>;
+export type MoodsQueryResult = Apollo.QueryResult<MoodsQuery, MoodsQueryVariables>;

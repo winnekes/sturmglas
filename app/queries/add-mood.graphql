@@ -1,7 +1,7 @@
-mutation AddMoodMutation($data: AddMoodInputType!) {
+mutation AddMood($data: AddMoodInputType!) {
   addMood(data: $data) {
     id
-    mood
+    emotion
     date
     description
     createdAt

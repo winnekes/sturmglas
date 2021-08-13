@@ -27,7 +27,7 @@ export class Mood {
     type: "enum",
     enum: Emotion,
   })
-  mood!: Emotion;
+  emotion!: Emotion;
 
   @IsDate()
   @Column()

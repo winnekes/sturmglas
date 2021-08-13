@@ -9,7 +9,7 @@ export class MoodType {
   id!: number;
 
   @Field((returns) => Emotion)
-  mood!: Emotion;
+  emotion!: Emotion;
 
   @Field()
   date!: Date;

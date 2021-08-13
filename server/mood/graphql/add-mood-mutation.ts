@@ -17,7 +17,7 @@ import { MoodType } from "./mood-type";
 export class AddMoodInputType {
   @IsEnum(Emotion)
   @Field((type) => Emotion)
-  mood!: Emotion;
+  emotion!: Emotion;
 
   @IsDate()
   @Field()
@@ -42,7 +42,7 @@ export class AddMoodMutation {
     }
     const mood = this.moodRepository.create();
     mood.user = context.user;
-    mood.mood = data.mood;
+    mood.emotion = data.emotion;
     mood.date = data.date;
     mood.description = data.description;
 

@@ -1,7 +1,7 @@
-query MoodsQuery {
+query Moods {
   moods {
     id
-    mood
+    emotion
     date
   }
 }
