@@ -1,3 +1,4 @@
+import { IsDate, IsEmail } from "class-validator";
 import {
   Column,
   CreateDateColumn,
@@ -17,14 +18,25 @@ export class User {
   @Column()
   authId!: string;
 
+  @Column({ default: "" })
+  firstName!: string;
+
   @Index({ unique: true })
+  @IsEmail()
   @Column("varchar")
   email!: string;
+
+  @Column({ default: "" })
+  pictureUrl!: string;
 
   @OneToMany("Mood", "user", {
     onDelete: "CASCADE",
   })
   moods!: Mood[];
+
+  @IsDate()
+  @Column()
+  lastLogin!: Date;
 
   @CreateDateColumn()
   createdAt!: Date;
