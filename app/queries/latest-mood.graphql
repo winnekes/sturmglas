@@ -2,6 +2,7 @@ query LatestMood {
   latestMood {
     id
     emotion
+    description
     date
   }
 }

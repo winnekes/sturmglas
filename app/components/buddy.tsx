@@ -1,7 +1,7 @@
-import { Center, Circle, Image } from "@chakra-ui/react";
-import Link from "next/link";
+import { Image, VStack, Text } from "@chakra-ui/react";
 import { FunctionComponent } from "react";
 import { useLatestMoodQuery } from "../types/graphql";
+import { Subheading } from "./text/subheading";
 
 type Props = {
   size: string;
@@ -18,14 +18,13 @@ export const Buddy: FunctionComponent<Props> = ({ size }) => {
   if (error || !data) {
     return <>Error</>;
   }
+  console.log({ data });
   return (
-    <Center>
-      <Link href="/" passHref>
-        <Circle bg="white" boxSize={size} p={2}>
-          <Image src="/logo.png" cursor="pointer" m={12} />
-          latest mood : {data.latestMood.emotion}
-        </Circle>
-      </Link>
-    </Center>
+    <VStack>
+      <Image src="/logo.png" boxSize="200px" />
+      <Subheading>currently</Subheading>
+      <Text>{data.latestMood.emotion}</Text>
+      <Text>{data.latestMood.description}</Text>
+    </VStack>
   );
 };

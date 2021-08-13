@@ -5,14 +5,15 @@ import { Emotion } from "./graphql";
 // TODO get proper icons
 type Emotions = {
   [key in Emotion]: {
-    icon: ComponentWithAs<"svg", IconProps>;
     name: string;
+    description: string;
+    icon: ComponentWithAs<"svg", IconProps>;
   };
 };
 export const emotions: Emotions = {
-  TIRED: { icon: AddIcon, name: "tired" },
-  NEUTRAL: { icon: AddIcon, name: "neutral" },
-  HAPPY: { icon: AddIcon, name: "happy" },
-  SAD: { icon: AddIcon, name: "sad" },
-  ANGRY: { icon: AddIcon, name: "angry" },
+  HAPPY: { name: "happy", description: "", icon: AddIcon },
+  ANXIOUS: { name: "neutral", description: "", icon: AddIcon },
+  TIRED: { name: "tired", description: "", icon: AddIcon },
+  SAD: { name: "sad", description: "", icon: AddIcon },
+  ANGRY: { name: "angry", description: "", icon: AddIcon },
 };

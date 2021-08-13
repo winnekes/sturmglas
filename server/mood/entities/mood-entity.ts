@@ -10,11 +10,11 @@ import {
 import { User } from "../../user/entities/user-entity";
 
 export enum Emotion {
-  ANGRY = "ANGRY",
-  SAD = "SAD",
-  NEUTRAL = "NEUTRAL",
-  TIRED = "TIRED",
   HAPPY = "HAPPY",
+  ANXIOUS = "ANXIOUS",
+  TIRED = "TIRED",
+  SAD = "SAD",
+  ANGRY = "ANGRY",
 }
 
 @Entity()

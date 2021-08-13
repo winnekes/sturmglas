@@ -24,11 +24,11 @@ export type AddMoodInputType = {
 
 
 export enum Emotion {
-  Angry = 'ANGRY',
-  Sad = 'SAD',
-  Neutral = 'NEUTRAL',
+  Happy = 'HAPPY',
+  Anxious = 'ANXIOUS',
   Tired = 'TIRED',
-  Happy = 'HAPPY'
+  Sad = 'SAD',
+  Angry = 'ANGRY'
 }
 
 export type MoodType = {
@@ -55,11 +55,21 @@ export type Query = {
   latestMood: MoodType;
   mood: MoodType;
   moods: Array<MoodType>;
+  profile: UserType;
 };
 
 
 export type QueryMoodArgs = {
   id: Scalars['Int'];
+};
+
+export type UserType = {
+  __typename?: 'UserType';
+  id: Scalars['Int'];
+  firstName: Scalars['String'];
+  pictureUrl: Scalars['String'];
+  lastLogin: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
 };
 
 export type AddMoodMutationVariables = Exact<{
@@ -72,7 +82,7 @@ export type AddMoodMutation = { __typename?: 'Mutation', addMood: { __typename?:
 export type LatestMoodQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LatestMoodQuery = { __typename?: 'Query', latestMood: { __typename?: 'MoodType', id: number, emotion: Emotion, date: any } };
+export type LatestMoodQuery = { __typename?: 'Query', latestMood: { __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any } };
 
 export type MoodQueryVariables = Exact<{
   id: Scalars['Int'];
@@ -129,6 +139,7 @@ export const LatestMoodDocument = gql`
   latestMood {
     id
     emotion
+    description
     date
   }
 }
