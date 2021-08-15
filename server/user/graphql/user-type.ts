@@ -15,5 +15,8 @@ export class UserType {
   lastLogin!: Date;
 
   @Field()
+  refreshToken!: "string";
+
+  @Field()
   createdAt!: Date;
 }

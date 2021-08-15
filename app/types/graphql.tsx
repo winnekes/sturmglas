@@ -43,11 +43,17 @@ export type MoodType = {
 export type Mutation = {
   __typename?: 'Mutation';
   addMood: MoodType;
+  saveRefreshToken: UserType;
 };
 
 
 export type MutationAddMoodArgs = {
   data: AddMoodInputType;
+};
+
+
+export type MutationSaveRefreshTokenArgs = {
+  data: SaveRefreshTokenInputType;
 };
 
 export type Query = {
@@ -63,12 +69,17 @@ export type QueryMoodArgs = {
   id: Scalars['Int'];
 };
 
+export type SaveRefreshTokenInputType = {
+  authToken: Scalars['String'];
+};
+
 export type UserType = {
   __typename?: 'UserType';
   id: Scalars['Int'];
   firstName: Scalars['String'];
   pictureUrl: Scalars['String'];
   lastLogin: Scalars['DateTime'];
+  refreshToken: Scalars['String'];
   createdAt: Scalars['DateTime'];
 };
 
@@ -95,6 +106,13 @@ export type MoodsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type MoodsQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, emotion: Emotion, date: any }> };
+
+export type SaveRefreshTokenMutationVariables = Exact<{
+  data: SaveRefreshTokenInputType;
+}>;
+
+
+export type SaveRefreshTokenMutation = { __typename?: 'Mutation', saveRefreshToken: { __typename?: 'UserType', id: number, refreshToken: string } };
 
 
 export const AddMoodDocument = gql`
@@ -244,3 +262,37 @@ export function useMoodsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Mood
 export type MoodsQueryHookResult = ReturnType<typeof useMoodsQuery>;
 export type MoodsLazyQueryHookResult = ReturnType<typeof useMoodsLazyQuery>;
 export type MoodsQueryResult = Apollo.QueryResult<MoodsQuery, MoodsQueryVariables>;
+export const SaveRefreshTokenDocument = gql`
+    mutation SaveRefreshToken($data: SaveRefreshTokenInputType!) {
+  saveRefreshToken(data: $data) {
+    id
+    refreshToken
+  }
+}
+    `;
+export type SaveRefreshTokenMutationFn = Apollo.MutationFunction<SaveRefreshTokenMutation, SaveRefreshTokenMutationVariables>;
+
+/**
+ * __useSaveRefreshTokenMutation__
+ *
+ * To run a mutation, you first call `useSaveRefreshTokenMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSaveRefreshTokenMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [saveRefreshTokenMutation, { data, loading, error }] = useSaveRefreshTokenMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useSaveRefreshTokenMutation(baseOptions?: Apollo.MutationHookOptions<SaveRefreshTokenMutation, SaveRefreshTokenMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SaveRefreshTokenMutation, SaveRefreshTokenMutationVariables>(SaveRefreshTokenDocument, options);
+      }
+export type SaveRefreshTokenMutationHookResult = ReturnType<typeof useSaveRefreshTokenMutation>;
+export type SaveRefreshTokenMutationResult = Apollo.MutationResult<SaveRefreshTokenMutation>;
+export type SaveRefreshTokenMutationOptions = Apollo.BaseMutationOptions<SaveRefreshTokenMutation, SaveRefreshTokenMutationVariables>;

@@ -34,6 +34,9 @@ export class User {
   })
   moods!: Mood[];
 
+  @Column({ default: "" })
+  refreshToken!: string;
+
   @IsDate()
   @Column()
   lastLogin!: Date;

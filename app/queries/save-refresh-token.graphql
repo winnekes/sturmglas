@@ -1,0 +1,6 @@
+mutation SaveRefreshToken($data: SaveRefreshTokenInputType!) {
+  saveRefreshToken(data: $data) {
+    id
+    refreshToken
+  }
+}

@@ -8,6 +8,7 @@ import { LatestMoodQuery } from "./mood/graphql/latest-mood-query";
 import { MoodQuery } from "./mood/graphql/mood-query";
 import { MoodsQuery } from "./mood/graphql/moods-query";
 import { ProfileQuery } from "./user/graphql/profile-query";
+import { SaveRefreshTokenMutation } from "./user/graphql/save-refresh-token-mutation";
 import { getUser } from "./utils/get-user";
 
 export interface Context {
@@ -25,7 +26,10 @@ export const startGraphqlServer = async (
     MoodQuery,
     ProfileQuery,
   ];
-  const mutations: NonEmptyArray<Function> = [AddMoodMutation];
+  const mutations: NonEmptyArray<Function> = [
+    AddMoodMutation,
+    SaveRefreshTokenMutation,
+  ];
 
   const authId: string = getSession(req, res)?.user.sub;
   const user = authId && (await getUser(authId));
