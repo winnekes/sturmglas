@@ -1,6 +1,7 @@
 import { Button, Heading, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { Buddy } from "../app/components/buddy";
+import { FitnessLogin } from "../app/components/fitness-login";
 import { AddMoodModal } from "../app/components/mood/add-mood-modal";
 import { PageWrapper } from "../app/components/page-wrapper";
 import { Panel } from "../app/components/panel";
@@ -23,6 +24,7 @@ export default function Oasis() {
       <Buddy size="130px" />
       <Panel>
         <Heading as="h1">Oasis</Heading>
+        <FitnessLogin />
         {data.moods.map((mood) => (
           <Text color="black" key={mood.id}>
             {mood.emotion}
