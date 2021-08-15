@@ -10,7 +10,11 @@ export class MoodsQuery {
 
   @Authorized()
   @Query((returns) => [MoodType])
-  moods(@Ctx() context: Context): Promise<MoodType[]> {
+  async moods(@Ctx() context: Context): Promise<MoodType[]> {
+    if (!context.authId || !context.user) {
+      throw new Error("No user set on context");
+    }
+
     return this.moodRepository.find({
       relations: ["user"],
       where: { user: { authId: context.authId } },
