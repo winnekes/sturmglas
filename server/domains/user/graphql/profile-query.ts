@@ -1,6 +1,6 @@
 import { Authorized, Ctx, Query, Resolver } from "type-graphql";
 import { getRepository, Repository } from "typeorm";
-import { Context } from "../../graphql-server";
+import { Context } from "../../../graphql-server";
 import { User } from "../entities/user-entity";
 import { UserType } from "./user-type";
 

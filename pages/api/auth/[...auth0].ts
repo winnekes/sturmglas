@@ -2,7 +2,7 @@ import { handleAuth, handleCallback, Session } from "@auth0/nextjs-auth0";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getRepository, Repository } from "typeorm";
 import { initializeDatabase } from "../../../server/database-connection";
-import { User } from "../../../server/user/entities/user-entity";
+import { User } from "../../../server/domains/user/entities/user-entity";
 import { afterCallback } from "../../../server/utils/after-login-callback";
 
 // Here magic happens through Auth0

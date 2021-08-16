@@ -2,7 +2,7 @@ import { Session } from "@auth0/nextjs-auth0";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getRepository, Repository } from "typeorm";
 import { initializeDatabase } from "../database-connection";
-import { User } from "../user/entities/user-entity";
+import { User } from "../domains/user/entities/user-entity";
 
 export const afterCallback = async (
   req: NextApiRequest,

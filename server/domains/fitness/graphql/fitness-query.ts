@@ -1,7 +1,7 @@
 import { Authorized, Ctx, Query, Resolver } from "type-graphql";
 import * as util from "util";
-import { Context } from "../../graphql-server";
-import { getHeartRate, getSteps } from "../../utils/fitness-client";
+import { Context } from "../../../graphql-server";
+import { getHeartRate, getSteps } from "../../../utils/fitness-client";
 import { FitnessType } from "./fitness-type";
 
 @Resolver()

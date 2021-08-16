@@ -9,8 +9,8 @@ import {
   Resolver,
 } from "type-graphql";
 import { getRepository, Repository } from "typeorm";
-import { Context } from "../../graphql-server";
-import { oauth2Client } from "../../utils/fitness-client";
+import { Context } from "../../../graphql-server";
+import { oauth2Client } from "../../../utils/fitness-client";
 import { User } from "../entities/user-entity";
 import { UserType } from "./user-type";
 
