@@ -8,7 +8,7 @@ import { FitnessType } from "./fitness-type";
 export class FitnessQuery {
   @Authorized()
   @Query((returns) => FitnessType)
-  async fitness(@Ctx() context: Context): Promise<FitnessType> {
+  async fitness(@Ctx() context: Context): Promise<FitnessType | undefined> {
     if (!context.authId || !context.user) {
       throw new Error("No user set on context");
     }
