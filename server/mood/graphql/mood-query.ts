@@ -32,6 +32,7 @@ export class MoodQuery {
     if (!context.authId || !context.user) {
       throw new Error("No user set on context");
     }
+
     return this.moodRepository.findOne({
       relations: ["user"],
       where: { user: { authId: context.authId }, id: args.id },
