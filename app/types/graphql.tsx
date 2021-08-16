@@ -22,6 +22,12 @@ export type AddMoodInputType = {
   description: Scalars['String'];
 };
 
+export type DatasetOutputType = {
+  __typename?: 'DatasetOutputType';
+  yesterday: Scalars['Int'];
+  today: Scalars['Int'];
+};
+
 
 export enum Emotion {
   Happy = 'HAPPY',
@@ -30,6 +36,12 @@ export enum Emotion {
   Sad = 'SAD',
   Angry = 'ANGRY'
 }
+
+export type FitnessType = {
+  __typename?: 'FitnessType';
+  steps: DatasetOutputType;
+  heartRate: DatasetOutputType;
+};
 
 export type MoodType = {
   __typename?: 'MoodType';
@@ -58,6 +70,7 @@ export type MutationSaveRefreshTokenArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  fitness: FitnessType;
   latestMood: MoodType;
   mood: MoodType;
   moods: Array<MoodType>;
@@ -89,6 +102,11 @@ export type AddMoodMutationVariables = Exact<{
 
 
 export type AddMoodMutation = { __typename?: 'Mutation', addMood: { __typename?: 'MoodType', id: number, emotion: Emotion, date: any, description: string, createdAt: any } };
+
+export type FitnessQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FitnessQueryQuery = { __typename?: 'Query', fitness: { __typename?: 'FitnessType', steps: { __typename?: 'DatasetOutputType', today: number, yesterday: number }, heartRate: { __typename?: 'DatasetOutputType', today: number, yesterday: number } } };
 
 export type LatestMoodQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -152,6 +170,47 @@ export function useAddMoodMutation(baseOptions?: Apollo.MutationHookOptions<AddM
 export type AddMoodMutationHookResult = ReturnType<typeof useAddMoodMutation>;
 export type AddMoodMutationResult = Apollo.MutationResult<AddMoodMutation>;
 export type AddMoodMutationOptions = Apollo.BaseMutationOptions<AddMoodMutation, AddMoodMutationVariables>;
+export const FitnessQueryDocument = gql`
+    query FitnessQuery {
+  fitness {
+    steps {
+      today
+      yesterday
+    }
+    heartRate {
+      today
+      yesterday
+    }
+  }
+}
+    `;
+
+/**
+ * __useFitnessQueryQuery__
+ *
+ * To run a query within a React component, call `useFitnessQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFitnessQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFitnessQueryQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useFitnessQueryQuery(baseOptions?: Apollo.QueryHookOptions<FitnessQueryQuery, FitnessQueryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FitnessQueryQuery, FitnessQueryQueryVariables>(FitnessQueryDocument, options);
+      }
+export function useFitnessQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FitnessQueryQuery, FitnessQueryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FitnessQueryQuery, FitnessQueryQueryVariables>(FitnessQueryDocument, options);
+        }
+export type FitnessQueryQueryHookResult = ReturnType<typeof useFitnessQueryQuery>;
+export type FitnessQueryLazyQueryHookResult = ReturnType<typeof useFitnessQueryLazyQuery>;
+export type FitnessQueryQueryResult = Apollo.QueryResult<FitnessQueryQuery, FitnessQueryQueryVariables>;
 export const LatestMoodDocument = gql`
     query LatestMood {
   latestMood {

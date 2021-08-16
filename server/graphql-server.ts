@@ -2,6 +2,7 @@ import { getSession } from "@auth0/nextjs-auth0";
 import { ApolloServer } from "apollo-server-micro";
 import { IncomingMessage, ServerResponse } from "http";
 import { AuthChecker, buildSchema, NonEmptyArray } from "type-graphql";
+import { FitnessQuery } from "./fitness/graphql/fitness-query";
 import { User } from "./user/entities/user-entity";
 import { AddMoodMutation } from "./mood/graphql/add-mood-mutation";
 import { LatestMoodQuery } from "./mood/graphql/latest-mood-query";
@@ -21,6 +22,7 @@ export const startGraphqlServer = async (
   res: ServerResponse
 ) => {
   const queries: NonEmptyArray<Function> = [
+    FitnessQuery,
     LatestMoodQuery,
     MoodsQuery,
     MoodQuery,
