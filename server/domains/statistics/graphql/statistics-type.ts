@@ -11,12 +11,13 @@ class DatasetOutputType {
 
 @ObjectType()
 export class StatisticsType {
-  @Field((type) => DatasetOutputType)
-  streakCountInDays!: DatasetOutputType;
+  @Field((type) => Int)
+  streakCountInDays!: number;
 
   @Field((type) => DatasetOutputType)
   goalsCompletedCount!: DatasetOutputType;
-  //
-  // @Field((type) => DatasetOutputType)
-  // sleep!: DatasetOutputType;
+
+  // TODO: sleep data
+  // @Field((type) => Int)
+  // sleepInHours!: number;
 }
