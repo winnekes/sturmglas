@@ -29,6 +29,17 @@ export type DatasetOutputType = {
 };
 
 
+export type DeleteMoodInputType = {
+  id: Scalars['Int'];
+};
+
+export type EditMoodInputType = {
+  id: Scalars['Int'];
+  emotion: Emotion;
+  date: Scalars['DateTime'];
+  description: Scalars['String'];
+};
+
 export enum Emotion {
   Happy = 'HAPPY',
   Anxious = 'ANXIOUS',
@@ -54,8 +65,20 @@ export type MoodType = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  deleteMood: Scalars['Boolean'];
+  editMood: MoodType;
   addMood: MoodType;
   saveRefreshToken: UserType;
+};
+
+
+export type MutationDeleteMoodArgs = {
+  data: DeleteMoodInputType;
+};
+
+
+export type MutationEditMoodArgs = {
+  data: EditMoodInputType;
 };
 
 
@@ -102,6 +125,20 @@ export type AddMoodMutationVariables = Exact<{
 
 
 export type AddMoodMutation = { __typename?: 'Mutation', addMood: { __typename?: 'MoodType', id: number, emotion: Emotion, date: any, description: string, createdAt: any } };
+
+export type DeleteMoodMutationVariables = Exact<{
+  data: DeleteMoodInputType;
+}>;
+
+
+export type DeleteMoodMutation = { __typename?: 'Mutation', deleteMood: boolean };
+
+export type EditMoodMutationMutationVariables = Exact<{
+  data: EditMoodInputType;
+}>;
+
+
+export type EditMoodMutationMutation = { __typename?: 'Mutation', editMood: { __typename?: 'MoodType', id: number, emotion: Emotion, date: any, description: string, createdAt: any } };
 
 export type FitnessQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -170,6 +207,74 @@ export function useAddMoodMutation(baseOptions?: Apollo.MutationHookOptions<AddM
 export type AddMoodMutationHookResult = ReturnType<typeof useAddMoodMutation>;
 export type AddMoodMutationResult = Apollo.MutationResult<AddMoodMutation>;
 export type AddMoodMutationOptions = Apollo.BaseMutationOptions<AddMoodMutation, AddMoodMutationVariables>;
+export const DeleteMoodDocument = gql`
+    mutation DeleteMood($data: DeleteMoodInputType!) {
+  deleteMood(data: $data)
+}
+    `;
+export type DeleteMoodMutationFn = Apollo.MutationFunction<DeleteMoodMutation, DeleteMoodMutationVariables>;
+
+/**
+ * __useDeleteMoodMutation__
+ *
+ * To run a mutation, you first call `useDeleteMoodMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteMoodMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteMoodMutation, { data, loading, error }] = useDeleteMoodMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useDeleteMoodMutation(baseOptions?: Apollo.MutationHookOptions<DeleteMoodMutation, DeleteMoodMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteMoodMutation, DeleteMoodMutationVariables>(DeleteMoodDocument, options);
+      }
+export type DeleteMoodMutationHookResult = ReturnType<typeof useDeleteMoodMutation>;
+export type DeleteMoodMutationResult = Apollo.MutationResult<DeleteMoodMutation>;
+export type DeleteMoodMutationOptions = Apollo.BaseMutationOptions<DeleteMoodMutation, DeleteMoodMutationVariables>;
+export const EditMoodMutationDocument = gql`
+    mutation EditMoodMutation($data: EditMoodInputType!) {
+  editMood(data: $data) {
+    id
+    emotion
+    date
+    description
+    createdAt
+  }
+}
+    `;
+export type EditMoodMutationMutationFn = Apollo.MutationFunction<EditMoodMutationMutation, EditMoodMutationMutationVariables>;
+
+/**
+ * __useEditMoodMutationMutation__
+ *
+ * To run a mutation, you first call `useEditMoodMutationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEditMoodMutationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [editMoodMutationMutation, { data, loading, error }] = useEditMoodMutationMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useEditMoodMutationMutation(baseOptions?: Apollo.MutationHookOptions<EditMoodMutationMutation, EditMoodMutationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<EditMoodMutationMutation, EditMoodMutationMutationVariables>(EditMoodMutationDocument, options);
+      }
+export type EditMoodMutationMutationHookResult = ReturnType<typeof useEditMoodMutationMutation>;
+export type EditMoodMutationMutationResult = Apollo.MutationResult<EditMoodMutationMutation>;
+export type EditMoodMutationMutationOptions = Apollo.BaseMutationOptions<EditMoodMutationMutation, EditMoodMutationMutationVariables>;
 export const FitnessQueryDocument = gql`
     query FitnessQuery {
   fitness {

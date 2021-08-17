@@ -1,0 +1,3 @@
+mutation DeleteMood($data: DeleteMoodInputType!) {
+  deleteMood(data: $data)
+}
