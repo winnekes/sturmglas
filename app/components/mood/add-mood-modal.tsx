@@ -7,12 +7,18 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
+  ModalFooter,
 } from "@chakra-ui/react";
 import { FunctionComponent, useState } from "react";
 import { BiTired } from "react-icons/bi";
 
 import { ImAngry, ImHappy, ImNeutral, ImSad } from "react-icons/im";
-import { Emotion, useAddMoodMutation } from "../../types/graphql";
+import {
+  Emotion,
+  LatestMoodDocument,
+  MoodsDocument,
+  useAddMoodMutation,
+} from "../../types/graphql";
 
 type Props = {
   onClose: () => void;
@@ -20,7 +26,20 @@ type Props = {
 
 export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
   const [emotion, setEmotion] = useState<Emotion | null>(null);
-  const [addMood] = useAddMoodMutation();
+  const [mutate] = useAddMoodMutation({
+    // TODO: optimise (use update instead of refetchQueries to reduce api call from 2 to 1)
+    refetchQueries: [MoodsDocument, LatestMoodDocument],
+  });
+
+  const addMood = async () => {
+    if (emotion) {
+      await mutate({
+        variables: {
+          data: { emotion, date: new Date(), description: "" },
+        },
+      });
+    }
+  };
 
   // TODO: find better icon assets
   return (
@@ -39,7 +58,7 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
             <Icon
               as={ImNeutral}
               boxSize="48px"
-              onClick={() => setEmotion(Emotion.Neutral)}
+              onClick={() => setEmotion(Emotion.Anxious)}
             />
             <Icon
               as={ImSad}
@@ -57,20 +76,10 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
               onClick={() => setEmotion(Emotion.Angry)}
             />
           </HStack>
-          <Button
-            onClick={async () => {
-              if (emotion) {
-                await addMood({
-                  variables: {
-                    data: { emotion, date: new Date(), description: "" },
-                  },
-                });
-              }
-            }}
-          >
-            send
-          </Button>
         </ModalBody>
+        <ModalFooter>
+          <Button onClick={addMood}>Record</Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   );
