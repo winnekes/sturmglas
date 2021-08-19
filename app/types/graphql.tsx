@@ -124,7 +124,7 @@ export type AddMoodMutationVariables = Exact<{
 }>;
 
 
-export type AddMoodMutation = { __typename?: 'Mutation', addMood: { __typename?: 'MoodType', id: number, emotion: Emotion, date: any, description: string, createdAt: any } };
+export type AddMoodMutation = { __typename?: 'Mutation', addMood: { __typename?: 'MoodType', id: number, emotion: Emotion, date: any } };
 
 export type DeleteMoodMutationVariables = Exact<{
   data: DeleteMoodInputType;
@@ -176,8 +176,6 @@ export const AddMoodDocument = gql`
     id
     emotion
     date
-    description
-    createdAt
   }
 }
     `;
