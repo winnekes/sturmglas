@@ -4,13 +4,7 @@ import type { AppProps } from "next/app";
 import { MetaHead } from "../app/components/meta-head";
 import { theme } from "../app/styles/theme";
 import { ChakraProvider } from "@chakra-ui/react";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  useQuery,
-  gql,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 const client = new ApolloClient({
   uri: "/api/graphql",
