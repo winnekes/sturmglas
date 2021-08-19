@@ -7,6 +7,7 @@ import { MobileMenu } from "./mobile-menu";
 export const MobileNavigation = () => {
   const { isOpen, onToggle, onClose } = useDisclosure();
   const btnRef = useRef(null);
+
   return (
     <>
       <Flex
@@ -22,8 +23,7 @@ export const MobileNavigation = () => {
           }
           justifyContent="flex-end"
           variant="link"
-          color="white"
-          aria-label="Toggle Navigation"
+          aria-label="Toggle navigation"
         />
       </Flex>
       <MobileMenu finalFocusRef={btnRef} isOpen={isOpen} onClose={onClose} />

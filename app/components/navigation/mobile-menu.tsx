@@ -1,18 +1,19 @@
+import { useUser } from "@auth0/nextjs-auth0";
 import {
+  Box,
+  Stack,
   DrawerBody,
   DrawerContent,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   Drawer,
-} from "@chakra-ui/modal";
-import { Box, Button, Center, Stack, Text } from "@chakra-ui/react";
+} from "@chakra-ui/react";
 import { MutableRefObject } from "react";
+import { useTimeOfDay } from "../../hooks/use-time-of-day";
 import { colors } from "../../styles/theme";
-import { Buddy } from "../buddy";
-import { openNavigationItems } from "./navigation";
+import { authNavigationItems, openNavigationItems } from "./navigation";
+import Link from "next/link";
 
-// TODO replace with user data
 type Props = {
   finalFocusRef: MutableRefObject<null>;
   isOpen: boolean;
@@ -20,6 +21,12 @@ type Props = {
 };
 
 export const MobileMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
+  const { greeting } = useTimeOfDay();
+  const { user, isLoading } = useUser();
+
+  const navigationItems =
+    user && !isLoading ? authNavigationItems : openNavigationItems;
+
   return (
     <Drawer
       isOpen={isOpen}
@@ -29,24 +36,20 @@ export const MobileMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
     >
       <DrawerOverlay />
       <DrawerContent bg={colors.ui.background02} color="white">
-        <DrawerHeader>Hello, -- name-- </DrawerHeader>
+        <DrawerHeader>
+          {greeting}
+          {!isLoading && (user ? <>, {user.name?.split(" ")[0]}</> : <>!</>)}
+        </DrawerHeader>
 
         <DrawerBody>
-          <Center>
-            <Buddy size="64px" />
-          </Center>
           <Stack p={4} spacing={7} display={{ md: "none" }}>
-            {openNavigationItems.map((navItem) => (
-              <Box fontWeight={600} key={navItem.label}>
-                {navItem.label}
-              </Box>
+            {navigationItems.map(navItem => (
+              <Link key={navItem.label} href={navItem.href} passHref>
+                <Box fontWeight={600}>{navItem.label}</Box>
+              </Link>
             ))}
           </Stack>
         </DrawerBody>
-
-        <DrawerFooter>
-          <Button>Logout</Button>
-        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );

@@ -5,8 +5,10 @@ import { padding } from "../../styles/theme";
 import { authNavigationItems, openNavigationItems } from "./navigation";
 
 export const DesktopNavigation = () => {
-  const { user } = useUser();
-  // to render cta button
+  const { user, isLoading } = useUser();
+  const navigationItems =
+    user && !isLoading ? authNavigationItems : openNavigationItems;
+
   return (
     <Flex
       display={{ base: "none", md: "flex" }}
@@ -15,41 +17,21 @@ export const DesktopNavigation = () => {
       px={padding}
       align="center"
       justify="flex-end"
-      color="white"
     >
       <Flex ml={10} py={5} display={{ base: "none", md: "flex" }}>
         <Stack direction="row" spacing={4}>
-          {user ? (
-            <>
-              {authNavigationItems.map((navItem) => (
-                <NextLink key={navItem.label} href={navItem.href} passHref>
-                  <Link
-                    fontWeight={500}
-                    fontSize="xl"
-                    textTransform="uppercase"
-                    ml={1}
-                  >
-                    {navItem.label}
-                  </Link>
-                </NextLink>
-              ))}
-            </>
-          ) : (
-            <>
-              {openNavigationItems.map((navItem) => (
-                <NextLink key={navItem.label} href={navItem.href} passHref>
-                  <Link
-                    fontWeight={500}
-                    fontSize="xl"
-                    textTransform="uppercase"
-                    ml={1}
-                  >
-                    {navItem.label}
-                  </Link>
-                </NextLink>
-              ))}
-            </>
-          )}
+          {navigationItems.map(navItem => (
+            <NextLink key={navItem.label} href={navItem.href} passHref>
+              <Link
+                fontWeight={500}
+                fontSize="xl"
+                textTransform="uppercase"
+                ml={1}
+              >
+                {navItem.label}
+              </Link>
+            </NextLink>
+          ))}
         </Stack>
       </Flex>
     </Flex>

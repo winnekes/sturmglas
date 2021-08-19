@@ -3,7 +3,5 @@ mutation AddMood($data: AddMoodInputType!) {
     id
     emotion
     date
-    description
-    createdAt
   }
 }
