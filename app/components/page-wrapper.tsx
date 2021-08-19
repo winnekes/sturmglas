@@ -18,7 +18,7 @@ export const PageWrapper: FunctionComponent = ({ children }) => {
         {/*</Center>*/}
         {children}
       </Container>{" "}
-      {/*<FloatingAction />*/}
+      <FloatingAction />
     </>
   );
 };

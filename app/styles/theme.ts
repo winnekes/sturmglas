@@ -2,7 +2,7 @@ import { extendTheme } from "@chakra-ui/react";
 
 export const colors = {
   ui: {
-    background01: "#f6e8f3",
+    background01: "rgba(134,56,83,0.85)",
     background02: "#d196d5",
   },
   text01: "#8c8c8c",
@@ -32,9 +32,9 @@ export const theme = extendTheme({
     },
   },
   styles: {
-    global: (props) => ({
+    global: props => ({
       body: {
-        bg: colors.ui.background01,
+        // bg: colors.ui.background01,
       },
     }),
   },
