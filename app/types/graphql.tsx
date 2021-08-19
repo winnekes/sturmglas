@@ -160,7 +160,7 @@ export type MoodQuery = { __typename?: 'Query', mood: { __typename?: 'MoodType',
 export type MoodsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MoodsQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, emotion: Emotion, date: any }> };
+export type MoodsQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any }> };
 
 export type SaveRefreshTokenMutationVariables = Exact<{
   data: SaveRefreshTokenInputType;
@@ -393,6 +393,7 @@ export const MoodsDocument = gql`
   moods {
     id
     emotion
+    description
     date
   }
 }

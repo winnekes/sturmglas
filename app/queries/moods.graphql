@@ -2,6 +2,7 @@ query Moods {
   moods {
     id
     emotion
+    description
     date
   }
 }
