@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { FunctionComponent } from "react";
 import { useLatestMoodQuery } from "../types/graphql";
+import { Splash } from "./splash";
 import { Subheading } from "./text/subheading";
 
 type Props = {
@@ -20,7 +21,7 @@ export const Buddy: FunctionComponent<Props> = ({ size }) => {
 
   // TODO Generic component
   if (loading) {
-    return <>Loading</>;
+    return <Splash />;
   }
 
   if (error || !data) {
@@ -35,11 +36,11 @@ export const Buddy: FunctionComponent<Props> = ({ size }) => {
         <Text>{data.latestMood.emotion}</Text>
         <Text>{data.latestMood.description}</Text>
 
-        <HStack>
-          <Box>Longest streak</Box>
-          <Box>What do you want to achieve today?</Box>
-          <Box>Goals</Box>
-        </HStack>
+        {/*<HStack>*/}
+        {/*  <Box>Longest streak</Box>*/}
+        {/*  <Box>What do you want to achieve today?</Box>*/}
+        {/*  <Box>Goals</Box>*/}
+        {/*</HStack>*/}
       </VStack>
     </>
   );

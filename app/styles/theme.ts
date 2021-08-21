@@ -2,7 +2,7 @@ import { extendTheme } from "@chakra-ui/react";
 
 export const colors = {
   ui: {
-    background01: "rgba(134,56,83,0.85)",
+    background01: "rgba(236,236,236,0.85)",
     background02: "#d196d5",
   },
   text01: "#8c8c8c",
@@ -14,7 +14,7 @@ export const padding = [4, 6];
 
 export const theme = extendTheme({
   fonts: {
-    body: "Nunito Sans",
+    body: "Raleway",
     heading: "Nunito",
   },
   components: {
@@ -27,14 +27,14 @@ export const theme = extendTheme({
     Text: {
       baseStyle: {
         color: colors.text02,
-        marginBottom: 4,
+        //F marginBottom: 4,
       },
     },
   },
   styles: {
     global: props => ({
       body: {
-        // bg: colors.ui.background01,
+        bg: colors.ui.background01,
       },
     }),
   },

@@ -6,6 +6,7 @@ import { AddMoodModal } from "../app/components/mood/add-mood-modal";
 import { MoodsTimeline } from "../app/components/mood/moods-timeline";
 import { PageWrapper } from "../app/components/page-wrapper";
 import { Panel } from "../app/components/panel";
+import { Splash } from "../app/components/splash";
 import { useTimeOfDay } from "../app/hooks/use-time-of-day";
 import { useMoodsQuery } from "../app/types/graphql";
 
@@ -16,7 +17,7 @@ export default function Oasis() {
   const { data, error, loading } = useMoodsQuery();
 
   if (isLoading || loading) {
-    return <>Loading</>;
+    return <Splash />;
   }
 
   if (error || !data || !user) {
@@ -28,10 +29,6 @@ export default function Oasis() {
       <PageWrapper>
         <Buddy size="130px" />
         <Panel>
-          <Heading as="h1">
-            {greeting}, {user.name?.split(" ")[0]}
-          </Heading>
-          <Heading as="h3">How are you feeling today?</Heading>
           <Button onClick={() => setShowAddMoodModal(true)} />
 
           <MoodsTimeline moods={data.moods} />

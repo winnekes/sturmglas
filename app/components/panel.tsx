@@ -11,7 +11,7 @@ export const Panel: FunctionComponent = ({ children }) => {
       r={0}
       p={padding}
       mt={10}
-      height="300px"
+      minHeight="300px"
     >
       {children}
     </Box>
