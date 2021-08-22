@@ -94,7 +94,7 @@ export type MutationSaveRefreshTokenArgs = {
 export type Query = {
   __typename?: 'Query';
   fitness: FitnessType;
-  latestMood: MoodType;
+  latestMood?: Maybe<MoodType>;
   mood: MoodType;
   moods: Array<MoodType>;
   profile: UserType;
@@ -148,7 +148,7 @@ export type FitnessQueryQuery = { __typename?: 'Query', fitness: { __typename?: 
 export type LatestMoodQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LatestMoodQuery = { __typename?: 'Query', latestMood: { __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any } };
+export type LatestMoodQuery = { __typename?: 'Query', latestMood?: Maybe<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any }> };
 
 export type MoodQueryVariables = Exact<{
   id: Scalars['Int'];

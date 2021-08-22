@@ -9,7 +9,7 @@ export class LatestMoodQuery {
   private moodRepository = getRepository("Mood") as Repository<Mood>;
 
   @Authorized()
-  @Query((returns) => MoodType)
+  @Query(returns => MoodType, { nullable: true })
   async latestMood(@Ctx() context: Context): Promise<MoodType | undefined> {
     if (!context.authId || !context.user) {
       throw new Error("No user set on context");

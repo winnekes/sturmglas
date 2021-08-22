@@ -27,6 +27,7 @@ export default function Home() {
         <meta name="description" content="mentali" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Splash />
     </PageWrapper>
   );
 }

@@ -9,6 +9,7 @@ import { Panel } from "../app/components/panel";
 import { Splash } from "../app/components/splash";
 import { useTimeOfDay } from "../app/hooks/use-time-of-day";
 import { useMoodsQuery } from "../app/types/graphql";
+import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 
 export default function Oasis() {
   const [showAddMoodModal, setShowAddMoodModal] = useState(false);
@@ -40,3 +41,5 @@ export default function Oasis() {
     </>
   );
 }
+
+export const getServerSideProps = withPageAuthRequired();

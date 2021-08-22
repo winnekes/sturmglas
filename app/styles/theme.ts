@@ -2,11 +2,12 @@ import { extendTheme } from "@chakra-ui/react";
 
 export const colors = {
   ui: {
-    background01: "rgba(236,236,236,0.85)",
-    background02: "#d196d5",
+    background01: "#25a69e",
+    background02: "#0d726c",
   },
   text01: "#8c8c8c",
   text02: "#a2a2a2",
+  brand01: "#25a69e",
 };
 
 export const width = ["100%", "100%", "100%", "container.xl"];
@@ -34,7 +35,7 @@ export const theme = extendTheme({
   styles: {
     global: props => ({
       body: {
-        bg: colors.ui.background01,
+        bgGradient: `radial(${colors.ui.background01}, ${colors.ui.background02})`,
       },
     }),
   },
