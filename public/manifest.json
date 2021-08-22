@@ -1,13 +1,24 @@
 {
   "lang": "en",
-  "background_color": "#00aae7",
-  "theme_color": "#00aae7",
+  "background_color": "#0d726c",
+  "theme_color": "#0d726c",
   "dir": "ltr",
   "display": "fullscreen",
-  "orientation": "any",
-  "name": "mentali",
+  "orientation": "portrait",
+  "name": "Mentali",
   "start_url": "/",
   "icons": [
+    {
+      "src": "/icons/maskable-icon.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/android-icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
     {
       "src": "/icons/android-icon-192x192.png",
       "type": "image/png",
@@ -74,5 +85,5 @@
       "sizes": "16x16"
     }
   ],
-  "prefer_related_applications": "false"
+  "prefer_related_applications": false
 }
