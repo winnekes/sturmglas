@@ -1,9 +1,11 @@
 import "../app/styles/globals.scss";
 import { UserProvider } from "@auth0/nextjs-auth0";
 import type { AppProps } from "next/app";
+import { useEffect, useState } from "react";
 import { MetaHead } from "../app/components/meta-head";
 import { theme } from "../app/styles/theme";
 import { ChakraProvider, Progress } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import {
   ApolloClient,
   InMemoryCache,
@@ -21,9 +23,35 @@ const client = new ApolloClient({
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
   const status = useApolloNetworkStatus();
-  const isLoading =
-    status.numPendingMutations > 0 || status.numPendingQueries > 0;
+
+  useEffect(() => {
+    if (status.numPendingMutations > 0 || status.numPendingQueries > 0) {
+      setIsLoading(true);
+    }
+    if (!status.numPendingMutations && !status.numPendingQueries) {
+      setIsLoading(false);
+    }
+
+    const handleRouteChangeStart = () => {
+      setIsLoading(true);
+    };
+
+    const handleRouteChangeComplete = () => {
+      setIsLoading(false);
+    };
+
+    router.events.on("routeChangeStart", handleRouteChangeStart);
+    router.events.on("routeChangeComplete", handleRouteChangeComplete);
+
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChangeStart);
+      router.events.off("routeChangeComplete", handleRouteChangeComplete);
+    };
+  }, [status]);
 
   return (
     <>
