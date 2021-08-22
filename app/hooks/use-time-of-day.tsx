@@ -41,5 +41,5 @@ export const useTimeOfDay: () => TimeOfDay = () => {
     return () => clearInterval(interval);
   }, [timeFrame]);
 
-  return { greeting: greetingNow, time: timeFrame };
+  return { greeting: greetingNow || "Hi", time: timeFrame };
 };
