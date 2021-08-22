@@ -6,7 +6,7 @@
   "display": "fullscreen",
   "orientation": "portrait",
   "name": "Mentali",
-  "start_url": "/",
+  "start_url": "/oasis",
   "icons": [
     {
       "src": "/icons/maskable-icon.png",
