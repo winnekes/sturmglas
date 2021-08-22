@@ -24,10 +24,8 @@ export const MobileNavigation = () => {
         bg="white"
         bottom={0}
         position="fixed"
-        borderTopRadius="40px"
+        //  borderTopRadius="40px"
         color="gray"
-        transition="transform 150ms ease-in-out"
-        animation="translateY(-100%);"
         boxShadow="0px 0px 20px 3px rgba(0,0,0,.1)"
       >
         <IconButton

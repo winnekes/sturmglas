@@ -13,12 +13,13 @@ export const DesktopNavigation = () => {
     <Flex
       display={{ base: "none", md: "flex" }}
       minH="60px"
-      py={{ base: 2 }}
+      pT={2}
       px={padding}
       align="center"
       justify="flex-end"
+      color="white"
     >
-      <Flex ml={10} py={5} display={{ base: "none", md: "flex" }}>
+      <Flex>
         <Stack direction="row" spacing={4}>
           {navigationItems.map(navItem => (
             <NextLink key={navItem.label} href={navItem.href} passHref>
