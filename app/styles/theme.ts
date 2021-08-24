@@ -16,8 +16,8 @@ export const spacing = [4, 10];
 
 export const theme = extendTheme({
   fonts: {
-    body: "Raleway",
-    // heading: "Nunito",
+    body: "Nunito Sans",
+    heading: "Nunito",
   },
   components: {
     Heading: {
