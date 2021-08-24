@@ -3,7 +3,6 @@ import { Buddy } from "../app/components/buddy";
 import { MoodsTimeline } from "../app/components/mood/moods-timeline";
 import { PageWrapper } from "../app/components/page-wrapper";
 import { Panel } from "../app/components/panel";
-import { Splash } from "../app/components/splash";
 import { useMoodsQuery } from "../app/types/graphql";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 
@@ -12,7 +11,7 @@ export default function Oasis() {
   const { data, error, loading } = useMoodsQuery();
 
   if (isLoading || loading) {
-    return <Splash />;
+    return <>Loading</>;
   }
 
   if (error || !data || !user) {
@@ -20,14 +19,12 @@ export default function Oasis() {
   }
 
   return (
-    <>
-      <PageWrapper>
-        <Buddy size="130px" />
-        <Panel mt={5}>
-          <MoodsTimeline moods={data.moods} />
-        </Panel>
-      </PageWrapper>
-    </>
+    <PageWrapper>
+      <Buddy size="130px" />
+      <Panel mt={5}>
+        <MoodsTimeline moods={data.moods} />
+      </Panel>
+    </PageWrapper>
   );
 }
 

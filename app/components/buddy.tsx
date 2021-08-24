@@ -1,6 +1,7 @@
-import { VStack, Text, Button } from "@chakra-ui/react";
+import { VStack, Text, Button, Box } from "@chakra-ui/react";
 import { FunctionComponent, useEffect, useRef } from "react";
 import { useBluetooth } from "../hooks/use-bluetooth";
+import { colors } from "../styles/theme";
 import { useLatestMoodQuery } from "../types/graphql";
 import { Splash } from "./splash";
 import { Subheading } from "./text/subheading";
@@ -17,7 +18,7 @@ export const Buddy: FunctionComponent<Props> = ({ size }) => {
 
   // TODO Generic component
   if (loading) {
-    return <Splash />;
+    return <>Loiading</>;
   }
 
   if (error || !data) {
@@ -27,7 +28,7 @@ export const Buddy: FunctionComponent<Props> = ({ size }) => {
   return (
     <>
       <VStack>
-        <Image src="/logo.png" width="200px" height="200px" />
+        <Image src="/logo.png" height="200px" width="200px" priority={true} />
 
         <Button onClick={bluetooth.connect}>Connect</Button>
         {data.latestMood && (

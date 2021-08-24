@@ -36,6 +36,7 @@ export const theme = extendTheme({
     global: props => ({
       body: {
         bgGradient: `radial(${colors.ui.background01}, ${colors.ui.background02})`,
+        backgroundAttachment: "fixed",
         color: "white",
       },
     }),

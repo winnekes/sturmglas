@@ -1,5 +1,5 @@
 import { useUser } from "@auth0/nextjs-auth0";
-import { AddIcon, ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
+import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import {
   Box,
   Stack,
@@ -8,7 +8,6 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Drawer,
-  useMediaQuery,
   IconButton,
 } from "@chakra-ui/react";
 import { MutableRefObject } from "react";
@@ -16,6 +15,7 @@ import { useTimeOfDay } from "../../hooks/use-time-of-day";
 import { colors } from "../../styles/theme";
 import { authNavigationItems, openNavigationItems } from "./navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 type Props = {
   finalFocusRef: MutableRefObject<null>;
@@ -30,7 +30,6 @@ export const DrawerMenu = ({
   onClose,
   onToggle,
 }: Props) => {
-  const [isDesktop] = useMediaQuery("(min-width: 62em)");
   const { greeting } = useTimeOfDay();
   const { user, isLoading } = useUser();
 
@@ -58,8 +57,8 @@ export const DrawerMenu = ({
           aria-label="Toggle navigation"
         />
         <DrawerHeader>
-          {greeting}
-          {!isLoading && (user ? <>, {user.name?.split(" ")[0]}</> : <>!</>)}
+          {greeting} {!user && "!"}
+          {user && <>, {user.name?.split(" ")[0]}</>}
         </DrawerHeader>
         <DrawerBody>
           <Stack p={4} spacing={7}>
