@@ -1,5 +1,6 @@
-import { VStack, Text } from "@chakra-ui/react";
-import { FunctionComponent } from "react";
+import { VStack, Text, Button } from "@chakra-ui/react";
+import { FunctionComponent, useEffect, useRef } from "react";
+import { useBluetooth } from "../hooks/use-bluetooth";
 import { useLatestMoodQuery } from "../types/graphql";
 import { Splash } from "./splash";
 import { Subheading } from "./text/subheading";
@@ -11,6 +12,8 @@ type Props = {
 
 export const Buddy: FunctionComponent<Props> = ({ size }) => {
   const { data, error, loading } = useLatestMoodQuery();
+  const bluetooth = useBluetooth();
+  const btnRef = useRef<HTMLButtonElement>();
 
   // TODO Generic component
   if (loading) {
@@ -26,9 +29,18 @@ export const Buddy: FunctionComponent<Props> = ({ size }) => {
       <VStack>
         <Image src="/logo.png" width="200px" height="200px" />
 
+        <Button onClick={bluetooth.connect}>Connect</Button>
         {data.latestMood && (
           <>
-            <Subheading>SRIRAM IS A MONKEY</Subheading>
+            {bluetooth.state.connected && (
+              <button
+                onClick={async () => {
+                  await bluetooth.changeName("sriram is a monkey");
+                }}
+              >
+                change name to bum and restart
+              </button>
+            )}
             <Text>{data.latestMood.emotion}</Text>
             <Text>{data.latestMood.description}</Text>
           </>

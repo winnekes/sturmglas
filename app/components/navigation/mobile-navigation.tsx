@@ -15,7 +15,7 @@ export const MobileNavigation = () => {
   return (
     <>
       <Flex
-        display={{ base: "flex", md: "none" }}
+        display={{ base: "flex", lg: "none" }}
         align="center"
         justify="space-between"
         px={padding}
@@ -40,7 +40,6 @@ export const MobileNavigation = () => {
           aria-label={"Record your mood"}
           icon={<BiPlus />}
           size="lg"
-          n
           borderRadius="100%"
           color="white"
           bg={colors.brand01}

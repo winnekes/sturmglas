@@ -6,13 +6,12 @@ import {
   GridItem,
   useMediaQuery,
 } from "@chakra-ui/react";
-
 import { padding, width } from "../styles/theme";
 import { DesktopNavigation } from "./navigation/desktop-navigation";
 import { MobileNavigation } from "./navigation/mobile-navigation";
 
 export const PageWrapper: FunctionComponent = ({ children }) => {
-  const [isDesktop] = useMediaQuery("(min-width: 48em)");
+  const [isDesktop] = useMediaQuery("(min-width: 62em)");
   return (
     <>
       {!isDesktop && <MobilePageWrapper>{children}</MobilePageWrapper>}
