@@ -29,8 +29,15 @@ export default function Oasis() {
     <>
       <PageWrapper>
         <Buddy size="130px" />
-        <Panel>
-          <Button onClick={() => setShowAddMoodModal(true)} />
+        <Panel mt={5}>
+          <Button
+            w="100%"
+            variant="outline"
+            colorScheme="green"
+            onClick={() => setShowAddMoodModal(true)}
+          >
+            How are you feeling right now? Record it
+          </Button>
 
           <MoodsTimeline moods={data.moods} />
         </Panel>

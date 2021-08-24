@@ -42,10 +42,12 @@ export const MobileMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
         </DrawerHeader>
 
         <DrawerBody>
-          <Stack p={4} spacing={7} display={{ md: "none" }}>
+          <Stack p={4} spacing={7}>
             {navigationItems.map(navItem => (
               <Link key={navItem.label} href={navItem.href} passHref>
-                <Box fontWeight={600}>{navItem.label}</Box>
+                <Box fontWeight={600} onClick={onClose}>
+                  {navItem.label}
+                </Box>
               </Link>
             ))}
           </Stack>

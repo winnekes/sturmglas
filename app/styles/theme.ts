@@ -10,7 +10,7 @@ export const colors = {
   brand01: "#25a69e",
 };
 
-export const width = ["100%", "100%", "100%", "container.xl"];
+export const width = ["100%", "container.xl"];
 export const padding = [4, 6];
 
 export const theme = extendTheme({
@@ -27,7 +27,7 @@ export const theme = extendTheme({
     },
     Text: {
       baseStyle: {
-        color: colors.text02,
+        // color: colors.text02,
         //F marginBottom: 4,
       },
     },
@@ -36,6 +36,7 @@ export const theme = extendTheme({
     global: props => ({
       body: {
         bgGradient: `radial(${colors.ui.background01}, ${colors.ui.background02})`,
+        color: "white",
       },
     }),
   },

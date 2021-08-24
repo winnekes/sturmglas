@@ -24,7 +24,7 @@ export const MobileNavigation = () => {
         bg="white"
         bottom={0}
         position="fixed"
-        //  borderTopRadius="40px"
+        borderTopRadius="30px"
         color="gray"
         boxShadow="0px 0px 20px 3px rgba(0,0,0,.1)"
       >
@@ -40,6 +40,7 @@ export const MobileNavigation = () => {
           aria-label={"Record your mood"}
           icon={<BiPlus />}
           size="lg"
+          n
           borderRadius="100%"
           color="white"
           bg={colors.brand01}

@@ -5,12 +5,11 @@ export const Panel: ChakraComponent<"div", {}> = ({ children, ...props }) => {
   return (
     <Box
       bg="white"
+      color="gray.900"
       borderTopRadius="25px"
       borderBottomRadius="25px"
       r={0}
       p={padding}
-      mt={10}
-      //  minHeight="300px"
       {...props}
     >
       {children}

@@ -53,6 +53,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     };
   }, [status]);
 
+  // TODO: colorScheme progressbar
   return (
     <>
       <MetaHead />
@@ -62,8 +63,9 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Progress
               bg="transparent"
               size="sm"
-              colorScheme="pink"
+              colorScheme="green"
               isIndeterminate={isLoading}
+              value={0}
             />
             <Component {...pageProps} />
           </ChakraProvider>

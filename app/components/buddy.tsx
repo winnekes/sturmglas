@@ -1,19 +1,9 @@
-import {
-  Image,
-  VStack,
-  Text,
-  Circle,
-  HStack,
-  Box,
-  Divider,
-  Stack,
-  Button,
-} from "@chakra-ui/react";
+import { VStack, Text } from "@chakra-ui/react";
 import { FunctionComponent } from "react";
 import { useLatestMoodQuery } from "../types/graphql";
-import { Panel } from "./panel";
 import { Splash } from "./splash";
 import { Subheading } from "./text/subheading";
+import Image from "next/image";
 
 type Props = {
   size: string;
@@ -34,7 +24,7 @@ export const Buddy: FunctionComponent<Props> = ({ size }) => {
   return (
     <>
       <VStack>
-        <Image src="/logo.png" boxSize="200px" />
+        <Image src="/logo.png" width="200px" height="200px" />
 
         {data.latestMood && (
           <>

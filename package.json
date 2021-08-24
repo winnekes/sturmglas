@@ -17,7 +17,6 @@
     "@chakra-ui/react": "^1.6.5",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
-    "@googleapis/fitness": "^0.2.0",
     "apollo-server-micro": "^3.1.2",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",

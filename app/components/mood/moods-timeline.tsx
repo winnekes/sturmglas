@@ -1,4 +1,4 @@
-import { Box, Center, HStack, Icon, Text } from "@chakra-ui/react";
+import { Box, Center, Heading, HStack, Icon, Text } from "@chakra-ui/react";
 import { DateTime as time } from "luxon";
 import { FunctionComponent } from "react";
 import { MoodsQuery } from "../../types/graphql";
@@ -56,6 +56,8 @@ export const MoodsTimeline: FunctionComponent<Props> = ({ moods }) => {
 
   return (
     <>
+      <Heading>Oasis</Heading>
+
       {mappedMoods.map(year => (
         <Box key={year.year}>
           {year.months.map(month => (
