@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useRef } from "react";
 import { BiHomeAlt, BiMenu, BiPlus, BiX } from "react-icons/bi";
 import { colors, padding } from "../../styles/theme";
-import { MobileMenu } from "./mobile-menu";
+import { DrawerMenu } from "./drawer-menu";
 import { navigation } from "./navigation";
 
 // TODO: hide navigation on scroll
@@ -53,7 +53,12 @@ export const MobileNavigation = () => {
           size="lg"
         />
       </Flex>
-      <MobileMenu finalFocusRef={btnRef} isOpen={isOpen} onClose={onClose} />
+      <DrawerMenu
+        finalFocusRef={btnRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        onToggle={onToggle}
+      />
     </>
   );
 };

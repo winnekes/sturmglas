@@ -2,8 +2,8 @@ import { extendTheme } from "@chakra-ui/react";
 
 export const colors = {
   ui: {
-    background01: "#46b9b5",
-    background02: "#0d726c",
+    background01: "#97cbde",
+    background02: "#1A4551",
   },
   text01: "#8c8c8c",
   text02: "#a2a2a2",

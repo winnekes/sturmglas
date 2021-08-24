@@ -1,4 +1,5 @@
 import { useUser } from "@auth0/nextjs-auth0";
+import { AddIcon, ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import {
   Box,
   Stack,
@@ -7,6 +8,8 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Drawer,
+  useMediaQuery,
+  IconButton,
 } from "@chakra-ui/react";
 import { MutableRefObject } from "react";
 import { useTimeOfDay } from "../../hooks/use-time-of-day";
@@ -18,9 +21,16 @@ type Props = {
   finalFocusRef: MutableRefObject<null>;
   isOpen: boolean;
   onClose: () => void;
+  onToggle: () => void;
 };
 
-export const MobileMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
+export const DrawerMenu = ({
+  finalFocusRef,
+  isOpen,
+  onClose,
+  onToggle,
+}: Props) => {
+  const [isDesktop] = useMediaQuery("(min-width: 62em)");
   const { greeting } = useTimeOfDay();
   const { user, isLoading } = useUser();
 
@@ -33,14 +43,24 @@ export const MobileMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
       placement="left"
       onClose={onClose}
       finalFocusRef={finalFocusRef}
+      size="xs"
     >
       <DrawerOverlay />
       <DrawerContent bg={colors.ui.background02} color="white">
+        <IconButton
+          icon={isOpen ? <ArrowLeftIcon /> : <ArrowRightIcon />}
+          position="absolute"
+          right="-5"
+          top="20px"
+          borderRadius="100%"
+          colorScheme="blue"
+          onClick={onToggle}
+          aria-label="Toggle navigation"
+        />
         <DrawerHeader>
           {greeting}
           {!isLoading && (user ? <>, {user.name?.split(" ")[0]}</> : <>!</>)}
         </DrawerHeader>
-
         <DrawerBody>
           <Stack p={4} spacing={7}>
             {navigationItems.map(navItem => (
