@@ -2,7 +2,7 @@ import { Flex, IconButton, useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef } from "react";
 import { BiHomeAlt, BiMenu, BiPlus, BiX } from "react-icons/bi";
-import { colors, padding } from "../../styles/theme";
+import { colors, spacing } from "../../styles/theme";
 import { DrawerMenu } from "./drawer-menu";
 import { navigation } from "./navigation";
 
@@ -18,7 +18,7 @@ export const MobileNavigation = () => {
         display={{ base: "flex", lg: "none" }}
         align="center"
         justify="space-between"
-        px={padding}
+        px={spacing}
         py={4}
         width="100%"
         bg="white"
@@ -53,12 +53,7 @@ export const MobileNavigation = () => {
           size="lg"
         />
       </Flex>
-      <DrawerMenu
-        finalFocusRef={btnRef}
-        isOpen={isOpen}
-        onClose={onClose}
-        onToggle={onToggle}
-      />
+      <DrawerMenu finalFocusRef={btnRef} isOpen={isOpen} onClose={onClose} />
     </>
   );
 };

@@ -1,12 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway&family=Nunito:wght@400;800&display=swap");
 
 html,
-body {
+body,
+#__next {
   padding: 0;
   margin: 0;
   font-family: "Raleway", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  height: 100%;
+  height: 100% !important;
 }
 
 a {

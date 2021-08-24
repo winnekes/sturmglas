@@ -12,7 +12,7 @@ export const colors = {
 };
 
 export const width = ["100%", "container.xl"];
-export const padding = [4, 6];
+export const spacing = [4, 6];
 
 export const theme = extendTheme({
   fonts: {

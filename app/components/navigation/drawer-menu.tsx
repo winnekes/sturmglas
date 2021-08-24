@@ -9,6 +9,7 @@ import {
   DrawerOverlay,
   Drawer,
   IconButton,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { MutableRefObject } from "react";
 import { useTimeOfDay } from "../../hooks/use-time-of-day";
@@ -21,16 +22,11 @@ type Props = {
   finalFocusRef: MutableRefObject<null>;
   isOpen: boolean;
   onClose: () => void;
-  onToggle: () => void;
 };
 
-export const DrawerMenu = ({
-  finalFocusRef,
-  isOpen,
-  onClose,
-  onToggle,
-}: Props) => {
+export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
   const { greeting } = useTimeOfDay();
+  const [isDesktop] = useMediaQuery("(min-width: 62em)");
   const { user, isLoading } = useUser();
 
   const navigationItems =
@@ -39,24 +35,13 @@ export const DrawerMenu = ({
   return (
     <Drawer
       isOpen={isOpen}
-      placement="left"
+      placement={isDesktop ? "right" : "left"}
       onClose={onClose}
       finalFocusRef={finalFocusRef}
-      size="xs"
+      size={isDesktop ? "lg" : "xs"}
     >
       <DrawerOverlay />
       <DrawerContent bg={colors.ui.background03} color="white">
-        <IconButton
-          icon={isOpen ? <ArrowLeftIcon /> : <ArrowRightIcon />}
-          position="absolute"
-          right="-5"
-          top="20px"
-          borderRadius="100%"
-          bg={colors.brand01}
-          color="white"
-          onClick={onToggle}
-          aria-label="Toggle navigation"
-        />
         <DrawerHeader>
           {greeting} {!user && "!"}
           {user && <>, {user.name?.split(" ")[0]}</>}

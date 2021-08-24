@@ -1,5 +1,5 @@
-import { Center, Image } from "@chakra-ui/react";
+import { Center, Text } from "@chakra-ui/react";
 
 export const Splash = () => {
-  return <Image src="/mentali.png" width="300px" />;
+  return <Text>ddsfdslkj</Text>;
 };

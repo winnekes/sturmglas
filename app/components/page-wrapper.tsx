@@ -5,11 +5,13 @@ import {
   Box,
   Container,
   Flex,
+  HStack,
   IconButton,
   useDisclosure,
   useMediaQuery,
 } from "@chakra-ui/react";
-import { colors, padding, width } from "../styles/theme";
+import { colors, spacing, width } from "../styles/theme";
+import { DesktopNavigation } from "./navigation/desktop-navigation";
 import { DrawerMenu } from "./navigation/drawer-menu";
 import { MobileNavigation } from "./navigation/mobile-navigation";
 
@@ -24,12 +26,11 @@ export const PageWrapper: FunctionComponent<Props> = ({
   const [isDesktop] = useMediaQuery("(min-width: 62em)");
   return (
     <>
-      <Head>
-        <title>mentali {props.title}</title>
-        <meta name="description" content="mentali" />
-      </Head>
-      {!isDesktop && <MobilePageWrapper>{children}</MobilePageWrapper>}
-      {isDesktop && <DesktopPageWrapper>{children}</DesktopPageWrapper>}
+      {!isDesktop ? (
+        <MobilePageWrapper>{children}</MobilePageWrapper>
+      ) : (
+        <DesktopPageWrapper>{children}</DesktopPageWrapper>
+      )}
     </>
   );
 };
@@ -39,46 +40,19 @@ const DesktopPageWrapper: FunctionComponent = ({ children }) => {
   const btnRef = useRef(null);
   return (
     <>
-      {!isOpen && (
-        <IconButton
-          icon={<ArrowRightIcon />}
-          position="fixed"
-          top="20px"
-          left="30px"
-          borderRadius="100%"
-          bg={colors.brand01}
-          color="white"
-          onClick={onOpen}
-          aria-label="Toggle navigation"
-        />
-      )}
-      <Flex>
-        <Box
-          bg={colors.ui.background03}
-          boxShadow="3px 0px 5px rgba(0, 0, 0, .1)"
-          width="50px"
-          minHeight="100vh"
-        />
-
-        <Container maxW={width} py={[6, 0]}>
-          {children}
-        </Container>
-      </Flex>
-      <DrawerMenu
-        finalFocusRef={btnRef}
-        isOpen={isOpen}
-        onClose={onClose}
-        onToggle={onToggle}
-      />
+      <DesktopNavigation />
+      <Container maxW={width} py={[6, 0]}>
+        {children}
+      </Container>
     </>
   );
 };
 
 const MobilePageWrapper: FunctionComponent = ({ children }) => {
   return (
-    <Box>
+    <Box display={{ lg: "none" }}>
       <Container maxW={width} p={0}>
-        <Box px={padding}>{children}</Box>
+        <Box px={spacing}>{children}</Box>
         <MobileNavigation />
       </Container>
     </Box>

@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <PageWrapper>
       <Splash />
-      <Text>Test</Text>
+      <Text>Test</Text> <Splash />
     </PageWrapper>
   );
 }
