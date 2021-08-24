@@ -1,22 +1,13 @@
-import { ArrowRightIcon } from "@chakra-ui/icons";
-import Head from "next/head";
-import { FunctionComponent, useRef } from "react";
-import {
-  Box,
-  Container,
-  Flex,
-  HStack,
-  IconButton,
-  useDisclosure,
-  useMediaQuery,
-} from "@chakra-ui/react";
-import { colors, spacing, width } from "../styles/theme";
+import { FunctionComponent } from "react";
+import { Box, Container, Heading, useMediaQuery } from "@chakra-ui/react";
+import { spacing, width } from "../styles/theme";
 import { DesktopNavigation } from "./navigation/desktop-navigation";
-import { DrawerMenu } from "./navigation/drawer-menu";
 import { MobileNavigation } from "./navigation/mobile-navigation";
+import { Subtitle, Title } from "./text/titles";
 
 type Props = {
-  title?: string;
+  pageTitle?: string;
+  pageSubtitle?: string;
 };
 
 export const PageWrapper: FunctionComponent<Props> = ({
@@ -27,34 +18,45 @@ export const PageWrapper: FunctionComponent<Props> = ({
   return (
     <>
       {!isDesktop ? (
-        <MobilePageWrapper>{children}</MobilePageWrapper>
+        <MobilePageWrapper {...props}>{children}</MobilePageWrapper>
       ) : (
-        <DesktopPageWrapper>{children}</DesktopPageWrapper>
+        <DesktopPageWrapper {...props}>{children}</DesktopPageWrapper>
       )}
     </>
   );
 };
 
-const DesktopPageWrapper: FunctionComponent = ({ children }) => {
-  const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef(null);
+const DesktopPageWrapper: FunctionComponent<Props> = ({
+  children,
+  ...props
+}) => {
   return (
-    <>
+    <Container maxW={width} py={[6, 0]}>
       <DesktopNavigation />
-      <Container maxW={width} py={[6, 0]}>
-        {children}
-      </Container>
-    </>
+      <Box mx={spacing}>
+        <Title>{props.pageTitle}</Title>
+        <Subtitle>{props.pageSubtitle}</Subtitle>
+      </Box>
+      <Box my={spacing}>{children}</Box>
+    </Container>
   );
 };
 
-const MobilePageWrapper: FunctionComponent = ({ children }) => {
+const MobilePageWrapper: FunctionComponent<Props> = ({
+  children,
+  ...props
+}) => {
   return (
-    <Box display={{ lg: "none" }}>
-      <Container maxW={width} p={0}>
-        <Box px={spacing}>{children}</Box>
-        <MobileNavigation />
+    <>
+      <Container maxW={width} px={spacing}>
+        <Box p={spacing}>
+          <Title>{props.pageTitle}</Title>
+          <Subtitle>{props.pageSubtitle}</Subtitle>
+        </Box>
+
+        {children}
       </Container>
-    </Box>
+      <MobileNavigation />
+    </>
   );
 };

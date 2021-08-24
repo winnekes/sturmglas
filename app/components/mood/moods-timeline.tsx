@@ -4,6 +4,7 @@ import { FunctionComponent } from "react";
 import { MoodsQuery } from "../../types/graphql";
 import { emotions } from "../../types/mood";
 import { Subheading } from "../text/subheading";
+import { PanelTitle } from "../text/titles";
 
 type Moods = MoodsQuery["moods"];
 
@@ -56,14 +57,14 @@ export const MoodsTimeline: FunctionComponent<Props> = ({ moods }) => {
 
   return (
     <>
-      <Heading>Oasis</Heading>
+      <PanelTitle>Your mood timeline</PanelTitle>
 
       {mappedMoods.map(year => (
         <Box key={year.year}>
           {year.months.map(month => (
             <Box marginBottom="4rem" key={month.month}>
-              <Text>
-                {year.year} {month.month}
+              <Text fontSize="xl" mb={10}>
+                {month.month},{year.year}
               </Text>
 
               {month.moods.map((mood, index) => {
@@ -78,11 +79,12 @@ export const MoodsTimeline: FunctionComponent<Props> = ({ moods }) => {
                   .toLocaleString({ day: "numeric" });
 
                 return (
-                  <HStack align="flex-start" spacing={10} key={mood.id}>
-                    <Box minWidth="2rem">
-                      {(!previousDay || previousDay !== currentDay) &&
-                        currentDay}
-                    </Box>
+                  <HStack
+                    align="flex-start"
+                    justify="flex-start"
+                    spacing={6}
+                    key={mood.id}
+                  >
                     <Box
                       minHeight="20px"
                       alignSelf="stretch"
@@ -94,23 +96,16 @@ export const MoodsTimeline: FunctionComponent<Props> = ({ moods }) => {
                       borderBottomRadius={
                         index === month.moods.length - 1 ? "25px" : "0px"
                       }
-                    >
-                      {month.moods[index - 1]?.emotion !== mood.emotion && (
-                        <Center mt={4}>
-                          <Icon
-                            as={emotions[mood.emotion].icon}
-                            color="white"
-                          />
-                        </Center>
-                      )}
-                    </Box>
+                    />
                     <Box paddingBottom={20}>
-                      <Subheading>
+                      <Subheading fontSize="sm" color="gray.600">
                         {time
                           .fromISO(mood.date)
-                          .toLocaleString({ timeStyle: "short" })}
+                          .toLocaleString(time.DATETIME_SHORT)}
                       </Subheading>
-                      <Text>{emotions[mood.emotion].name}</Text>
+                      <Text fontWeight="bold" textTransform="capitalize">
+                        {emotions[mood.emotion].name}
+                      </Text>
                       <Text> {mood.description}</Text>
                     </Box>
                   </HStack>

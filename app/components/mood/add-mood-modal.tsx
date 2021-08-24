@@ -28,7 +28,7 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
   const [emotion, setEmotion] = useState<Emotion | null>(null);
   const [mutate] = useAddMoodMutation({
     // TODO: optimise (use update instead of refetchQueries to reduce api call from 2 to 1)
-    refetchQueries: [MoodsDocument, LatestMoodDocument],
+    refetchQueries: ["Moods", "LatestMood"],
   });
 
   const addMood = async () => {
@@ -45,7 +45,7 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
   return (
     <Modal onClose={onClose} isOpen isCentered>
       <ModalOverlay />
-      <ModalContent pb={5}>
+      <ModalContent p={5} bg="gray.800">
         <ModalHeader>How are you feeling right now?</ModalHeader>
 
         <ModalBody>
@@ -78,7 +78,9 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
           </HStack>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={addMood}>Record</Button>
+          <Button onClick={addMood} colorScheme="purple">
+            Record
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

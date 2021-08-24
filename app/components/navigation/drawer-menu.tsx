@@ -10,13 +10,14 @@ import {
   Drawer,
   IconButton,
   useMediaQuery,
+  Divider,
 } from "@chakra-ui/react";
 import { MutableRefObject } from "react";
 import { useTimeOfDay } from "../../hooks/use-time-of-day";
-import { colors } from "../../styles/theme";
+import { colors, spacing } from "../../styles/theme";
+import { Buddy } from "../buddy";
 import { authNavigationItems, openNavigationItems } from "./navigation";
 import Link from "next/link";
-import Image from "next/image";
 
 type Props = {
   finalFocusRef: MutableRefObject<null>;
@@ -43,10 +44,13 @@ export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
       <DrawerOverlay />
       <DrawerContent bg={colors.ui.background03} color="white">
         <DrawerHeader>
-          {greeting} {!user && "!"}
+          {greeting}
+          {!user && "!"}
           {user && <>, {user.name?.split(" ")[0]}</>}
         </DrawerHeader>
         <DrawerBody>
+          <Buddy size="100px" />
+          <Divider colorScheme="red" my={spacing} />
           <Stack p={4} spacing={7}>
             {navigationItems.map(navItem => (
               <Link key={navItem.label} href={navItem.href} passHref>

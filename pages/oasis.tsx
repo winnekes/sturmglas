@@ -1,4 +1,5 @@
 import { useUser } from "@auth0/nextjs-auth0";
+import { Heading } from "@chakra-ui/react";
 import { Buddy } from "../app/components/buddy";
 import { MoodsTimeline } from "../app/components/mood/moods-timeline";
 import { PageWrapper } from "../app/components/page-wrapper";
@@ -9,6 +10,8 @@ import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 export default function Oasis() {
   const { user, isLoading } = useUser();
   const { data, error, loading } = useMoodsQuery();
+  const pageTitle = "Oasis";
+  const pageSubtitle = "How are you doing today?";
 
   if (isLoading || loading) {
     return <>Loading</>;
@@ -19,8 +22,7 @@ export default function Oasis() {
   }
 
   return (
-    <PageWrapper>
-      <Buddy size="130px" />
+    <PageWrapper pageTitle={pageTitle} pageSubtitle={pageSubtitle}>
       <Panel mt={5}>
         <MoodsTimeline moods={data.moods} />
       </Panel>

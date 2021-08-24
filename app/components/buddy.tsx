@@ -1,20 +1,26 @@
-import { VStack, Text, Button, Box } from "@chakra-ui/react";
-import { FunctionComponent, useEffect, useRef } from "react";
+import { VStack, Text, Box } from "@chakra-ui/react";
+import { DateTime as time } from "luxon";
+import { FunctionComponent, useRef } from "react";
 import { useBluetooth } from "../hooks/use-bluetooth";
-import { colors } from "../styles/theme";
+import { spacing } from "../styles/theme";
 import { useLatestMoodQuery } from "../types/graphql";
-import { Splash } from "./splash";
+import { emotions } from "../types/mood";
 import { Subheading } from "./text/subheading";
 import Image from "next/image";
+import { useEffect } from "react";
 
 type Props = {
   size: string;
 };
 
 export const Buddy: FunctionComponent<Props> = ({ size }) => {
-  const { data, error, loading } = useLatestMoodQuery();
+  const { data, error, loading, refetch } = useLatestMoodQuery();
   const bluetooth = useBluetooth();
   const btnRef = useRef<HTMLButtonElement>();
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   // TODO Generic component
   if (loading) {
@@ -25,25 +31,34 @@ export const Buddy: FunctionComponent<Props> = ({ size }) => {
     return <>Error</>;
   }
 
+  console.log({ data });
+
   return (
     <>
       <VStack>
-        <Image src="/logo.png" height="200px" width="200px" priority={true} />
-
-        <Button onClick={bluetooth.connect}>Connect</Button>
         {data.latestMood && (
           <>
-            {bluetooth.state.connected && (
-              <button
-                onClick={async () => {
-                  await bluetooth.changeName("sriram is a monkey");
-                }}
-              >
-                change name to bum and restart
-              </button>
-            )}
-            <Text>{data.latestMood.emotion}</Text>
-            <Text>{data.latestMood.description}</Text>
+            <Image
+              src={emotions[data.latestMood.emotion].imageUrl}
+              height={size}
+              width={size}
+              priority={true}
+              quality={100}
+            />
+
+            {/*<Button onClick={bluetooth.connect}>Connect</Button>*/}
+
+            <Box>
+              <Subheading fontSize="sm" color="gray.600">
+                {time
+                  .fromISO(data.latestMood.date)
+                  .toLocaleString(time.DATETIME_SHORT)}
+              </Subheading>
+              <Text fontWeight="bold" textTransform="capitalize">
+                {emotions[data.latestMood.emotion].name}
+              </Text>
+              <Text>{data.latestMood.description}</Text>
+            </Box>
           </>
         )}
 
@@ -58,3 +73,13 @@ export const Buddy: FunctionComponent<Props> = ({ size }) => {
     </>
   );
 };
+
+// {bluetooth.state.connected && (
+//   <button
+//     onClick={async () => {
+//       await bluetooth.changeName("sriram is a monkey");
+//     }}
+//   >
+//     change name to bum and restart
+//   </button>
+// )}
