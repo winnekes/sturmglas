@@ -1,8 +1,7 @@
-import { VStack, Text, Box } from "@chakra-ui/react";
+import { VStack, Text, Box, Button } from "@chakra-ui/react";
 import { DateTime as time } from "luxon";
 import { FunctionComponent, useRef } from "react";
 import { useBluetooth } from "../hooks/use-bluetooth";
-import { spacing } from "../styles/theme";
 import { useLatestMoodQuery } from "../types/graphql";
 import { emotions } from "../types/mood";
 import { Subheading } from "./text/subheading";
@@ -46,7 +45,10 @@ export const Buddy: FunctionComponent<Props> = ({ size }) => {
               quality={100}
             />
 
-            {/*<Button onClick={bluetooth.connect}>Connect</Button>*/}
+            <Button onClick={bluetooth.connect}>Connect</Button>
+            {bluetooth.state.connected && (
+              <Button onClick={bluetooth.changeMood}>send angry face</Button>
+            )}
 
             <Box>
               <Subheading fontSize="sm" color="gray.600">

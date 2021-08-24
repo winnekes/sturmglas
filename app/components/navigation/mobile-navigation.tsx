@@ -1,3 +1,4 @@
+import { useUser } from "@auth0/nextjs-auth0";
 import { Flex, IconButton, useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
@@ -11,6 +12,7 @@ import { navigation } from "./navigation";
 export const MobileNavigation = () => {
   const [showAddMoodModal, setShowAddMoodModal] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const { user } = useUser();
   const router = useRouter();
   const btnRef = useRef(null);
 
@@ -37,14 +39,16 @@ export const MobileNavigation = () => {
           borderRadius="100%"
           onClick={() => router.push(navigation.root)}
         />
-        <IconButton
-          aria-label={"Record your mood"}
-          icon={<BiPlus />}
-          size="lg"
-          borderRadius="100%"
-          bg={colors.brand01}
-          onClick={() => setShowAddMoodModal(true)}
-        />
+        {user && (
+          <IconButton
+            aria-label={"Record your mood"}
+            icon={<BiPlus />}
+            size="lg"
+            borderRadius="100%"
+            bg={colors.brand01}
+            onClick={() => setShowAddMoodModal(true)}
+          />
+        )}
         <IconButton
           onClick={() => setShowMenu(true)}
           icon={<BiMenu />}
