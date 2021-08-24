@@ -41,8 +41,8 @@ export const MobileNavigation = () => {
           icon={<BiPlus />}
           size="lg"
           borderRadius="100%"
-          color="white"
           bg={colors.brand01}
+          color="white"
         />
         <IconButton
           onClick={onToggle}

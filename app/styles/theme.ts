@@ -2,12 +2,13 @@ import { extendTheme } from "@chakra-ui/react";
 
 export const colors = {
   ui: {
-    background01: "#97cbde",
-    background02: "#1A4551",
+    background01: "#2d749a",
+    background02: "#03324E",
+    background03: "#01263D",
   },
   text01: "#8c8c8c",
   text02: "#a2a2a2",
-  brand01: "#25a69e",
+  brand01: "#c9484c",
 };
 
 export const width = ["100%", "container.xl"];

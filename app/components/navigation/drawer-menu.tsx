@@ -45,14 +45,15 @@ export const DrawerMenu = ({
       size="xs"
     >
       <DrawerOverlay />
-      <DrawerContent bg={colors.ui.background02} color="white">
+      <DrawerContent bg={colors.ui.background03} color="white">
         <IconButton
           icon={isOpen ? <ArrowLeftIcon /> : <ArrowRightIcon />}
           position="absolute"
           right="-5"
           top="20px"
           borderRadius="100%"
-          colorScheme="blue"
+          bg={colors.brand01}
+          color="white"
           onClick={onToggle}
           aria-label="Toggle navigation"
         />

@@ -46,14 +46,15 @@ const DesktopPageWrapper: FunctionComponent = ({ children }) => {
           top="20px"
           left="30px"
           borderRadius="100%"
-          colorScheme="blue"
+          bg={colors.brand01}
+          color="white"
           onClick={onOpen}
           aria-label="Toggle navigation"
         />
       )}
       <Flex>
         <Box
-          bg={colors.ui.background02}
+          bg={colors.ui.background03}
           boxShadow="3px 0px 5px rgba(0, 0, 0, .1)"
           width="50px"
           minHeight="100vh"
