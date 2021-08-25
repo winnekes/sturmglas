@@ -1,6 +1,5 @@
 import { useUser } from "@auth0/nextjs-auth0";
-import { Heading } from "@chakra-ui/react";
-import { Buddy } from "../app/components/buddy";
+import { Loading } from "../app/components/loading";
 import { MoodsTimeline } from "../app/components/mood/moods-timeline";
 import { PageWrapper } from "../app/components/page-wrapper";
 import { Panel } from "../app/components/panel";
@@ -14,7 +13,7 @@ export default function Oasis() {
   const pageSubtitle = "How are you doing today?";
 
   if (isLoading || loading) {
-    return <>Loading</>;
+    return <Loading />;
   }
 
   if (error || !data || !user) {

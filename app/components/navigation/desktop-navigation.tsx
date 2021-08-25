@@ -11,8 +11,9 @@ export const DesktopNavigation = () => {
   return (
     <>
       <Flex justify="space-between" align="center" py={spacing}>
-        <Text>mentali</Text>
+        <Text justifySelf="flex-start">mentali</Text>
         <IconButton
+          justifySelf="flex-end"
           icon={<Icon as={BiMenu} boxSize="32px" />}
           aria-label={"Open menu"}
           variant="ghost"

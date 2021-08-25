@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { createContext, FunctionComponent, useContext, useState } from "react";
 
 const serviceUuid = process.env.NEXT_PUBLIC_BLUETOOTH_SERVICE_UUID ?? "";
 const commandCharacteristicUuid =
@@ -6,15 +6,24 @@ const commandCharacteristicUuid =
 const faceCharacteristicUuid =
   process.env.NEXT_PUBLIC_BLUETOOTH_FACE_UUID ?? "";
 
-export const useBluetooth = () => {
-  const [connection, setConnection] = useState<
-    BluetoothRemoteGATTServer | undefined
-  >(undefined);
-  const [service, setService] = useState<
-    BluetoothRemoteGATTService | undefined
-  >(undefined);
+type Context = {
+  connect: () => void;
+  restart: () => void;
+  disconnect: () => void;
+  changeName: (name: string) => void;
+  changeFace: (faceInHex: string) => void;
+  deviceName: string;
+  state: { connected: boolean; error: boolean };
+};
+
+const BluetoothContext = createContext<Context | null>(null);
+
+export const BluetoothContextProvider: FunctionComponent = ({ children }) => {
+  const [connection, setConnection] = useState<BluetoothRemoteGATTServer>();
+  const [service, setService] = useState<BluetoothRemoteGATTService>();
   const [deviceName, setDeviceName] = useState("");
   const [deviceFace, setDeviceFace] = useState("");
+  const [connected, setConnected] = useState(false);
   const [error, setError] = useState(false);
 
   const textEncoder = new TextEncoder();
@@ -27,6 +36,7 @@ export const useBluetooth = () => {
         filters: [{ services: [serviceUuid] }],
       });
 
+      setDeviceName(device?.name ?? "");
       const server = await device.gatt?.connect();
       if (server) {
         setConnection(server);
@@ -35,6 +45,7 @@ export const useBluetooth = () => {
           setService(primaryService);
         }
       }
+      setConnected(true);
       setError(false);
     } catch (e) {
       setError(e);
@@ -48,7 +59,9 @@ export const useBluetooth = () => {
           commandCharacteristicUuid
         );
 
+        console.log("command");
         await commandCharacteristic.writeValue(textEncoder.encode(command));
+        console.log("command send");
       }
       setError(false);
     } catch (e) {
@@ -60,9 +73,6 @@ export const useBluetooth = () => {
     try {
       if (connection && service) {
         await sendCommand("RESTART");
-        // setConnection(undefined);
-        // setService(undefined);
-        // // await connect();
       }
       setError(false);
     } catch (e) {
@@ -75,47 +85,41 @@ export const useBluetooth = () => {
       connection.disconnect();
       setService(undefined);
       setConnection(undefined);
+      setConnected(false);
     }
   };
 
   const changeName = async (name: string) => {
     try {
       if (connection && service) {
-        await sendCommand(`RENAME ${name}`);
+        await sendCommand("RENAME " + name);
+        console.log("i get here?");
         setDeviceName(name);
       }
+      disconnect();
       setError(false);
+      console.log("done");
     } catch (e) {
+      console.log({ e });
       setError(e);
     }
   };
 
-  const changeMood = async () => {
+  const changeFace = async (faceInHex: string) => {
     try {
       if (connection && service) {
         const characteristic = await service.getCharacteristic(
           faceCharacteristicUuid
         );
 
-        // TODO buffer
-        // send command
-
-        const angry =
-          "0400c80000000000000006000001a4000009b000002fc00000ff000003d80000060000000000000000000000000000000010200000210000007800000000000000000000000006000001a4000009b000002fc00000ff000003d800000600000000000000000000000000000000000000004080000084000001e00000000000000000000000001800000690000026c00000bf000003fc00000f60000018000000000000000000000000000000004080000084000001e00000000000000000000000001800000690000026c00000bf000003fc00000f600000180000000000000000000000001020000021000000780000000000";
-
-        const result = angry.match(/[\da-f]{2}/gi) || [];
+        const result = faceInHex.match(/[\da-f]{2}/gi) || [];
         const typedArray = new Uint8Array(
           result.map(function (h) {
             return parseInt(h, 16);
           })
         );
 
-        console.log(typedArray);
-        // console.log([0xAA, 0x55, 0x04, 0xB1, 0x00, 0x00, 0xB5])
-
-        const buffer = typedArray.buffer;
-
-        await characteristic.writeValue(buffer);
+        await characteristic.writeValue(typedArray.buffer);
       }
       setError(false);
     } catch (e) {
@@ -123,13 +127,27 @@ export const useBluetooth = () => {
     }
   };
 
-  return {
-    connect,
-    restart,
-    disconnect,
-    changeName,
-    changeMood,
-    deviceName,
-    state: { connected: !!connection && !!service, error },
-  };
+  return (
+    <BluetoothContext.Provider
+      value={{
+        connect,
+        restart,
+        disconnect,
+        changeName,
+        changeFace,
+        deviceName,
+        state: { connected, error },
+      }}
+    >
+      {children}
+    </BluetoothContext.Provider>
+  );
+};
+
+export const useBluetooth = () => {
+  const data = useContext(BluetoothContext);
+  if (!data) {
+    throw new Error("Must be used inside provider");
+  }
+  return data;
 };

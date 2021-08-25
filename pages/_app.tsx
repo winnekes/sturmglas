@@ -3,6 +3,7 @@ import { UserProvider } from "@auth0/nextjs-auth0";
 import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
 import { MetaHead } from "../app/components/meta-head";
+import { BluetoothContextProvider } from "../app/hooks/use-bluetooth";
 import { theme } from "../app/styles/theme";
 import { ChakraProvider, Progress } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -67,7 +68,9 @@ function MyApp({ Component, pageProps }: AppProps) {
               isIndeterminate={isLoading}
               value={0}
             />
-            <Component {...pageProps} />
+            <BluetoothContextProvider>
+              <Component {...pageProps} />
+            </BluetoothContextProvider>
           </ChakraProvider>
         </ApolloProvider>
       </UserProvider>

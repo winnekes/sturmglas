@@ -13,12 +13,14 @@ import { FunctionComponent, useState } from "react";
 import { BiTired } from "react-icons/bi";
 
 import { ImAngry, ImHappy, ImNeutral, ImSad } from "react-icons/im";
+import { useBluetooth } from "../../hooks/use-bluetooth";
 import {
   Emotion,
   LatestMoodDocument,
   MoodsDocument,
   useAddMoodMutation,
 } from "../../types/graphql";
+import { emotions } from "../../types/mood";
 
 type Props = {
   onClose: () => void;
@@ -26,6 +28,7 @@ type Props = {
 
 export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
   const [emotion, setEmotion] = useState<Emotion | null>(null);
+  const bluetooth = useBluetooth();
   const [mutate] = useAddMoodMutation({
     // TODO: optimise (use update instead of refetchQueries to reduce api call from 2 to 1)
     refetchQueries: ["Moods", "LatestMood"],
@@ -33,11 +36,17 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
 
   const addMood = async () => {
     if (emotion) {
-      await mutate({
-        variables: {
-          data: { emotion, date: new Date(), description: "" },
-        },
-      });
+      try {
+        await mutate({
+          variables: {
+            data: { emotion, date: new Date(), description: "" },
+          },
+        });
+
+        await bluetooth.changeFace(emotions[emotion].faceInHex);
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 

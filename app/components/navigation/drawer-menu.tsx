@@ -45,12 +45,17 @@ export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
       <DrawerContent bg={colors.ui.background03} color="white">
         <DrawerHeader>
           {greeting}
-          {!user && "!"}
+          {!user && " there!"}
           {user && <>, {user.name?.split(" ")[0]}</>}
         </DrawerHeader>
         <DrawerBody>
-          <Buddy size="100px" />
-          <Divider colorScheme="red" my={spacing} />
+          {user && (
+            <>
+              <Buddy size="100px" />
+              <Divider colorScheme="red" my={spacing} />
+            </>
+          )}
+
           <Stack p={4} spacing={7}>
             {navigationItems.map(navItem => (
               <Link key={navItem.label} href={navItem.href} passHref>

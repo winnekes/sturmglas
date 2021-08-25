@@ -25,10 +25,8 @@ export const useTimeOfDay: () => TimeOfDay = () => {
     evening: ["Good evening"],
   };
 
-  console.log({ greetingNow, timeFrame });
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("am i runnings");
       setTimeFrame(
         timeNow.hour < 12
           ? Time.MORNING

@@ -10,8 +10,8 @@ import { navigation } from "./navigation";
 
 // TODO: hide navigation on scroll
 export const MobileNavigation = () => {
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const [showAddMoodModal, setShowAddMoodModal] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
   const { user } = useUser();
   const router = useRouter();
   const btnRef = useRef(null);
@@ -50,7 +50,7 @@ export const MobileNavigation = () => {
           />
         )}
         <IconButton
-          onClick={() => setShowMenu(true)}
+          onClick={onOpen}
           icon={<BiMenu />}
           variant="ghost"
           aria-label="Toggle navigation"
@@ -58,13 +58,8 @@ export const MobileNavigation = () => {
           size="lg"
         />
       </Flex>
-      {showMenu && (
-        <DrawerMenu
-          finalFocusRef={btnRef}
-          isOpen={true}
-          onClose={() => setShowMenu(false)}
-        />
-      )}
+
+      <DrawerMenu finalFocusRef={btnRef} isOpen={isOpen} onClose={onClose} />
       {showAddMoodModal && (
         <AddMoodModal onClose={() => setShowAddMoodModal(false)} />
       )}

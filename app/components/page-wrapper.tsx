@@ -14,14 +14,10 @@ export const PageWrapper: FunctionComponent<Props> = ({
   children,
   ...props
 }) => {
-  const [isDesktop] = useMediaQuery("(min-width: 62em)");
   return (
     <>
-      {!isDesktop ? (
-        <MobilePageWrapper {...props}>{children}</MobilePageWrapper>
-      ) : (
-        <DesktopPageWrapper {...props}>{children}</DesktopPageWrapper>
-      )}
+      <MobilePageWrapper {...props}>{children}</MobilePageWrapper>
+      <DesktopPageWrapper {...props}>{children}</DesktopPageWrapper>
     </>
   );
 };
@@ -31,14 +27,16 @@ const DesktopPageWrapper: FunctionComponent<Props> = ({
   ...props
 }) => {
   return (
-    <Container maxW={width} py={[6, 0]}>
-      <DesktopNavigation />
-      <Box mx={spacing}>
-        <Title>{props.pageTitle}</Title>
-        <Subtitle>{props.pageSubtitle}</Subtitle>
-      </Box>
-      <Box my={spacing}>{children}</Box>
-    </Container>
+    <Box display={{ sm: "none", md: "none", lg: "initial" }}>
+      <Container maxW={width} py={[6, 0]}>
+        <DesktopNavigation />
+        <Box mx={spacing}>
+          <Title>{props.pageTitle}</Title>
+          <Subtitle>{props.pageSubtitle}</Subtitle>
+        </Box>
+        <Box my={spacing}>{children}</Box>
+      </Container>
+    </Box>
   );
 };
 
@@ -47,7 +45,7 @@ const MobilePageWrapper: FunctionComponent<Props> = ({
   ...props
 }) => {
   return (
-    <>
+    <Box display={{ sm: "block", md: "block", lg: "none" }}>
       <Container maxW={width} px={spacing}>
         <Box p={spacing}>
           <Title>{props.pageTitle}</Title>
@@ -57,6 +55,6 @@ const MobilePageWrapper: FunctionComponent<Props> = ({
         {children}
       </Container>
       <MobileNavigation />
-    </>
+    </Box>
   );
 };
