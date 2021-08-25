@@ -21,3 +21,8 @@ a {
   box-shadow: none !important;
   outline: 0 !important;
 }
+
+[data-hover],
+button:hover {
+  background: none !important;
+}
