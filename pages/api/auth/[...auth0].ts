@@ -1,4 +1,9 @@
-import { handleAuth, handleCallback, Session } from "@auth0/nextjs-auth0";
+import {
+  handleAuth,
+  handleCallback,
+  handleLogin,
+  Session,
+} from "@auth0/nextjs-auth0";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getRepository, Repository } from "typeorm";
 import { initializeDatabase } from "../../../server/database-connection";
@@ -18,5 +23,10 @@ export default handleAuth({
     } catch (error) {
       res.status(error.status || 500).end(error.message);
     }
+  },
+  async login(req, res) {
+    await handleLogin(req, res, {
+      returnTo: "/oasis",
+    });
   },
 });
