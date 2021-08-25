@@ -1,10 +1,20 @@
-import { Box, Center, Heading, HStack, Icon, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Heading,
+  HStack,
+  Icon,
+  Text,
+} from "@chakra-ui/react";
 import { DateTime as time } from "luxon";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
+import { colors, spacing } from "../../styles/theme";
 import { MoodsQuery } from "../../types/graphql";
 import { emotions } from "../../types/mood";
 import { Subheading } from "../text/subheading";
 import { PanelTitle } from "../text/titles";
+import { AddMoodModal } from "./add-mood-modal";
 
 type Moods = MoodsQuery["moods"];
 
@@ -54,10 +64,21 @@ const splitAndSortMoodsByYearAndMonth = (moods: Moods) => {
 // todo mental weather
 export const MoodsTimeline: FunctionComponent<Props> = ({ moods }) => {
   const mappedMoods = splitAndSortMoodsByYearAndMonth(moods);
+  const [showAddMoodModal, setShowAddMoodModal] = useState(false);
 
   return (
     <>
       <PanelTitle>Your mood timeline</PanelTitle>
+
+      <Button
+        display={{ base: "none", lg: "block" }}
+        bg={colors.brand01}
+        mb={spacing}
+        w="100%"
+        onClick={() => setShowAddMoodModal(true)}
+      >
+        How are you feeling today? Record your mood
+      </Button>
 
       {mappedMoods.map(year => (
         <Box key={year.year}>
@@ -115,6 +136,9 @@ export const MoodsTimeline: FunctionComponent<Props> = ({ moods }) => {
           ))}
         </Box>
       ))}
+      {showAddMoodModal && (
+        <AddMoodModal onClose={() => setShowAddMoodModal(false)} />
+      )}
     </>
   );
 };

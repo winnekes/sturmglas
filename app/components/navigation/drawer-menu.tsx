@@ -1,5 +1,4 @@
 import { useUser } from "@auth0/nextjs-auth0";
-import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import {
   Box,
   Stack,
@@ -8,9 +7,9 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Drawer,
-  IconButton,
   useMediaQuery,
   Divider,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import { MutableRefObject } from "react";
 import { useTimeOfDay } from "../../hooks/use-time-of-day";
@@ -59,9 +58,7 @@ export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
           <Stack p={4} spacing={7}>
             {navigationItems.map(navItem => (
               <Link key={navItem.label} href={navItem.href} passHref>
-                <Box fontWeight={600} onClick={onClose}>
-                  {navItem.label}
-                </Box>
+                <ChakraLink fontSize="xl">{navItem.label}</ChakraLink>
               </Link>
             ))}
           </Stack>
@@ -70,3 +67,5 @@ export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
     </Drawer>
   );
 };
+
+const MenuItem = () => {};

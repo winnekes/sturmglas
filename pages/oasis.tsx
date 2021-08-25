@@ -21,7 +21,7 @@ export default function Oasis() {
   }
 
   return (
-    <PageWrapper pageTitle={pageTitle} pageSubtitle={pageSubtitle}>
+    <PageWrapper pageTitle={pageTitle}>
       <Panel mt={5}>
         <MoodsTimeline moods={data.moods} />
       </Panel>

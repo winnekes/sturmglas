@@ -8,7 +8,7 @@ export const colors = {
   },
   text01: "#d9d9d9",
   text02: "#dcdcdc",
-  brand01: "#bb2a88",
+  brand01: "#704573",
 };
 
 export const width = ["100%", "container.lg"];

@@ -17,12 +17,6 @@ export const authNavigationItems: NavigationItem[] = [
     href: "/oasis",
     type: "link",
   },
-
-  {
-    label: "Profile",
-    href: "/profile",
-    type: "link",
-  },
   {
     label: "Logout",
     href: "/api/auth/logout",
@@ -40,10 +34,5 @@ export const openNavigationItems: NavigationItem[] = [
     label: "Sign in",
     href: "/api/auth/login",
     type: "link",
-  },
-  {
-    label: "Sign up",
-    href: "/api/auth/register",
-    type: "button",
   },
 ];
