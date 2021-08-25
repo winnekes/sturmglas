@@ -53,6 +53,7 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
         });
 
         await bluetooth.changeFace(emotions[emotion].faceInHex);
+        onClose();
       } catch (e) {
         console.log(e);
       }
