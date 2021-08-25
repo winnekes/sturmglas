@@ -33,7 +33,12 @@ export const Buddy: FunctionComponent<Props> = ({ size }) => {
 
   useEffect(() => {
     refetch();
-  }, []);
+    if (data && data.latestMood) {
+      if (bluetooth.state.connected) {
+        bluetooth.changeFace(emotions[data.latestMood.emotion].faceInHex);
+      }
+    }
+  }, [bluetooth.state.connected]);
 
   if (loading) {
     return <Loading />;
