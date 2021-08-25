@@ -35,7 +35,6 @@ export const Buddy: FunctionComponent<Props> = ({ size }) => {
     refetch();
   }, []);
 
-  // TODO Generic component
   if (loading) {
     return <Loading />;
   }
@@ -54,6 +53,7 @@ export const Buddy: FunctionComponent<Props> = ({ size }) => {
                 icon={<MdBluetooth />}
                 onClick={bluetooth.connect}
                 variant="ghost"
+                aria-label=""
               />
             ) : (
               <MdBluetoothDisabled onClick={bluetooth.disconnect} />

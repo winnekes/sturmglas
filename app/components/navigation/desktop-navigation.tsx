@@ -1,4 +1,12 @@
-import { Icon, useDisclosure, Flex, IconButton, Text } from "@chakra-ui/react";
+import {
+  Icon,
+  useDisclosure,
+  Flex,
+  IconButton,
+  Image,
+  HStack,
+  Text,
+} from "@chakra-ui/react";
 import { useRef } from "react";
 import { BiMenu } from "react-icons/bi";
 import { spacing } from "../../styles/theme";
@@ -11,9 +19,13 @@ export const DesktopNavigation = () => {
   return (
     <>
       <Flex justify="space-between" align="center" py={spacing}>
-        <Text justifySelf="flex-start">mentali</Text>
+        <HStack>
+          <Image src="/logo.png" boxSize="34px" />
+          <Text fontWeight="bold" fontFamily="heading">
+            mentali
+          </Text>
+        </HStack>
         <IconButton
-          justifySelf="flex-end"
           icon={<Icon as={BiMenu} boxSize="32px" />}
           aria-label={"Open menu"}
           variant="ghost"

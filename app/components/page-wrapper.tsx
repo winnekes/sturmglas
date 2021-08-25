@@ -27,7 +27,7 @@ const DesktopPageWrapper: FunctionComponent<Props> = ({
   ...props
 }) => {
   return (
-    <Box display={{ sm: "none", md: "none", lg: "initial" }}>
+    <Box display={{ base: "none", sm: "none", md: "none", lg: "block" }}>
       <Container maxW={width} py={[6, 0]}>
         <DesktopNavigation />
         <Box mx={spacing}>
@@ -45,8 +45,8 @@ const MobilePageWrapper: FunctionComponent<Props> = ({
   ...props
 }) => {
   return (
-    <Box display={{ sm: "block", md: "block", lg: "none" }}>
-      <Container maxW={width} px={spacing}>
+    <Box display={{ base: "block", sm: "block", md: "block", lg: "none" }}>
+      <Container maxW={width} px={spacing} pb={100}>
         <Box p={spacing}>
           <Title>{props.pageTitle}</Title>
           <Subtitle>{props.pageSubtitle}</Subtitle>
