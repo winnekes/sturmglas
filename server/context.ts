@@ -13,40 +13,8 @@ import { MoodsQuery } from "./domains/mood/graphql/moods-query";
 import { ProfileQuery } from "./domains/user/graphql/profile-query";
 import { SaveRefreshTokenMutation } from "./domains/user/graphql/save-refresh-token-mutation";
 import { getUser } from "./utils/get-user";
-import { ServerContext } from "./context";
 
-export const startGraphqlServer = async (req: IncomingMessage, res: ServerResponse) => {
-  const queries: NonEmptyArray<Function> = [
-    FitnessQuery,
-    LatestMoodQuery,
-    MoodsQuery,
-    MoodQuery,
-    ProfileQuery,
-  ];
-  const mutations: NonEmptyArray<Function> = [
-    AddMoodMutation,
-    EditMoodMutation,
-    DeleteMoodMutation,
-    SaveRefreshTokenMutation,
-  ];
-
-  const authId: string = getSession(req, res)?.user.sub;
-  const user = authId && (await getUser(authId));
-
-  const authChecker: AuthChecker<ServerContext> = ({ context }) => {
-    return !!context.user;
-  };
-
-  const apolloServer = new ApolloServer({
-    schema: await buildSchema({
-      authChecker,
-      resolvers: [...queries, ...mutations],
-    }),
-    context: { authId, user },
-  });
-
-  await apolloServer.start();
-  return apolloServer.createHandler({
-    path: "/api/graphql",
-  })(req, res);
-};
+export interface ServerContext {
+  authId?: string;
+  user?: User;
+}

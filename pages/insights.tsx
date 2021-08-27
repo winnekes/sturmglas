@@ -4,10 +4,10 @@ import { Panel } from "../app/components/panel";
 import { useMoodsQuery } from "../app/types/graphql";
 
 export default function Insights() {
-  const { data, error, loading } = useMoodsQuery();
-
+  const pageTitle = "Insights";
+  const subTitle = "This is an overview of you";
   return (
-    <PageWrapper>
+    <PageWrapper pageTitle={pageTitle} pageSubtitle={subTitle}>
       <Panel>Insights</Panel>
     </PageWrapper>
   );

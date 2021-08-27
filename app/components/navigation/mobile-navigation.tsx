@@ -6,7 +6,7 @@ import { BiHomeAlt, BiMenu, BiPlus, BiX } from "react-icons/bi";
 import { colors, spacing } from "../../styles/theme";
 import { AddMoodModal } from "../mood/add-mood-modal";
 import { DrawerMenu } from "./drawer-menu";
-import { navigation } from "./navigation";
+import { PAGES } from "./PAGES";
 
 // TODO: hide navigation on scroll
 export const MobileNavigation = () => {
@@ -37,7 +37,7 @@ export const MobileNavigation = () => {
           variant="ghost"
           size="lg"
           borderRadius="100%"
-          onClick={() => router.push(navigation.root)}
+          onClick={() => router.push(PAGES.root)}
         />
         {user && (
           <IconButton
@@ -60,9 +60,7 @@ export const MobileNavigation = () => {
       </Flex>
 
       <DrawerMenu finalFocusRef={btnRef} isOpen={isOpen} onClose={onClose} />
-      {showAddMoodModal && (
-        <AddMoodModal onClose={() => setShowAddMoodModal(false)} />
-      )}
+      {showAddMoodModal && <AddMoodModal onClose={() => setShowAddMoodModal(false)} />}
     </>
   );
 };

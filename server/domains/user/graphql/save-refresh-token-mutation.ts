@@ -1,15 +1,7 @@
 import { IsNotEmpty } from "class-validator";
-import {
-  Arg,
-  Authorized,
-  Ctx,
-  Field,
-  InputType,
-  Mutation,
-  Resolver,
-} from "type-graphql";
+import { Arg, Authorized, Ctx, Field, InputType, Mutation, Resolver } from "type-graphql";
 import { getRepository, Repository } from "typeorm";
-import { Context } from "../../../graphql-server";
+import { ServerContext } from "../../../context";
 import { oauth2Client } from "../../../utils/fitness-client";
 import { User } from "../entities/user-entity";
 import { UserType } from "./user-type";
@@ -26,10 +18,10 @@ export class SaveRefreshTokenMutation {
   private userRepository = getRepository("User") as Repository<User>;
 
   @Authorized()
-  @Mutation((returns) => UserType)
+  @Mutation(returns => UserType)
   async saveRefreshToken(
     @Arg("data") data: SaveRefreshTokenInputType,
-    @Ctx() context: Context
+    @Ctx() context: ServerContext
   ): Promise<User | undefined> {
     if (!context.authId || !context.user) {
       throw new Error("No user set on context");

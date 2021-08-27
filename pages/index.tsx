@@ -1,7 +1,7 @@
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { navigation } from "../app/components/navigation/navigation";
+import { PAGES } from "../app/components/navigation/PAGES";
 import { PageWrapper } from "../app/components/page-wrapper";
 import { Splash } from "../app/components/splash";
 import { VStack } from "@chakra-ui/react";
@@ -16,7 +16,7 @@ export default function Home() {
   const router = useRouter();
   useEffect(() => {
     if (!isLoading && user) {
-      router.push(navigation.oasis);
+      router.push(PAGES.oasis);
     }
   }, [user, isLoading]);
 

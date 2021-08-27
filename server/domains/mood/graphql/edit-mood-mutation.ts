@@ -1,16 +1,7 @@
 import { IsDate, IsEnum } from "class-validator";
-import {
-  Arg,
-  Authorized,
-  Ctx,
-  Field,
-  InputType,
-  Int,
-  Mutation,
-  Resolver,
-} from "type-graphql";
+import { Arg, Authorized, Ctx, Field, InputType, Int, Mutation, Resolver } from "type-graphql";
 import { getRepository, Repository } from "typeorm";
-import { Context } from "../../../graphql-server";
+import { ServerContext } from "../../../context";
 import { Emotion, Mood } from "../entities/mood-entity";
 import { MoodType } from "./mood-type";
 
@@ -39,7 +30,7 @@ export class EditMoodMutation {
   @Mutation(returns => MoodType)
   async editMood(
     @Arg("data") data: EditMoodInputType,
-    @Ctx() context: Context
+    @Ctx() context: ServerContext
   ): Promise<MoodType> {
     if (!context.authId || !context.user) {
       throw new Error("No user set on context");

@@ -59,9 +59,14 @@ const ApolloApp: FunctionComponent = ({ children }) => {
       router.events.off("routeChangeStart", handleRouteChangeStart);
       router.events.off("routeChangeComplete", handleRouteChangeComplete);
     };
-  }, [status, router.events]);
+  }, [status]);
 
-  return <ApolloProvider client={client}>{children}</ApolloProvider>;
+  return (
+    <ApolloProvider client={client}>
+      <Progress isIndeterminate={isLoading} colorScheme="purple" bg="transparent" />
+      {children}
+    </ApolloProvider>
+  );
 };
 
 const MyApp = ({ Component, pageProps }: AppProps) => {

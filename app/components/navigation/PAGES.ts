@@ -1,11 +1,11 @@
-// TODO better naming/type
 import { IconType } from "react-icons";
-import { BiNetworkChart, BiHome, BiLogIn, BiLogOut, BiSpa, BiCog } from "react-icons/all";
+import { BiNetworkChart, BiHome, BiLogIn, BiLogOut, BiSpa, BiCog } from "react-icons/bi";
 
-export const navigation = {
+export const PAGES = {
   root: "/",
   oasis: "/oasis",
-  mood: "/mood",
+  insights: "/insights",
+  settings: "/settings",
 };
 
 export interface NavigationItem {
@@ -19,19 +19,19 @@ export const authNavigationItems: NavigationItem[] = [
   {
     label: "Oasis",
     icon: BiSpa,
-    href: "/oasis",
+    href: PAGES.oasis,
     type: "link",
   },
   {
     label: "Insights",
     icon: BiNetworkChart,
-    href: "/insights",
+    href: PAGES.insights,
     type: "link",
   },
   {
     label: "Settings",
     icon: BiCog,
-    href: "/settings",
+    href: PAGES.settings,
     type: "link",
   },
   {
@@ -46,7 +46,7 @@ export const openNavigationItems: NavigationItem[] = [
   {
     label: "Home",
     icon: BiHome,
-    href: "/",
+    href: PAGES.root,
     type: "link",
   },
   {

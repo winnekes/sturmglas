@@ -88,7 +88,7 @@ export const BluetoothContextProvider: FunctionComponent = ({ children }) => {
   const changeName = async (name: string) => {
     try {
       if (connection && service) {
-        await sendCommand("RENAME " + name);
+        await sendCommand("CONFIG NAME " + name);
         setDeviceName(name);
       }
       setTimeout(() => connect(), 5000);
