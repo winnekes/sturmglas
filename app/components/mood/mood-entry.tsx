@@ -26,7 +26,7 @@ export const MoodEntry: FunctionComponent<Props> = ({ mood }) => {
           alignContent="center"
           w="1px"
           minWidth="1px"
-          bg="gray.200"
+          bg="gray.400"
         />
         <Box
           paddingBottom={20}

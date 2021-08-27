@@ -30,9 +30,9 @@ export const MoodsTimeline: FunctionComponent<Props> = ({ moods }) => {
 
       {moods.map(year => (
         <Box key={year.name}>
-          {year.months.map(month => (
-            <MonthSection key={month.name} month={month} year={year} />
-          ))}
+          {year.months.map(month => {
+            return <MonthSection key={month.name} month={month} year={year} />;
+          })}
         </Box>
       ))}
 
