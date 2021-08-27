@@ -7,10 +7,10 @@ export const MetaHead = () => {
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       <meta
         name="viewport"
-        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
       />
 
-      <meta name="theme-color" content="#48BB78" />
+      <meta name="theme-color" content="#9a2d67" />
       <meta name="description" content="" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <link rel="manifest" href="/manifest.json" />

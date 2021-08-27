@@ -3,7 +3,6 @@ import { BiTired } from "react-icons/bi";
 import { ImAngry, ImHappy, ImNeutral, ImSad } from "react-icons/im";
 import { Emotion } from "./graphql";
 
-// TODO get proper icons
 type Emotions = {
   [key in Emotion]: {
     name: string;

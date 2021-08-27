@@ -24,7 +24,6 @@ export const initializeDatabase = async (
       ...optionOverrides,
     };
 
-    console.log("dd");
     return createConnection(options);
   }
 };

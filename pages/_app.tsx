@@ -52,7 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       router.events.off("routeChangeStart", handleRouteChangeStart);
       router.events.off("routeChangeComplete", handleRouteChangeComplete);
     };
-  }, [status]);
+  }, [status, router.events]);
 
   // TODO: colorScheme progressbar
   return (
@@ -64,7 +64,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Progress
               bg="transparent"
               size="sm"
-              colorScheme="green"
+              colorScheme="purple"
               isIndeterminate={isLoading}
               value={0}
             />

@@ -46,7 +46,7 @@ const MobilePageWrapper: FunctionComponent<Props> = ({
 }) => {
   return (
     <Box display={{ base: "block", sm: "block", md: "block", lg: "none" }}>
-      <Container maxW={width} px={spacing} pb={100}>
+      <Container maxW={width} px={spacing} pt={50} pb={120}>
         <Box p={spacing}>
           <Title>{props.pageTitle}</Title>
           <Subtitle>{props.pageSubtitle}</Subtitle>

@@ -27,7 +27,9 @@ type Props = {
 export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
   const { greeting } = useTimeOfDay();
   const [isDesktop] = useMediaQuery("(min-width: 62em)");
-  const { user, isLoading } = useUser();
+  const { user, isLoading, error, checkSession } = useUser();
+
+  console.log({ user, error });
 
   const navigationItems =
     user && !isLoading ? authNavigationItems : openNavigationItems;
@@ -35,7 +37,7 @@ export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
   return (
     <Drawer
       isOpen={isOpen}
-      placement={isDesktop ? "right" : "left"}
+      placement="right"
       onClose={onClose}
       finalFocusRef={finalFocusRef}
       size={isDesktop ? "lg" : "xs"}

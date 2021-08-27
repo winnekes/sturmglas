@@ -19,7 +19,7 @@ export class User {
   authId!: string;
 
   @Column()
-  firstName!: string;
+  username!: string;
 
   @Index({ unique: true })
   @IsEmail()

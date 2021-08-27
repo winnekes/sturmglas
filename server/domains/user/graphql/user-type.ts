@@ -2,11 +2,11 @@ import { Field, Int, ObjectType } from "type-graphql";
 
 @ObjectType()
 export class UserType {
-  @Field((type) => Int)
+  @Field(type => Int)
   id!: number;
 
   @Field()
-  firstName!: string;
+  username!: string;
 
   @Field()
   pictureUrl!: string;

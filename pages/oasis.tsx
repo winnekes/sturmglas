@@ -7,16 +7,17 @@ import { useMoodsQuery } from "../app/types/graphql";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 
 export default function Oasis() {
-  const { user, isLoading } = useUser();
+  const { user } = useUser();
   const { data, error, loading } = useMoodsQuery();
   const pageTitle = "Oasis";
   const pageSubtitle = "How are you doing today?";
 
-  if (isLoading || loading) {
+  if (loading) {
     return <Loading />;
   }
 
-  if (error || !data || !user) {
+  // todo error components
+  if (error || !data) {
     return <>Error</>;
   }
 
