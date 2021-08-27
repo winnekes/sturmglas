@@ -6,15 +6,19 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Drawer,
+  Text,
   Link as ChakraLink,
   useBreakpointValue,
+  Icon,
+  HStack,
+  Divider,
 } from "@chakra-ui/react";
 import { MutableRefObject } from "react";
 import { useTimeOfDay } from "../../hooks/use-time-of-day";
 import { colors } from "../../styles/theme";
-
 import { authNavigationItems, openNavigationItems } from "./navigation";
 import Link from "next/link";
+import React from "react";
 
 type Props = {
   finalFocusRef: MutableRefObject<null>;
@@ -25,7 +29,7 @@ type Props = {
 // todo show empty buddy
 export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
   const { greeting } = useTimeOfDay();
-  const drawerSize = useBreakpointValue({ base: "xs", lg: "lg" });
+  const drawerSize = useBreakpointValue({ base: "xs", lg: "md" });
   const { user, isLoading } = useUser();
 
   const navigationItems = user && !isLoading ? authNavigationItems : openNavigationItems;
@@ -49,9 +53,17 @@ export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
         <DrawerBody>
           <Stack p={4} spacing={7}>
             {navigationItems.map(navItem => (
-              <Link key={navItem.label} href={navItem.href} passHref>
-                <ChakraLink fontSize="xl">{navItem.label}</ChakraLink>
-              </Link>
+              <React.Fragment key={navItem.label}>
+                <Link href={navItem.href} passHref>
+                  <ChakraLink fontSize="xl">
+                    <HStack>
+                      <Icon as={navItem.icon} />
+                      <Text>{navItem.label}</Text>
+                    </HStack>
+                  </ChakraLink>
+                </Link>
+                <Divider />
+              </React.Fragment>
             ))}
           </Stack>
         </DrawerBody>

@@ -1,7 +1,7 @@
 import { Box, Button } from "@chakra-ui/react";
 import { FunctionComponent, useState } from "react";
-import { SplitMoods } from "../../../pages/oasis";
 import { colors, spacing } from "../../styles/theme";
+import { SplitMoods } from "../../types/mood";
 import { PanelTitle } from "../text/titles";
 import { AddMoodModal } from "./add-mood-modal";
 import { MonthSection } from "./mood-month-section";
