@@ -15,6 +15,7 @@ export const width = ["100%", "container.lg"];
 export const spacing = [4, 10];
 
 export const theme = extendTheme({
+  config: { initialColorMode: "dark", useSystemColorMode: false },
   fonts: {
     body: "Nunito Sans",
     heading: "Nunito",
@@ -34,6 +35,12 @@ export const theme = extendTheme({
     Divider: {
       baseStyle: {
         borderColor: "gray.700",
+      },
+    },
+    Button: {
+      variants: {
+        primary: { bg: colors.ui.background01, _hover: { bg: "red" } },
+        secondary: { bg: "gray.700", _hover: { bg: "red" } },
       },
     },
   },

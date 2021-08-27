@@ -5,4 +5,10 @@ query Moods {
     description
     date
   }
+  latestMood {
+    id
+    emotion
+    description
+    date
+  }
 }

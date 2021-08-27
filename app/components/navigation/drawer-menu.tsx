@@ -1,20 +1,18 @@
 import { useUser } from "@auth0/nextjs-auth0";
 import {
-  Box,
   Stack,
   DrawerBody,
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
   Drawer,
-  useMediaQuery,
-  Divider,
   Link as ChakraLink,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { MutableRefObject } from "react";
 import { useTimeOfDay } from "../../hooks/use-time-of-day";
-import { colors, spacing } from "../../styles/theme";
-import { Buddy } from "../buddy";
+import { colors } from "../../styles/theme";
+
 import { authNavigationItems, openNavigationItems } from "./navigation";
 import Link from "next/link";
 
@@ -24,23 +22,22 @@ type Props = {
   onClose: () => void;
 };
 
+// todo show empty buddy
 export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
   const { greeting } = useTimeOfDay();
-  const [isDesktop] = useMediaQuery("(min-width: 62em)");
-  const { user, isLoading, error, checkSession } = useUser();
+  const drawerSize = useBreakpointValue({ base: "xs", lg: "lg" });
+  const { user, isLoading } = useUser();
 
-  console.log({ user, error });
-
-  const navigationItems =
-    user && !isLoading ? authNavigationItems : openNavigationItems;
+  const navigationItems = user && !isLoading ? authNavigationItems : openNavigationItems;
 
   return (
     <Drawer
+      motionPreset="none"
       isOpen={isOpen}
       placement="right"
       onClose={onClose}
       finalFocusRef={finalFocusRef}
-      size={isDesktop ? "lg" : "xs"}
+      size={drawerSize}
     >
       <DrawerOverlay />
       <DrawerContent bg={colors.ui.background03} color="white">
@@ -50,13 +47,6 @@ export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
           {user && <>, {user.name?.split(" ")[0]}</>}
         </DrawerHeader>
         <DrawerBody>
-          {user && (
-            <>
-              <Buddy size="100px" />
-              <Divider colorScheme="red" my={spacing} />
-            </>
-          )}
-
           <Stack p={4} spacing={7}>
             {navigationItems.map(navItem => (
               <Link key={navItem.label} href={navItem.href} passHref>
@@ -69,5 +59,3 @@ export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
     </Drawer>
   );
 };
-
-const MenuItem = () => {};

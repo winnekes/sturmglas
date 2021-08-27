@@ -1,12 +1,4 @@
-import {
-  Icon,
-  useDisclosure,
-  Flex,
-  IconButton,
-  Image,
-  HStack,
-  Text,
-} from "@chakra-ui/react";
+import { Icon, useDisclosure, Flex, IconButton, Image, HStack, Text } from "@chakra-ui/react";
 import { useRef } from "react";
 import { BiMenu } from "react-icons/bi";
 import { spacing } from "../../styles/theme";
@@ -22,7 +14,7 @@ export const DesktopNavigation = () => {
         <HStack>
           <Image src="/logo.png" boxSize="34px" />
           <Text fontWeight="bold" fontFamily="heading">
-            mentali
+            sturmglas.
           </Text>
         </HStack>
         <IconButton
@@ -32,9 +24,8 @@ export const DesktopNavigation = () => {
           onClick={onOpen}
         />
       </Flex>
-      {isOpen && (
-        <DrawerMenu finalFocusRef={btnRef} isOpen={isOpen} onClose={onClose} />
-      )}
+
+      <DrawerMenu finalFocusRef={btnRef} isOpen={isOpen} onClose={onClose} />
     </>
   );
 };

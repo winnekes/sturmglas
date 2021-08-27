@@ -1,7 +1,12 @@
 import { IconType } from "react-icons";
 import { BiTired } from "react-icons/bi";
 import { ImAngry, ImHappy, ImNeutral, ImSad } from "react-icons/im";
-import { Emotion } from "./graphql";
+import { Emotion, MoodsQuery } from "./graphql";
+
+export type SplitMoods = {
+  name: number;
+  months: Array<{ name: string; moods: MoodsQuery["moods"] }>;
+}[];
 
 type Emotions = {
   [key in Emotion]: {

@@ -10,19 +10,11 @@ import {
   ModalFooter,
   Textarea,
   VStack,
-  Text,
+  ModalCloseButton,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { FunctionComponent, useState } from "react";
-import {
-  BiAngry,
-  BiHappy,
-  BiMeh,
-  BiSad,
-  BiSleepy,
-  BiTired,
-} from "react-icons/bi";
-
-import { ImAngry, ImHappy, ImNeutral, ImSad } from "react-icons/im";
+import { BiAngry, BiHappy, BiMeh, BiSad, BiSleepy } from "react-icons/bi";
 import { useBluetooth } from "../../hooks/use-bluetooth";
 import { colors } from "../../styles/theme";
 import { Emotion, useAddMoodMutation } from "../../types/graphql";
@@ -35,6 +27,8 @@ type Props = {
 };
 
 export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
+  const modalSize = useBreakpointValue({ base: "full", lg: "md" });
+
   const [emotion, setEmotion] = useState<Emotion | null>(null);
   const [description, setDescription] = useState("");
   const bluetooth = useBluetooth();
@@ -62,10 +56,11 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
 
   // TODO: find better icon assets
   return (
-    <Modal onClose={onClose} isOpen isCentered size="sm">
+    <Modal onClose={onClose} isOpen isCentered size={modalSize}>
       <ModalOverlay />
       <ModalContent bg="gray.800">
         <ModalHeader>How are you feeling right now?</ModalHeader>
+        <ModalCloseButton />
 
         <ModalBody>
           <HStack justify="space-between">
@@ -74,11 +69,7 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
                 as={BiHappy}
                 boxSize="42px"
                 onClick={() => setEmotion(Emotion.Happy)}
-                color={
-                  emotion === Emotion.Happy
-                    ? colors.brand01
-                    : emotions[Emotion.Happy].color
-                }
+                color={emotion === Emotion.Happy ? colors.brand01 : "white"}
               />
               <Subheading fontWeight="bold" fontSize="sm">
                 happy
@@ -89,11 +80,7 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
                 as={BiMeh}
                 boxSize="42px"
                 onClick={() => setEmotion(Emotion.Anxious)}
-                color={
-                  emotion === Emotion.Anxious
-                    ? colors.brand01
-                    : emotions[Emotion.Anxious].color
-                }
+                color={emotion === Emotion.Anxious ? colors.brand01 : "white"}
               />
               <Subheading fontWeight="bold" fontSize="sm">
                 anxious
@@ -104,11 +91,7 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
                 as={BiSad}
                 boxSize="42px"
                 onClick={() => setEmotion(Emotion.Sad)}
-                color={
-                  emotion === Emotion.Sad
-                    ? colors.brand01
-                    : emotions[Emotion.Sad].color
-                }
+                color={emotion === Emotion.Sad ? colors.brand01 : "white"}
               />
               <Subheading fontWeight="bold" fontSize="sm">
                 sad
@@ -119,11 +102,7 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
                 as={BiSleepy}
                 boxSize="42px"
                 onClick={() => setEmotion(Emotion.Tired)}
-                color={
-                  emotion === Emotion.Tired
-                    ? colors.brand01
-                    : emotions[Emotion.Tired].color
-                }
+                color={emotion === Emotion.Tired ? colors.brand01 : "white"}
               />
               <Subheading fontWeight="bold" fontSize="sm">
                 tired
@@ -134,11 +113,7 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
                 as={BiAngry}
                 boxSize="42px"
                 onClick={() => setEmotion(Emotion.Angry)}
-                color={
-                  emotion === Emotion.Angry
-                    ? colors.brand01
-                    : emotions[Emotion.Angry].color
-                }
+                color={emotion === Emotion.Angry ? colors.brand01 : "white"}
               />
               <Subheading fontWeight="bold" fontSize="sm">
                 angry
@@ -157,7 +132,7 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
           />
         </ModalBody>
         <ModalFooter>
-          <Button onClick={addMood} bg={colors.brand01}>
+          <Button onClick={addMood} variant="primary">
             Record
           </Button>
         </ModalFooter>

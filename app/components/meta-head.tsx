@@ -14,38 +14,13 @@ export const MetaHead = () => {
       <meta name="description" content="" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <link rel="manifest" href="/manifest.json" />
-      <link
-        href="/icons/favicon-16x16.png"
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-      />
-      <link
-        href="/icons/favicon-32x32.png"
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="180x180"
-        href="/icons/apple-icon-180x180.png"
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="152x152"
-        href="/icons/apple-icon-152x152.png"
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="60x60"
-        href="/icons/apple-icon-60x60.png"
-      />
-      <link
-        rel="apple-touch-startup-image"
-        href="/icons/apple-icon-180x180.png"
-      />
-      <title>mentali</title>
+      <link href="/icons/favicon-16x16.png" rel="icon" type="image/png" sizes="16x16" />
+      <link href="/icons/favicon-32x32.png" rel="icon" type="image/png" sizes="32x32" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png" />
+      <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png" />
+      <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png" />
+      <link rel="apple-touch-startup-image" href="/icons/apple-icon-180x180.png" />
+      <title>sturmglas.</title>
     </Head>
   );
 };

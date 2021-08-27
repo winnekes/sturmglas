@@ -1,18 +1,13 @@
 import "../app/styles/globals.scss";
 import { UserProvider } from "@auth0/nextjs-auth0";
 import type { AppProps } from "next/app";
-import { useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { MetaHead } from "../app/components/meta-head";
 import { BluetoothContextProvider } from "../app/hooks/use-bluetooth";
 import { theme } from "../app/styles/theme";
-import { ChakraProvider, Progress } from "@chakra-ui/react";
+import { ChakraProvider, Progress, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client";
 import { createNetworkStatusNotifier } from "react-apollo-network-status";
 
 const { link, useApolloNetworkStatus } = createNetworkStatusNotifier();
@@ -23,13 +18,25 @@ const client = new ApolloClient({
   link: link.concat(createHttpLink({ uri: "/api/graphql" })),
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
+const ApolloApp: FunctionComponent = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const toast = useToast();
+  const toastId = "global-state";
 
   const status = useApolloNetworkStatus();
 
   useEffect(() => {
+    console.log(toast.isActive(toastId));
+    !toast.isActive(toastId) &&
+      (status.queryError || status.mutationError) &&
+      toast({
+        title: "Something went wrong",
+        description: "Please try again",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
     if (status.numPendingMutations > 0 || status.numPendingQueries > 0) {
       setIsLoading(true);
     }
@@ -54,27 +61,24 @@ function MyApp({ Component, pageProps }: AppProps) {
     };
   }, [status, router.events]);
 
-  // TODO: colorScheme progressbar
+  return <ApolloProvider client={client}>{children}</ApolloProvider>;
+};
+
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <MetaHead />
       <UserProvider>
-        <ApolloProvider client={client}>
+        <BluetoothContextProvider>
           <ChakraProvider theme={theme}>
-            <Progress
-              bg="transparent"
-              size="sm"
-              colorScheme="purple"
-              isIndeterminate={isLoading}
-              value={0}
-            />
-            <BluetoothContextProvider>
+            <ApolloApp>
               <Component {...pageProps} />
-            </BluetoothContextProvider>
+            </ApolloApp>
           </ChakraProvider>
-        </ApolloProvider>
+        </BluetoothContextProvider>
       </UserProvider>
     </>
   );
-}
+};
+
 export default MyApp;

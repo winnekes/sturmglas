@@ -112,7 +112,7 @@ export type SaveRefreshTokenInputType = {
 export type UserType = {
   __typename?: 'UserType';
   id: Scalars['Int'];
-  firstName: Scalars['String'];
+  username: Scalars['String'];
   pictureUrl: Scalars['String'];
   lastLogin: Scalars['DateTime'];
   refreshToken: Scalars['String'];
@@ -160,7 +160,7 @@ export type MoodQuery = { __typename?: 'Query', mood: { __typename?: 'MoodType',
 export type MoodsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MoodsQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any }> };
+export type MoodsQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any }>, latestMood?: Maybe<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any }> };
 
 export type SaveRefreshTokenMutationVariables = Exact<{
   data: SaveRefreshTokenInputType;
@@ -391,6 +391,12 @@ export type MoodQueryResult = Apollo.QueryResult<MoodQuery, MoodQueryVariables>;
 export const MoodsDocument = gql`
     query Moods {
   moods {
+    id
+    emotion
+    description
+    date
+  }
+  latestMood {
     id
     emotion
     description

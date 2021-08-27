@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { Box, Container, Heading, useMediaQuery } from "@chakra-ui/react";
+import { Box, Container } from "@chakra-ui/react";
 import { spacing, width } from "../styles/theme";
 import { DesktopNavigation } from "./navigation/desktop-navigation";
 import { MobileNavigation } from "./navigation/mobile-navigation";
@@ -10,10 +10,7 @@ type Props = {
   pageSubtitle?: string;
 };
 
-export const PageWrapper: FunctionComponent<Props> = ({
-  children,
-  ...props
-}) => {
+export const PageWrapper: FunctionComponent<Props> = ({ children, ...props }) => {
   return (
     <>
       <MobilePageWrapper {...props}>{children}</MobilePageWrapper>
@@ -22,10 +19,7 @@ export const PageWrapper: FunctionComponent<Props> = ({
   );
 };
 
-const DesktopPageWrapper: FunctionComponent<Props> = ({
-  children,
-  ...props
-}) => {
+const DesktopPageWrapper: FunctionComponent<Props> = ({ children, ...props }) => {
   return (
     <Box display={{ base: "none", sm: "none", md: "none", lg: "block" }}>
       <Container maxW={width} py={[6, 0]}>
@@ -40,13 +34,10 @@ const DesktopPageWrapper: FunctionComponent<Props> = ({
   );
 };
 
-const MobilePageWrapper: FunctionComponent<Props> = ({
-  children,
-  ...props
-}) => {
+const MobilePageWrapper: FunctionComponent<Props> = ({ children, ...props }) => {
   return (
-    <Box display={{ base: "block", sm: "block", md: "block", lg: "none" }}>
-      <Container maxW={width} px={spacing} pt={50} pb={120}>
+    <Box display={{ base: "block", lg: "none" }}>
+      <Container maxW={width} px={spacing} pt={2} pb={120}>
         <Box p={spacing}>
           <Title>{props.pageTitle}</Title>
           <Subtitle>{props.pageSubtitle}</Subtitle>

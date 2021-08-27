@@ -1,7 +1,7 @@
 // TODO better naming/type
 export const navigation = {
   root: "/",
-  home: "/home",
+  oasis: "/oasis",
   mood: "/mood",
 };
 

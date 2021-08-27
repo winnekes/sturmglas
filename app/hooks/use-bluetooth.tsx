@@ -1,10 +1,8 @@
 import { createContext, FunctionComponent, useContext, useState } from "react";
 
 const serviceUuid = process.env.NEXT_PUBLIC_BLUETOOTH_SERVICE_UUID ?? "";
-const commandCharacteristicUuid =
-  process.env.NEXT_PUBLIC_BLUETOOTH_COMMAND_UUID ?? "";
-const faceCharacteristicUuid =
-  process.env.NEXT_PUBLIC_BLUETOOTH_FACE_UUID ?? "";
+const commandCharacteristicUuid = process.env.NEXT_PUBLIC_BLUETOOTH_COMMAND_UUID ?? "";
+const faceCharacteristicUuid = process.env.NEXT_PUBLIC_BLUETOOTH_FACE_UUID ?? "";
 
 type Context = {
   connect: () => void;
@@ -55,9 +53,7 @@ export const BluetoothContextProvider: FunctionComponent = ({ children }) => {
   const sendCommand = async (command: string) => {
     try {
       if (connection && service) {
-        const commandCharacteristic = await service.getCharacteristic(
-          commandCharacteristicUuid
-        );
+        const commandCharacteristic = await service.getCharacteristic(commandCharacteristicUuid);
 
         console.log("command");
         await commandCharacteristic.writeValue(textEncoder.encode(command));
@@ -93,12 +89,10 @@ export const BluetoothContextProvider: FunctionComponent = ({ children }) => {
     try {
       if (connection && service) {
         await sendCommand("RENAME " + name);
-        console.log("i get here?");
         setDeviceName(name);
       }
-      disconnect();
+      setTimeout(() => connect(), 5000);
       setError(false);
-      console.log("done");
     } catch (e) {
       console.log({ e });
       setError(e);
@@ -108,9 +102,7 @@ export const BluetoothContextProvider: FunctionComponent = ({ children }) => {
   const changeFace = async (faceInHex: string) => {
     try {
       if (connection && service) {
-        const characteristic = await service.getCharacteristic(
-          faceCharacteristicUuid
-        );
+        const characteristic = await service.getCharacteristic(faceCharacteristicUuid);
 
         const result = faceInHex.match(/[\da-f]{2}/gi) || [];
         const typedArray = new Uint8Array(
