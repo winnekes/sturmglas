@@ -1,5 +1,5 @@
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { Box, HStack, IconButton, Text } from "@chakra-ui/react";
+import { Box, HStack, IconButton, Tag, Text } from "@chakra-ui/react";
 import { DateTime as time } from "luxon";
 import { FunctionComponent, useState } from "react";
 import { MoodsQuery } from "../../types/graphql";
@@ -61,6 +61,13 @@ export const MoodEntry: FunctionComponent<Props> = ({ mood }) => {
             {emotions[mood.emotion].name}
           </Text>
           <Text> {mood.description}</Text>
+          <HStack spacing={3} mt={6}>
+            {mood.tags?.map(tag => (
+              <Tag bg="gray.700" color="gray.500">
+                {tag.name}
+              </Tag>
+            ))}
+          </HStack>
         </Box>
       </HStack>
 
