@@ -7,8 +7,8 @@ export class UserType {
   @Field(type => Int)
   id!: number;
 
-  @Field()
-  username!: string;
+  @Field({ nullable: true })
+  nickname!: string | null;
 
   @Field()
   pictureUrl!: string;
@@ -17,7 +17,7 @@ export class UserType {
   lastLogin!: Date;
 
   @Field(type => GraphQLJSON)
-  userSettings!: UserSettings;
+  settings!: UserSettings;
 
   @Field()
   refreshToken!: "string";

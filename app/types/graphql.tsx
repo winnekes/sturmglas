@@ -14,6 +14,8 @@ export type Scalars = {
   Float: number;
   /** The javascript `Date` as string. Type represents date and time as the ISO Date string. */
   DateTime: any;
+  /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
+  JSON: any;
 };
 
 export type AddMoodInputType = {
@@ -53,6 +55,7 @@ export type FitnessType = {
   steps: DatasetOutputType;
   heartRate: DatasetOutputType;
 };
+
 
 export type MoodType = {
   __typename?: 'MoodType';
@@ -115,6 +118,7 @@ export type UserType = {
   username: Scalars['String'];
   pictureUrl: Scalars['String'];
   lastLogin: Scalars['DateTime'];
+  settings: Scalars['JSON'];
   refreshToken: Scalars['String'];
   createdAt: Scalars['DateTime'];
 };
@@ -168,6 +172,11 @@ export type SaveRefreshTokenMutationVariables = Exact<{
 
 
 export type SaveRefreshTokenMutation = { __typename?: 'Mutation', saveRefreshToken: { __typename?: 'UserType', id: number, refreshToken: string } };
+
+export type UserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UserQuery = { __typename?: 'Query', profile: { __typename?: 'UserType', id: number, username: string, pictureUrl: string, refreshToken: string, settings: any } };
 
 
 export const AddMoodDocument = gql`
@@ -465,3 +474,41 @@ export function useSaveRefreshTokenMutation(baseOptions?: Apollo.MutationHookOpt
 export type SaveRefreshTokenMutationHookResult = ReturnType<typeof useSaveRefreshTokenMutation>;
 export type SaveRefreshTokenMutationResult = Apollo.MutationResult<SaveRefreshTokenMutation>;
 export type SaveRefreshTokenMutationOptions = Apollo.BaseMutationOptions<SaveRefreshTokenMutation, SaveRefreshTokenMutationVariables>;
+export const UserDocument = gql`
+    query User {
+  profile {
+    id
+    username
+    pictureUrl
+    refreshToken
+    settings
+  }
+}
+    `;
+
+/**
+ * __useUserQuery__
+ *
+ * To run a query within a React component, call `useUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useUserQuery(baseOptions?: Apollo.QueryHookOptions<UserQuery, UserQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<UserQuery, UserQueryVariables>(UserDocument, options);
+      }
+export function useUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserQuery, UserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<UserQuery, UserQueryVariables>(UserDocument, options);
+        }
+export type UserQueryHookResult = ReturnType<typeof useUserQuery>;
+export type UserLazyQueryHookResult = ReturnType<typeof useUserLazyQuery>;
+export type UserQueryResult = Apollo.QueryResult<UserQuery, UserQueryVariables>;

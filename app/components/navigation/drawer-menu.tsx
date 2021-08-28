@@ -56,7 +56,7 @@ export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
               <React.Fragment key={navItem.label}>
                 <Link href={navItem.href} passHref>
                   <ChakraLink fontSize="xl">
-                    <HStack>
+                    <HStack onClick={onClose}>
                       <Icon as={navItem.icon} />
                       <Text>{navItem.label}</Text>
                     </HStack>

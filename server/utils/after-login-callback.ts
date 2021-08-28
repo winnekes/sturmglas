@@ -18,7 +18,7 @@ export const afterCallback = async (
 
   user.authId = session.user.sub ?? "";
   user.email = session.user.email ?? "";
-  user.username = session.user.given_name ?? "";
+  user.nickname = session.user.given_name ?? "";
   user.pictureUrl = session.user.picture ?? "";
   user.lastLogin = session.user.last_login ?? new Date();
   await userRepository.save(user);

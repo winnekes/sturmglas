@@ -1,0 +1,9 @@
+query User {
+  profile {
+    id
+    username
+    pictureUrl
+    refreshToken
+    settings
+  }
+}

@@ -24,8 +24,8 @@ export class User {
   @Column()
   authId!: string;
 
-  @Column()
-  username!: string;
+  @Column({ nullable: true })
+  nickname!: string | null;
 
   @Index({ unique: true })
   @IsEmail()
