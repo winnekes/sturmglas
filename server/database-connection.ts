@@ -14,7 +14,6 @@ export const initializeDatabase = async (optionOverrides: Record<string, any> = 
       synchronize: true,
       logging: true,
       entities: [Mood, Tag, User],
-      //migrations: [__dirname + "/migrations/*.ts"],
       ...optionOverrides,
     };
 
