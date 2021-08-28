@@ -11,6 +11,7 @@ import { MoodQuery } from "./domains/mood/graphql/mood-query";
 import { MoodsQuery } from "./domains/mood/graphql/moods-query";
 import { ProfileQuery } from "./domains/user/graphql/profile-query";
 import { SaveRefreshTokenMutation } from "./domains/user/graphql/save-refresh-token-mutation";
+import { UpdateUserSettingsMutation } from "./domains/user/graphql/update-user-settings-mutation";
 import { getUser } from "./utils/get-user";
 import { ServerContext } from "./context";
 
@@ -27,6 +28,7 @@ export const startGraphqlServer = async (req: IncomingMessage, res: ServerRespon
     EditMoodMutation,
     DeleteMoodMutation,
     SaveRefreshTokenMutation,
+    UpdateUserSettingsMutation,
   ];
 
   const authId: string = getSession(req, res)?.user.sub;
