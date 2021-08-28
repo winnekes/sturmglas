@@ -10,6 +10,12 @@ import {
 } from "typeorm";
 import { Mood } from "../../mood/entities/mood-entity";
 
+export interface UserSettings {
+  hasFinishedTutorial: boolean;
+  hasCompanion: boolean;
+  hasGoogleFitness: boolean;
+}
+
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -28,6 +34,16 @@ export class User {
 
   @Column()
   pictureUrl!: string;
+
+  @Column({
+    type: "jsonb",
+    default: {
+      hasFinishedTutorial: false,
+      hasCompanion: false,
+      hasGoogleFitness: false,
+    },
+  })
+  public settings!: UserSettings;
 
   @OneToMany("Mood", "user", {
     onDelete: "CASCADE",
