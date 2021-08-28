@@ -3,10 +3,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { Tag } from "../../tags/entities/tag-entity";
 import { User } from "../../user/entities/user-entity";
 
 export enum Emotion {
@@ -41,6 +44,10 @@ export class Mood {
     onDelete: "CASCADE",
   })
   user!: User;
+
+  @ManyToMany("Tag", "moods")
+  @JoinTable()
+  tags!: Tag[];
 
   @CreateDateColumn()
   createdAt!: Date;

@@ -9,6 +9,7 @@ import { AddMoodMutation } from "./domains/mood/graphql/add-mood-mutation";
 import { LatestMoodQuery } from "./domains/mood/graphql/latest-mood-query";
 import { MoodQuery } from "./domains/mood/graphql/mood-query";
 import { MoodsQuery } from "./domains/mood/graphql/moods-query";
+import { TagsQuery } from "./domains/tags/graphql/tags-query";
 import { ProfileQuery } from "./domains/user/graphql/profile-query";
 import { SaveRefreshTokenMutation } from "./domains/user/graphql/save-refresh-token-mutation";
 import { UpdateUserSettingsMutation } from "./domains/user/graphql/update-user-settings-mutation";
@@ -22,6 +23,7 @@ export const startGraphqlServer = async (req: IncomingMessage, res: ServerRespon
     MoodsQuery,
     MoodQuery,
     ProfileQuery,
+    TagsQuery,
   ];
   const mutations: NonEmptyArray<Function> = [
     AddMoodMutation,

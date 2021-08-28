@@ -72,6 +72,7 @@ export type Mutation = {
   editMood: MoodType;
   addMood: MoodType;
   saveRefreshToken: UserType;
+  updateUserSettings: UserType;
 };
 
 
@@ -94,12 +95,18 @@ export type MutationSaveRefreshTokenArgs = {
   data: SaveRefreshTokenInputType;
 };
 
+
+export type MutationUpdateUserSettingsArgs = {
+  data: UpdateUserSettingsInputType;
+};
+
 export type Query = {
   __typename?: 'Query';
   fitness: FitnessType;
   latestMood?: Maybe<MoodType>;
   mood: MoodType;
   moods: Array<MoodType>;
+  tags: Array<TagType>;
   profile: UserType;
 };
 
@@ -112,10 +119,22 @@ export type SaveRefreshTokenInputType = {
   authToken: Scalars['String'];
 };
 
+export type TagType = {
+  __typename?: 'TagType';
+  id: Scalars['Int'];
+  name: Scalars['String'];
+  icon: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+};
+
+export type UpdateUserSettingsInputType = {
+  settings: Scalars['JSON'];
+};
+
 export type UserType = {
   __typename?: 'UserType';
   id: Scalars['Int'];
-  username: Scalars['String'];
+  nickname?: Maybe<Scalars['String']>;
   pictureUrl: Scalars['String'];
   lastLogin: Scalars['DateTime'];
   settings: Scalars['JSON'];
@@ -173,10 +192,22 @@ export type SaveRefreshTokenMutationVariables = Exact<{
 
 export type SaveRefreshTokenMutation = { __typename?: 'Mutation', saveRefreshToken: { __typename?: 'UserType', id: number, refreshToken: string } };
 
+export type TagsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TagsQuery = { __typename?: 'Query', tags: Array<{ __typename?: 'TagType', id: number, name: string, icon: string }> };
+
+export type UpdateUserSettingsMutationVariables = Exact<{
+  data: UpdateUserSettingsInputType;
+}>;
+
+
+export type UpdateUserSettingsMutation = { __typename?: 'Mutation', updateUserSettings: { __typename?: 'UserType', id: number, settings: any } };
+
 export type UserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type UserQuery = { __typename?: 'Query', profile: { __typename?: 'UserType', id: number, username: string, pictureUrl: string, refreshToken: string, settings: any } };
+export type UserQuery = { __typename?: 'Query', profile: { __typename?: 'UserType', id: number, nickname?: Maybe<string>, pictureUrl: string, refreshToken: string, settings: any } };
 
 
 export const AddMoodDocument = gql`
@@ -474,11 +505,81 @@ export function useSaveRefreshTokenMutation(baseOptions?: Apollo.MutationHookOpt
 export type SaveRefreshTokenMutationHookResult = ReturnType<typeof useSaveRefreshTokenMutation>;
 export type SaveRefreshTokenMutationResult = Apollo.MutationResult<SaveRefreshTokenMutation>;
 export type SaveRefreshTokenMutationOptions = Apollo.BaseMutationOptions<SaveRefreshTokenMutation, SaveRefreshTokenMutationVariables>;
+export const TagsDocument = gql`
+    query Tags {
+  tags {
+    id
+    name
+    icon
+  }
+}
+    `;
+
+/**
+ * __useTagsQuery__
+ *
+ * To run a query within a React component, call `useTagsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTagsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTagsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useTagsQuery(baseOptions?: Apollo.QueryHookOptions<TagsQuery, TagsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TagsQuery, TagsQueryVariables>(TagsDocument, options);
+      }
+export function useTagsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TagsQuery, TagsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TagsQuery, TagsQueryVariables>(TagsDocument, options);
+        }
+export type TagsQueryHookResult = ReturnType<typeof useTagsQuery>;
+export type TagsLazyQueryHookResult = ReturnType<typeof useTagsLazyQuery>;
+export type TagsQueryResult = Apollo.QueryResult<TagsQuery, TagsQueryVariables>;
+export const UpdateUserSettingsDocument = gql`
+    mutation UpdateUserSettings($data: UpdateUserSettingsInputType!) {
+  updateUserSettings(data: $data) {
+    id
+    settings
+  }
+}
+    `;
+export type UpdateUserSettingsMutationFn = Apollo.MutationFunction<UpdateUserSettingsMutation, UpdateUserSettingsMutationVariables>;
+
+/**
+ * __useUpdateUserSettingsMutation__
+ *
+ * To run a mutation, you first call `useUpdateUserSettingsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateUserSettingsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateUserSettingsMutation, { data, loading, error }] = useUpdateUserSettingsMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useUpdateUserSettingsMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUserSettingsMutation, UpdateUserSettingsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateUserSettingsMutation, UpdateUserSettingsMutationVariables>(UpdateUserSettingsDocument, options);
+      }
+export type UpdateUserSettingsMutationHookResult = ReturnType<typeof useUpdateUserSettingsMutation>;
+export type UpdateUserSettingsMutationResult = Apollo.MutationResult<UpdateUserSettingsMutation>;
+export type UpdateUserSettingsMutationOptions = Apollo.BaseMutationOptions<UpdateUserSettingsMutation, UpdateUserSettingsMutationVariables>;
 export const UserDocument = gql`
     query User {
   profile {
     id
-    username
+    nickname
     pictureUrl
     refreshToken
     settings

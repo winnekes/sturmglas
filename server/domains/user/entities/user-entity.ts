@@ -9,6 +9,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { Mood } from "../../mood/entities/mood-entity";
+import { Tag } from "../../tags/entities/tag-entity";
 
 export interface UserSettings {
   hasFinishedTutorial: boolean;
@@ -49,6 +50,11 @@ export class User {
     onDelete: "CASCADE",
   })
   moods!: Mood[];
+
+  @OneToMany("Tag", "user", {
+    onDelete: "CASCADE",
+  })
+  tags!: Tag[];
 
   @Column({ default: "" })
   refreshToken!: string;
