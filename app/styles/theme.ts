@@ -29,7 +29,6 @@ export const theme = extendTheme({
     Text: {
       baseStyle: {
         color: colors.text02,
-        //F marginBottom: 4,
       },
     },
     Divider: {
@@ -41,6 +40,12 @@ export const theme = extendTheme({
       variants: {
         primary: { bg: colors.ui.background01, _hover: { bg: "red" } },
         secondary: { bg: "gray.700", _hover: { bg: "red" } },
+      },
+    },
+    Modal: {
+      parts: ["dialog"],
+      baseStyle: {
+        dialog: { bg: "gray.900" },
       },
     },
   },

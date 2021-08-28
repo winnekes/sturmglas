@@ -58,7 +58,7 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
   return (
     <Modal onClose={onClose} isOpen isCentered size={modalSize}>
       <ModalOverlay />
-      <ModalContent bg="gray.800">
+      <ModalContent>
         <ModalHeader>How are you feeling right now?</ModalHeader>
         <ModalCloseButton />
 
