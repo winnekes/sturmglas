@@ -30,7 +30,6 @@ export const MoodEntry: FunctionComponent<Props> = ({ mood }) => {
         />
         <Box
           paddingBottom={20}
-          on
           onMouseEnter={() => setShowInteractionMenu(true)}
           onMouseLeave={() => setShowInteractionMenu(false)}
         >

@@ -2,11 +2,11 @@ import { useUser } from "@auth0/nextjs-auth0";
 import { Flex, IconButton, useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
-import { BiHomeAlt, BiMenu, BiPlus, BiX } from "react-icons/bi";
+import { BiHomeAlt, BiMenu, BiPlus } from "react-icons/bi";
 import { colors, spacing } from "../../styles/theme";
 import { AddMoodModal } from "../mood/add-mood-modal";
 import { DrawerMenu } from "./drawer-menu";
-import { PAGES } from "./PAGES";
+import { PAGES } from "./navigation";
 
 // TODO: hide navigation on scroll
 export const MobileNavigation = () => {
@@ -37,7 +37,7 @@ export const MobileNavigation = () => {
           variant="ghost"
           size="lg"
           borderRadius="100%"
-          onClick={() => router.push(PAGES.root)}
+          onClick={() => router.push(PAGES.oasis)}
         />
         {user && (
           <IconButton

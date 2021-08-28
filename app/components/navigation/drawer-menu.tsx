@@ -16,7 +16,7 @@ import {
 import { MutableRefObject } from "react";
 import { useTimeOfDay } from "../../hooks/use-time-of-day";
 import { colors } from "../../styles/theme";
-import { authNavigationItems, openNavigationItems } from "./PAGES";
+import { authNavigationItems, openNavigationItems } from "./navigation";
 import Link from "next/link";
 import React from "react";
 

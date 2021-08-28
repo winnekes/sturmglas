@@ -26,19 +26,8 @@ export const Companion: FunctionComponent<Props> = ({ latestMood }) => {
 
   return (
     <VStack>
-      {latestMood && (
+      {latestMood ? (
         <>
-          {/*{!bluetooth.state.connected ? (*/}
-          {/*  <IconButton*/}
-          {/*    icon={<MdBluetooth />}*/}
-          {/*    onClick={bluetooth.connect}*/}
-          {/*    variant="ghost"*/}
-          {/*    aria-label=""*/}
-          {/*  />*/}
-          {/*) : (*/}
-          {/*  <MdBluetoothDisabled onClick={bluetooth.disconnect} />*/}
-          {/*)}*/}
-
           {bluetooth.state.connected && bluetooth.deviceName && <EditName />}
           <Image
             src={emotions[latestMood.emotion].imageUrl}
@@ -55,6 +44,8 @@ export const Companion: FunctionComponent<Props> = ({ latestMood }) => {
             <Text noOfLines={1}>{latestMood.description}</Text>
           </Box>
         </>
+      ) : (
+        <Image src="/logo.png" height={"300px"} width={"300px"} priority={true} quality={100} />
       )}
     </VStack>
   );
