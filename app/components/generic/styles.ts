@@ -1,5 +1,5 @@
 export const customStyles = {
-  option: (provided, state) => ({
+  option: (provided: any, state: any) => ({
     ...provided,
     backgroundColor: "transparent",
     color: "#dcdcdc",
@@ -9,7 +9,7 @@ export const customStyles = {
     },
     borderColor: state.isFocused && "#9a2d67",
   }),
-  control: (provided, state) => ({
+  control: (provided: any, state: any) => ({
     ...provided,
     backgroundColor: "transparent",
     color: "#dcdcdc",
@@ -24,7 +24,7 @@ export const customStyles = {
     borderColor: state.isFocused && "#9a2d67",
     boxShadow: "none",
   }),
-  menu: (provided, state) => ({
+  menu: (provided: any, state: any) => ({
     ...provided,
     backgroundColor: "#171923",
     color: "#dcdcdc",
@@ -34,12 +34,12 @@ export const customStyles = {
     },
     borderColor: state.isFocused && "#9a2d67",
   }),
-  multiValue: (provided, state) => ({
+  multiValue: (provided: any, state: any) => ({
     ...provided,
     backgroundColor: "#694251",
     borderRadius: "7px",
     color: "#ffffff",
   }),
-  multiValueLabel: provided => ({ ...provided, color: "#ffffff" }),
-  indicatorSeparator: provided => ({ ...provided, backgroundColor: "#2D3748" }),
+  multiValueLabel: (provided: any) => ({ ...provided, color: "#ffffff" }),
+  indicatorSeparator: (provided: any) => ({ ...provided, backgroundColor: "#2D3748" }),
 };

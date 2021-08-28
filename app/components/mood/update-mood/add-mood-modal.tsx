@@ -65,12 +65,7 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
           {formStep === 1 ? (
             <SetEmotionView selectedEmotion={selectedEmotion} setEmotion={setSelectedEmotion} />
           ) : (
-            <SetMoodContext
-              note={note}
-              setNote={setNote}
-              selectedTags={selectedTags}
-              setSelectedTags={setSelectedTags}
-            />
+            <SetMoodContext note={note} setNote={setNote} setSelectedTags={setSelectedTags} />
           )}
         </ModalBody>
         <ModalFooter>

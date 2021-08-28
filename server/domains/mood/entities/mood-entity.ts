@@ -48,7 +48,7 @@ export class Mood {
 
   @ManyToMany("Tag", "moods")
   @JoinTable()
-  tags!: Promise<Tag[]>;
+  tags!: Tag[];
 
   @CreateDateColumn()
   createdAt!: Date;

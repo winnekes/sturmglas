@@ -28,7 +28,7 @@ export class Tag {
   user!: User;
 
   @ManyToMany("Mood", "tags")
-  moods!: Promise<Mood[]>;
+  moods!: Mood[];
 
   @CreateDateColumn()
   createdAt!: Date;
