@@ -1,4 +1,10 @@
-import { Field, Int, ObjectType } from "type-graphql";
+import { Field, InputType, Int, ObjectType } from "type-graphql";
+
+@InputType()
+export class TagInputType {
+  @Field()
+  name!: string;
+}
 
 @ObjectType()
 export class TagType {
@@ -7,9 +13,6 @@ export class TagType {
 
   @Field()
   name!: string;
-
-  @Field()
-  icon!: string;
 
   @Field()
   createdAt!: Date;

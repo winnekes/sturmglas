@@ -1,14 +1,15 @@
-import { Field, Int, ObjectType, registerEnumType } from "type-graphql";
+import { Field, FieldResolver, Int, ObjectType, registerEnumType } from "type-graphql";
+import { TagType } from "../../tags/graphql/tag-type";
 import { Emotion } from "../entities/mood-entity";
 
 registerEnumType(Emotion, { name: "Emotion" });
 
 @ObjectType()
 export class MoodType {
-  @Field((type) => Int)
+  @Field(type => Int)
   id!: number;
 
-  @Field((returns) => Emotion)
+  @Field(returns => Emotion)
   emotion!: Emotion;
 
   @Field()

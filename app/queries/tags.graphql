@@ -2,6 +2,5 @@ query Tags {
   tags {
     id
     name
-    icon
   }
 }

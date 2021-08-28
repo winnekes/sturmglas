@@ -10,6 +10,7 @@ body,
   height: 100% !important;
 }
 
+// Override Chakra UI focus styling
 [data-focus],
 *:focus {
   box-shadow: none !important;

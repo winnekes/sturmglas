@@ -22,6 +22,7 @@ export type AddMoodInputType = {
   emotion: Emotion;
   date: Scalars['DateTime'];
   description: Scalars['String'];
+  tags: Array<TagInputType>;
 };
 
 export type DatasetOutputType = {
@@ -44,6 +45,7 @@ export type EditMoodInputType = {
 
 export enum Emotion {
   Happy = 'HAPPY',
+  Loved = 'LOVED',
   Anxious = 'ANXIOUS',
   Tired = 'TIRED',
   Sad = 'SAD',
@@ -63,6 +65,7 @@ export type MoodType = {
   emotion: Emotion;
   date: Scalars['DateTime'];
   description: Scalars['String'];
+  tags?: Maybe<Array<TagType>>;
   createdAt: Scalars['DateTime'];
 };
 
@@ -119,11 +122,14 @@ export type SaveRefreshTokenInputType = {
   authToken: Scalars['String'];
 };
 
+export type TagInputType = {
+  name: Scalars['String'];
+};
+
 export type TagType = {
   __typename?: 'TagType';
   id: Scalars['Int'];
   name: Scalars['String'];
-  icon: Scalars['String'];
   createdAt: Scalars['DateTime'];
 };
 
@@ -183,7 +189,7 @@ export type MoodQuery = { __typename?: 'Query', mood: { __typename?: 'MoodType',
 export type MoodsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MoodsQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any }>, latestMood?: Maybe<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any }> };
+export type MoodsQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any, tags?: Maybe<Array<{ __typename?: 'TagType', id: number, name: string }>> }>, latestMood?: Maybe<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any, tags?: Maybe<Array<{ __typename?: 'TagType', id: number, name: string }>> }> };
 
 export type SaveRefreshTokenMutationVariables = Exact<{
   data: SaveRefreshTokenInputType;
@@ -195,7 +201,7 @@ export type SaveRefreshTokenMutation = { __typename?: 'Mutation', saveRefreshTok
 export type TagsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TagsQuery = { __typename?: 'Query', tags: Array<{ __typename?: 'TagType', id: number, name: string, icon: string }> };
+export type TagsQuery = { __typename?: 'Query', tags: Array<{ __typename?: 'TagType', id: number, name: string }> };
 
 export type UpdateUserSettingsMutationVariables = Exact<{
   data: UpdateUserSettingsInputType;
@@ -435,12 +441,20 @@ export const MoodsDocument = gql`
     emotion
     description
     date
+    tags {
+      id
+      name
+    }
   }
   latestMood {
     id
     emotion
     description
     date
+    tags {
+      id
+      name
+    }
   }
 }
     `;
@@ -510,7 +524,6 @@ export const TagsDocument = gql`
   tags {
     id
     name
-    icon
   }
 }
     `;

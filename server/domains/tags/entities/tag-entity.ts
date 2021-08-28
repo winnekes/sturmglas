@@ -15,10 +15,10 @@ export class Tag {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column("text")
+  @Column("text", { unique: true })
   name!: string;
 
-  @Column("text")
+  @Column("text", { default: "" })
   icon!: string;
 
   @ManyToOne("User", "tags", {
@@ -28,7 +28,7 @@ export class Tag {
   user!: User;
 
   @ManyToMany("Mood", "tags")
-  moods!: Mood[];
+  moods!: Promise<Mood[]>;
 
   @CreateDateColumn()
   createdAt!: Date;

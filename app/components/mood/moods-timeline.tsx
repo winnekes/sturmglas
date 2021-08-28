@@ -3,7 +3,7 @@ import { FunctionComponent, useState } from "react";
 import { colors, spacing } from "../../styles/theme";
 import { SplitMoods } from "../../types/mood";
 import { PanelTitle } from "../generic/text/titles";
-import { AddMoodModal } from "./add-mood-modal";
+import { AddMoodModal } from "./update-mood/add-mood-modal";
 import { MonthSection } from "./mood-month-section";
 
 // todo mental weather

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { BiHomeAlt, BiMenu, BiPlus } from "react-icons/bi";
 import { colors, spacing } from "../../styles/theme";
-import { AddMoodModal } from "../mood/add-mood-modal";
+import { AddMoodModal } from "../mood/update-mood/add-mood-modal";
 import { DrawerMenu } from "./drawer-menu";
 import { PAGES } from "./navigation";
 

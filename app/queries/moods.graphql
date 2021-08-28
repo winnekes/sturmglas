@@ -4,11 +4,19 @@ query Moods {
     emotion
     description
     date
+    tags {
+      id
+      name
+    }
   }
   latestMood {
     id
     emotion
     description
     date
+    tags {
+      id
+      name
+    }
   }
 }

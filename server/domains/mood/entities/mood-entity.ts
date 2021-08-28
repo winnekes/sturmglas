@@ -14,6 +14,7 @@ import { User } from "../../user/entities/user-entity";
 
 export enum Emotion {
   HAPPY = "HAPPY",
+  LOVED = "LOVED",
   ANXIOUS = "ANXIOUS",
   TIRED = "TIRED",
   SAD = "SAD",
@@ -47,7 +48,7 @@ export class Mood {
 
   @ManyToMany("Tag", "moods")
   @JoinTable()
-  tags!: Tag[];
+  tags!: Promise<Tag[]>;
 
   @CreateDateColumn()
   createdAt!: Date;
