@@ -2,10 +2,10 @@ import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { PAGES } from "../app/components/navigation/navigation";
-import { PageWrapper } from "../app/components/page-wrapper";
-import { Splash } from "../app/components/splash";
+import { PageWrapper } from "../app/components/generic/page-wrapper";
+import { Splash } from "../app/components/generic/splash";
 import { VStack } from "@chakra-ui/react";
-import { Subtitle, Title } from "../app/components/text/titles";
+import { Subtitle, Title } from "../app/components/generic/text/titles";
 
 export default function Home() {
   // TODO landing page

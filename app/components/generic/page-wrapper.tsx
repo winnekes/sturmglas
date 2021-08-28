@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
 import { Box, Container } from "@chakra-ui/react";
-import { spacing, width } from "../styles/theme";
-import { DesktopNavigation } from "./navigation/desktop-navigation";
-import { MobileNavigation } from "./navigation/mobile-navigation";
+import { spacing, width } from "../../styles/theme";
+import { DesktopNavigation } from "../navigation/desktop-navigation";
+import { MobileNavigation } from "../navigation/mobile-navigation";
 import { Subtitle, Title } from "./text/titles";
 
 type Props = {

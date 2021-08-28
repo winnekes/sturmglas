@@ -19,8 +19,8 @@ import { useBluetooth } from "../../hooks/use-bluetooth";
 import { colors } from "../../styles/theme";
 import { Emotion, useAddMoodMutation } from "../../types/graphql";
 import { emotions } from "../../types/mood";
-import { Subheading } from "../text/subheading";
-import { Subtitle } from "../text/titles";
+import { Subheading } from "../generic/text/subheading";
+import { Subtitle } from "../generic/text/titles";
 
 type Props = {
   onClose: () => void;

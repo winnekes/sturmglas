@@ -4,7 +4,7 @@ import { DateTime as time } from "luxon";
 import { FunctionComponent, useState } from "react";
 import { MoodsQuery } from "../../types/graphql";
 import { emotions } from "../../types/mood";
-import { Subheading } from "../text/subheading";
+import { Subheading } from "../generic/text/subheading";
 import { AddMoodModal } from "./add-mood-modal";
 import { ConfirmDeleteMoodModal } from "./confirm-delete-mood-modal";
 

@@ -5,7 +5,7 @@ import { MoodsQuery } from "../../types/graphql";
 import { emotions } from "../../types/mood";
 import Image from "next/image";
 import { useEffect } from "react";
-import { Subheading } from "../text/subheading";
+import { Subheading } from "../generic/text/subheading";
 import { EditName } from "./edit-name";
 import { DateTime as time } from "luxon";
 

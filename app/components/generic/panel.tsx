@@ -1,5 +1,5 @@
 import { Box, ChakraComponent } from "@chakra-ui/react";
-import { spacing } from "../styles/theme";
+import { spacing } from "../../styles/theme";
 
 export const Panel: ChakraComponent<"div", {}> = ({ children, ...props }) => {
   return (
