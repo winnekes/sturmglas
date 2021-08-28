@@ -11,10 +11,10 @@ export const afterCallback = async (
 ) => {
   await initializeDatabase();
   const userRepository = getRepository("User") as Repository<User>;
-  const user =
-    (await userRepository.findOne({
-      where: { authId: session.user?.sub },
-    })) || userRepository.create();
+  const userFound = await userRepository.findOne({
+    where: { authId: session.user?.sub },
+  });
+  const user = userFound || userRepository.create();
 
   user.authId = session.user.sub ?? "";
   user.email = session.user.email ?? "";
