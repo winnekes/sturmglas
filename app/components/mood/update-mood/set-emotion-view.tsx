@@ -22,6 +22,7 @@ export const SetEmotionView: FunctionComponent<Props> = ({ selectedEmotion, setE
             p={2}
             borderRadius="25px"
             onClick={() => {
+              // @ts-ignore
               setEmotion(Emotion[emotion.name]);
             }}
           >
