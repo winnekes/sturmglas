@@ -12,7 +12,7 @@ export interface NavigationItem {
   label: string;
   icon: IconType;
   href: string;
-  type: "link" | "button";
+  type: "internal" | "external";
 }
 
 export const authNavigationItems: NavigationItem[] = [
@@ -20,25 +20,25 @@ export const authNavigationItems: NavigationItem[] = [
     label: "Oasis",
     icon: BiSpa,
     href: PAGES.oasis,
-    type: "link",
+    type: "internal",
   },
   {
     label: "Insights",
     icon: BiNetworkChart,
     href: PAGES.insights,
-    type: "link",
+    type: "internal",
   },
   {
     label: "Settings",
     icon: BiCog,
     href: PAGES.settings,
-    type: "link",
+    type: "internal",
   },
   {
     label: "Logout",
     icon: BiLogOut,
     href: "/api/auth/logout",
-    type: "link",
+    type: "external",
   },
 ];
 
@@ -47,12 +47,12 @@ export const openNavigationItems: NavigationItem[] = [
     label: "Home",
     icon: BiHome,
     href: PAGES.root,
-    type: "link",
+    type: "internal",
   },
   {
     label: "Sign in",
     icon: BiLogIn,
     href: "/api/auth/login",
-    type: "link",
+    type: "external",
   },
 ];

@@ -12,7 +12,7 @@ export const DesktopNavigation = () => {
 
   return (
     <>
-      <Flex justify="space-between" align="center" py={spacing}>
+      <Flex justify="space-between" align="center" py={spacing} color="white">
         <Link onClick={() => router.push("/")}>
           <HStack>
             <Image src="/logo.png" boxSize="34px" />

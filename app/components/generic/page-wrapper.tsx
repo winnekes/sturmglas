@@ -15,20 +15,6 @@ type Props = {
 };
 
 export const PageWrapper: FunctionComponent<Props> = ({ children, ...props }) => {
-  const [showSplash, setShowSplash] = useState(true);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setShowSplash(false);
-    }, 3000);
-
-    return () => clearTimeout(timeout);
-  }, []);
-
-  if (showSplash) {
-    return <Splash />;
-  }
-
   return (
     <>
       <MobilePageWrapper {...props}>{children}</MobilePageWrapper>

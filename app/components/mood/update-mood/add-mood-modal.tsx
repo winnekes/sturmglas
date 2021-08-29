@@ -23,7 +23,6 @@ export type TagInput = { name: string };
 
 export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
   const bluetooth = useBluetooth();
-  const modalSize = useBreakpointValue({ base: "full", lg: "md" });
   const [selectedEmotion, setSelectedEmotion] = useState<Emotion | null>(null);
   const [note, setNote] = useState("");
   const [selectedTags, setSelectedTags] = useState<TagInput[]>([]);
@@ -56,7 +55,7 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
   };
 
   return (
-    <Modal onClose={onClose} isOpen isCentered size={modalSize}>
+    <Modal onClose={onClose} isOpen isCentered size="lg">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{formStep === 1 ? "How are you?" : "Give a bit of context"}</ModalHeader>

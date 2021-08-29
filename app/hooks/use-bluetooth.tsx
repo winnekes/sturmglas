@@ -34,7 +34,7 @@ export const BluetoothContextProvider: FunctionComponent = ({ children }) => {
         filters: [{ services: [serviceUuid] }],
       });
 
-      setDeviceName(device?.name ?? "");
+      setDeviceName(device?.name as string);
       const server = await device.gatt?.connect();
       if (server) {
         setConnection(server);
@@ -88,10 +88,10 @@ export const BluetoothContextProvider: FunctionComponent = ({ children }) => {
   const changeName = async (name: string) => {
     try {
       if (connection && service) {
-        await sendCommand("CONFIG NAME " + name);
+        await sendCommand("CONFIGR NAME " + name);
         setDeviceName(name);
       }
-      setTimeout(() => connect(), 5000);
+      setTimeout(() => connect(), 2000);
       setError(false);
     } catch (e) {
       console.log({ e });

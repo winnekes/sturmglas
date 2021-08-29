@@ -2,6 +2,7 @@ import "../app/styles/globals.scss";
 import { UserProvider } from "@auth0/nextjs-auth0";
 import type { AppProps } from "next/app";
 import { FunctionComponent, useEffect, useState } from "react";
+import { Splash } from "../app/components/generic/splash";
 import { MetaHead } from "../app/components/meta-head";
 import { BluetoothContextProvider } from "../app/hooks/use-bluetooth";
 import { theme } from "../app/styles/theme";
@@ -23,6 +24,7 @@ const ApolloApp: FunctionComponent = ({ children }) => {
   const router = useRouter();
   const toast = useToast();
   const toastId = "global-state";
+  const [showSplash, setShowSplash] = useState(true);
 
   const status = useApolloNetworkStatus();
 
@@ -61,6 +63,17 @@ const ApolloApp: FunctionComponent = ({ children }) => {
     };
   }, [status]);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowSplash(false);
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+  if (showSplash) {
+    return <Splash />;
+  }
   return (
     <ApolloProvider client={client}>
       <Progress isIndeterminate={isLoading} colorScheme="purple" bg="transparent" />

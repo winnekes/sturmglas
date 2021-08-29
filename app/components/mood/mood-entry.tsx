@@ -2,10 +2,10 @@ import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Box, HStack, IconButton, Tag, Text } from "@chakra-ui/react";
 import { DateTime as time } from "luxon";
 import { FunctionComponent, useState } from "react";
+import { BiShareAlt } from "react-icons/bi";
 import { MoodsQuery } from "../../types/graphql";
 import { emotions } from "../../types/mood";
 import { Subheading } from "../generic/text/subheading";
-import { AddMoodModal } from "./update-mood/add-mood-modal";
 import { ConfirmDeleteMoodModal } from "./update-mood/confirm-delete-mood-modal";
 import { EditMoodModal } from "./update-mood/edit-mood-modal";
 
@@ -40,6 +40,14 @@ export const MoodEntry: FunctionComponent<Props> = ({ mood }) => {
             </Subheading>
 
             <HStack spacing={2} visibility={showInteractionMenu ? "visible" : "hidden"}>
+              <IconButton
+                icon={<BiShareAlt />}
+                color="gray.500"
+                aria-label="Download as image"
+                onClick={() => setSelectedEditMoodId(mood.id)}
+                variant="ghost"
+                size="sm"
+              />
               <IconButton
                 icon={<EditIcon />}
                 color="gray.500"

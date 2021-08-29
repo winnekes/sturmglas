@@ -29,7 +29,6 @@ export type TagInput = { name: string };
 
 export const EditMoodModal: FunctionComponent<Props> = ({ mood, onClose }) => {
   const bluetooth = useBluetooth();
-  const modalSize = useBreakpointValue({ base: "full", lg: "md" });
   const [selectedEmotion, setSelectedEmotion] = useState<Emotion | null>(mood.emotion);
   const [note, setNote] = useState(mood.description);
   const [selectedTags, setSelectedTags] = useState<TagInput[]>(
@@ -64,7 +63,7 @@ export const EditMoodModal: FunctionComponent<Props> = ({ mood, onClose }) => {
   };
 
   return (
-    <Modal onClose={onClose} isOpen isCentered size={modalSize}>
+    <Modal onClose={onClose} isOpen isCentered size="lg">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Edit a previous record</ModalHeader>

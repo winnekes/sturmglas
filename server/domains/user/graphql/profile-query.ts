@@ -8,7 +8,6 @@ import { UserType } from "./user-type";
 export class ProfileQuery {
   private userRepository = getRepository("User") as Repository<User>;
 
-  @Authorized()
   @Query(returns => UserType)
   profile(@Ctx() context: ServerContext): Promise<User | undefined> {
     return this.userRepository.findOne({

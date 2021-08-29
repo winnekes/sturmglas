@@ -16,11 +16,14 @@ export const afterCallback = async (
   });
   const user = userFound || userRepository.create();
 
-  user.authId = session.user.sub ?? "";
-  user.email = session.user.email ?? "";
-  user.nickname = session.user.given_name ?? "";
+  if (!userFound) {
+    user.authId = session.user.sub ?? "";
+    user.email = session.user.email ?? "";
+    user.nickname = session.user.given_name ?? "";
+  }
   user.pictureUrl = session.user.picture ?? "";
   user.lastLogin = session.user.last_login ?? new Date();
+
   await userRepository.save(user);
 
   return session;

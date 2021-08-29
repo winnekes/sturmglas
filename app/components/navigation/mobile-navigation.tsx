@@ -30,6 +30,7 @@ export const MobileNavigation = () => {
         position="fixed"
         borderTopRadius="30px"
         boxShadow="0px 0px 20px 3px rgba(0,0,0,.1)"
+        color="white"
       >
         <IconButton
           aria-label={"Go home"}
