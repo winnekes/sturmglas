@@ -141,10 +141,10 @@ interface FeatureProps {
   icon?: ReactElement;
 }
 
-const Feature = ({ text, icon, iconBg }: FeatureProps) => {
+const Feature = ({ text, icon }: FeatureProps) => {
   return (
     <Stack direction="row" align="center">
-      <Flex w={8} h={8} align="center" justify="center" rounded="full" bg={iconBg}>
+      <Flex w={8} h={8} align="center" justify="center" rounded="full">
         {icon}
       </Flex>
       <Text fontWeight={600}>{text}</Text>
