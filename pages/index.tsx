@@ -138,7 +138,6 @@ export default function Home() {
 
 interface FeatureProps {
   text: string;
-  iconBg: string;
   icon?: ReactElement;
 }
 
