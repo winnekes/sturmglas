@@ -11,36 +11,44 @@ import {
 } from "@chakra-ui/react";
 import { FunctionComponent, useState } from "react";
 import { useBluetooth } from "../../../hooks/use-bluetooth";
-import { Emotion, useAddMoodMutation } from "../../../types/graphql";
+import {
+  Emotion,
+  MoodsQuery,
+  useAddMoodMutation,
+  useEditMoodMutationMutation,
+} from "../../../types/graphql";
 import { emotions } from "../../../types/mood";
 
 import { SetEmotionView } from "./set-emotion-view";
 import { SetMoodContext } from "./set-mood-context";
 type Props = {
+  mood: MoodsQuery["moods"][number];
   onClose: () => void;
 };
 export type TagInput = { name: string };
 
-export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
+export const EditMoodModal: FunctionComponent<Props> = ({ mood, onClose }) => {
   const bluetooth = useBluetooth();
   const modalSize = useBreakpointValue({ base: "full", lg: "md" });
-  const [selectedEmotion, setSelectedEmotion] = useState<Emotion | null>(null);
-  const [note, setNote] = useState("");
-  const [selectedTags, setSelectedTags] = useState<TagInput[]>([]);
+  const [selectedEmotion, setSelectedEmotion] = useState<Emotion | null>(mood.emotion);
+  const [note, setNote] = useState(mood.description);
+  const [selectedTags, setSelectedTags] = useState<TagInput[]>(
+    mood.tags?.map(tag => ({ name: tag.name })) ?? []
+  );
   const [formStep, setFormStep] = useState(1);
 
-  const [mutate] = useAddMoodMutation({
+  const [mutate] = useEditMoodMutationMutation({
     refetchQueries: ["Moods", "LatestMood"],
   });
 
-  const addMood = async () => {
+  const editMood = async () => {
     if (selectedEmotion) {
       try {
         await mutate({
           variables: {
             data: {
+              id: mood.id,
               emotion: selectedEmotion,
-              date: new Date(),
               description: note,
               tags: selectedTags,
             },
@@ -59,7 +67,7 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
     <Modal onClose={onClose} isOpen isCentered size={modalSize}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{formStep === 1 ? "How are you?" : "Give a bit of context"}</ModalHeader>
+        <ModalHeader>Edit a previous record</ModalHeader>
 
         <ModalBody as={Flex} direction="column" justifyContent="center">
           {formStep === 1 ? (
@@ -78,7 +86,7 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
             Cancel
           </Button>
           {formStep > 1 ? (
-            <Button onClick={addMood} variant="primary">
+            <Button onClick={editMood} variant="primary">
               Record
             </Button>
           ) : (

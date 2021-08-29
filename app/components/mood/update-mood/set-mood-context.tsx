@@ -10,10 +10,16 @@ import { TagInput } from "./add-mood-modal";
 type Props = {
   note: string;
   setNote: Dispatch<SetStateAction<string>>;
+  selectedTags: TagInput[];
   setSelectedTags: Dispatch<SetStateAction<TagInput[]>>;
 };
 
-export const SetMoodContext: FunctionComponent<Props> = ({ note, setNote, setSelectedTags }) => {
+export const SetMoodContext: FunctionComponent<Props> = ({
+  note,
+  setNote,
+  selectedTags,
+  setSelectedTags,
+}) => {
   const { data, error, loading } = useTagsQuery();
 
   const handleChange = (values: OptionsType<{ value: string; label: string }>, actionMeta: any) => {
@@ -22,6 +28,7 @@ export const SetMoodContext: FunctionComponent<Props> = ({ note, setNote, setSel
   };
 
   const options = data?.tags.map(tag => ({ value: tag.name, label: tag.name }));
+  const initialValues = selectedTags?.map(tag => ({ value: tag.name, label: tag.name }));
 
   return (
     <>
@@ -41,7 +48,8 @@ export const SetMoodContext: FunctionComponent<Props> = ({ note, setNote, setSel
             isMulti
             isSearchable
             options={options}
-            placeholder={"Select one or more labels"}
+            placeholder="Select one or more labels"
+            value={initialValues}
             onChange={handleChange}
           />
         </Box>

@@ -7,6 +7,7 @@ import { emotions } from "../../types/mood";
 import { Subheading } from "../generic/text/subheading";
 import { AddMoodModal } from "./update-mood/add-mood-modal";
 import { ConfirmDeleteMoodModal } from "./confirm-delete-mood-modal";
+import { EditMoodModal } from "./update-mood/edit-mood-modal";
 
 type Props = {
   mood: MoodsQuery["moods"][number];
@@ -71,7 +72,9 @@ export const MoodEntry: FunctionComponent<Props> = ({ mood }) => {
         </Box>
       </HStack>
 
-      {selectedEditMoodId && <AddMoodModal onClose={() => setSelectedEditMoodId(null)} />}
+      {selectedEditMoodId && (
+        <EditMoodModal mood={mood} onClose={() => setSelectedEditMoodId(null)} />
+      )}
       {selectedDeleteMoodId && (
         <ConfirmDeleteMoodModal
           moodId={mood.id}
