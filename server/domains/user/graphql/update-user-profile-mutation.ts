@@ -1,3 +1,4 @@
+import { ValidateNested } from "class-validator";
 import GraphQLJSON from "graphql-type-json";
 import { Arg, Authorized, Ctx, Field, InputType, Mutation, Resolver } from "type-graphql";
 import { getRepository, Repository } from "typeorm";
@@ -7,17 +8,20 @@ import { UserType } from "./user-type";
 
 @InputType()
 export class UpdateUserSettingsInputType {
+  @Field()
+  nickname!: string;
+
   @Field(() => GraphQLJSON)
   settings!: UserSettings;
 }
 
 @Resolver()
-export class UpdateUserSettingsMutation {
+export class UpdateUserProfileMutation {
   private userRepository = getRepository("User") as Repository<User>;
 
   @Authorized()
   @Mutation(returns => UserType)
-  async updateUserSettings(
+  async updateUserProfile(
     @Arg("data") data: UpdateUserSettingsInputType,
     @Ctx() context: ServerContext
   ): Promise<User | undefined> {
@@ -26,6 +30,7 @@ export class UpdateUserSettingsMutation {
     }
 
     try {
+      context.user.nickname = data.nickname;
       context.user.settings = data.settings;
 
       await this.userRepository.save(context.user);

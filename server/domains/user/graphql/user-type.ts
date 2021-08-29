@@ -1,5 +1,6 @@
 import GraphQLJSON from "graphql-type-json";
 import { Field, Int, ObjectType } from "type-graphql";
+import { Column } from "typeorm";
 import { UserSettings } from "../entities/user-entity";
 
 @ObjectType()
@@ -18,6 +19,12 @@ export class UserType {
 
   @Field(type => GraphQLJSON)
   settings!: UserSettings;
+
+  @Field(type => Int, { nullable: true })
+  currentStreak!: number;
+
+  @Field(type => Int, { nullable: true })
+  longestStreak!: number;
 
   @Field()
   refreshToken!: "string";

@@ -2,6 +2,7 @@ import { Box, Flex, HStack, Text, Textarea, VStack } from "@chakra-ui/react";
 import { Dispatch, FunctionComponent, SetStateAction, useState } from "react";
 import { OptionsType } from "react-select";
 import { useTagsQuery } from "../../../types/graphql";
+import { ErrorAlert } from "../../generic/error-alert";
 import { Loading } from "../../generic/loading";
 import Creatable from "react-select/creatable";
 import { customStyles } from "../../generic/styles";
@@ -34,7 +35,7 @@ export const SetMoodContext: FunctionComponent<Props> = ({
     <>
       <Text mb={10}>You don't need to, but reflecting on your mood never hurts.</Text>
       {loading && <Loading />}
-      {error && <>Error</>}
+      {error && <ErrorAlert />}
       {data && (
         <Box>
           <Text fontWeight="bold">What where you doing?</Text>

@@ -1,6 +1,0 @@
-mutation UpdateUserSettings($data: UpdateUserSettingsInputType!) {
-  updateUserSettings(data: $data) {
-    id
-    settings
-  }
-}

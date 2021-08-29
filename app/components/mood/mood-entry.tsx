@@ -6,7 +6,7 @@ import { MoodsQuery } from "../../types/graphql";
 import { emotions } from "../../types/mood";
 import { Subheading } from "../generic/text/subheading";
 import { AddMoodModal } from "./update-mood/add-mood-modal";
-import { ConfirmDeleteMoodModal } from "./confirm-delete-mood-modal";
+import { ConfirmDeleteMoodModal } from "./update-mood/confirm-delete-mood-modal";
 import { EditMoodModal } from "./update-mood/edit-mood-modal";
 
 type Props = {

@@ -38,7 +38,11 @@ export const theme = extendTheme({
     },
     Button: {
       variants: {
-        primary: { bg: colors.ui.background01, marginLeft: "10px", _hover: { bg: "red" } },
+        primary: {
+          bg: colors.ui.background01,
+          marginLeft: "10px",
+          _hover: { bg: colors.ui.background02 },
+        },
         secondary: { bg: "gray.700", _hover: { bg: "red" } },
       },
     },

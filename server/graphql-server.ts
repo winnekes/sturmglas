@@ -13,7 +13,7 @@ import { MoodsQuery } from "./domains/mood/graphql/moods-query";
 import { TagsQuery } from "./domains/tags/graphql/tags-query";
 import { ProfileQuery } from "./domains/user/graphql/profile-query";
 import { SaveRefreshTokenMutation } from "./domains/user/graphql/save-refresh-token-mutation";
-import { UpdateUserSettingsMutation } from "./domains/user/graphql/update-user-settings-mutation";
+import { UpdateUserProfileMutation } from "./domains/user/graphql/update-user-profile-mutation";
 import { getUser } from "./utils/get-user";
 import { ServerContext } from "./context";
 
@@ -32,7 +32,7 @@ export const startGraphqlServer = async (req: IncomingMessage, res: ServerRespon
     EditMoodMutation,
     DeleteMoodMutation,
     SaveRefreshTokenMutation,
-    UpdateUserSettingsMutation,
+    UpdateUserProfileMutation,
   ];
 
   const authId: string = getSession(req, res)?.user.sub;

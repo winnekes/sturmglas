@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { Button, AlertDialog } from "@chakra-ui/react";
 import { FunctionComponent, useRef } from "react";
-import { MoodsDocument, useDeleteMoodMutation } from "../../types/graphql";
+import { MoodsDocument, useDeleteMoodMutation } from "../../../types/graphql";
 
 type Props = {
   moodId: number;

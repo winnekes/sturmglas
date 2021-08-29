@@ -1,0 +1,7 @@
+mutation UpdateUserProfile($data: UpdateUserSettingsInputType!) {
+  updateUserProfile(data: $data) {
+    id
+    nickname
+    settings
+  }
+}

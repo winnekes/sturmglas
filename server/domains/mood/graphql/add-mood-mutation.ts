@@ -1,9 +1,10 @@
 import { IsDate, IsEnum, ValidateNested } from "class-validator";
 import { Arg, Authorized, Ctx, Field, InputType, Mutation, Resolver } from "type-graphql";
-import { getRepository, In, Repository } from "typeorm";
+import { getManager, getRepository, In, Repository } from "typeorm";
 import { ServerContext } from "../../../context";
 import { Tag } from "../../tags/entities/tag-entity";
 import { TagInputType, TagType } from "../../tags/graphql/tag-type";
+import { User } from "../../user/entities/user-entity";
 import { Emotion, Mood } from "../entities/mood-entity";
 import { MoodType } from "./mood-type";
 
@@ -29,6 +30,7 @@ export class AddMoodInputType {
 export class AddMoodMutation {
   private moodRepository = getRepository("Mood") as Repository<Mood>;
   private tagRepository = getRepository("Tag") as Repository<Tag>;
+  private userRepository = getRepository("User") as Repository<User>;
 
   @Authorized()
   @Mutation(returns => MoodType)
@@ -62,6 +64,8 @@ export class AddMoodMutation {
       }
     }
 
+    // todo STREAK
+    // await this.userRepository.save(context.user)
     return this.moodRepository.save(mood);
   }
 }

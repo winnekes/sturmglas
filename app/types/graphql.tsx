@@ -75,7 +75,7 @@ export type Mutation = {
   editMood: MoodType;
   addMood: MoodType;
   saveRefreshToken: UserType;
-  updateUserSettings: UserType;
+  updateUserProfile: UserType;
 };
 
 
@@ -99,7 +99,7 @@ export type MutationSaveRefreshTokenArgs = {
 };
 
 
-export type MutationUpdateUserSettingsArgs = {
+export type MutationUpdateUserProfileArgs = {
   data: UpdateUserSettingsInputType;
 };
 
@@ -134,6 +134,7 @@ export type TagType = {
 };
 
 export type UpdateUserSettingsInputType = {
+  nickname: Scalars['String'];
   settings: Scalars['JSON'];
 };
 
@@ -144,6 +145,8 @@ export type UserType = {
   pictureUrl: Scalars['String'];
   lastLogin: Scalars['DateTime'];
   settings: Scalars['JSON'];
+  currentStreak?: Maybe<Scalars['Int']>;
+  longestStreak?: Maybe<Scalars['Int']>;
   refreshToken: Scalars['String'];
   createdAt: Scalars['DateTime'];
 };
@@ -189,7 +192,7 @@ export type MoodQuery = { __typename?: 'Query', mood: { __typename?: 'MoodType',
 export type MoodsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MoodsQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any, tags?: Maybe<Array<{ __typename?: 'TagType', id: number, name: string }>> }>, latestMood?: Maybe<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any, tags?: Maybe<Array<{ __typename?: 'TagType', id: number, name: string }>> }> };
+export type MoodsQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any, tags?: Maybe<Array<{ __typename?: 'TagType', id: number, name: string }>> }>, latestMood?: Maybe<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any, tags?: Maybe<Array<{ __typename?: 'TagType', id: number, name: string }>> }>, profile: { __typename?: 'UserType', id: number, nickname?: Maybe<string>, settings: any, refreshToken: string } };
 
 export type SaveRefreshTokenMutationVariables = Exact<{
   data: SaveRefreshTokenInputType;
@@ -203,12 +206,12 @@ export type TagsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type TagsQuery = { __typename?: 'Query', tags: Array<{ __typename?: 'TagType', id: number, name: string }> };
 
-export type UpdateUserSettingsMutationVariables = Exact<{
+export type UpdateUserProfileMutationVariables = Exact<{
   data: UpdateUserSettingsInputType;
 }>;
 
 
-export type UpdateUserSettingsMutation = { __typename?: 'Mutation', updateUserSettings: { __typename?: 'UserType', id: number, settings: any } };
+export type UpdateUserProfileMutation = { __typename?: 'Mutation', updateUserProfile: { __typename?: 'UserType', id: number, nickname?: Maybe<string>, settings: any } };
 
 export type UserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -456,6 +459,12 @@ export const MoodsDocument = gql`
       name
     }
   }
+  profile {
+    id
+    nickname
+    settings
+    refreshToken
+  }
 }
     `;
 
@@ -554,40 +563,41 @@ export function useTagsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TagsQ
 export type TagsQueryHookResult = ReturnType<typeof useTagsQuery>;
 export type TagsLazyQueryHookResult = ReturnType<typeof useTagsLazyQuery>;
 export type TagsQueryResult = Apollo.QueryResult<TagsQuery, TagsQueryVariables>;
-export const UpdateUserSettingsDocument = gql`
-    mutation UpdateUserSettings($data: UpdateUserSettingsInputType!) {
-  updateUserSettings(data: $data) {
+export const UpdateUserProfileDocument = gql`
+    mutation UpdateUserProfile($data: UpdateUserSettingsInputType!) {
+  updateUserProfile(data: $data) {
     id
+    nickname
     settings
   }
 }
     `;
-export type UpdateUserSettingsMutationFn = Apollo.MutationFunction<UpdateUserSettingsMutation, UpdateUserSettingsMutationVariables>;
+export type UpdateUserProfileMutationFn = Apollo.MutationFunction<UpdateUserProfileMutation, UpdateUserProfileMutationVariables>;
 
 /**
- * __useUpdateUserSettingsMutation__
+ * __useUpdateUserProfileMutation__
  *
- * To run a mutation, you first call `useUpdateUserSettingsMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateUserSettingsMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useUpdateUserProfileMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateUserProfileMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [updateUserSettingsMutation, { data, loading, error }] = useUpdateUserSettingsMutation({
+ * const [updateUserProfileMutation, { data, loading, error }] = useUpdateUserProfileMutation({
  *   variables: {
  *      data: // value for 'data'
  *   },
  * });
  */
-export function useUpdateUserSettingsMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUserSettingsMutation, UpdateUserSettingsMutationVariables>) {
+export function useUpdateUserProfileMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUserProfileMutation, UpdateUserProfileMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateUserSettingsMutation, UpdateUserSettingsMutationVariables>(UpdateUserSettingsDocument, options);
+        return Apollo.useMutation<UpdateUserProfileMutation, UpdateUserProfileMutationVariables>(UpdateUserProfileDocument, options);
       }
-export type UpdateUserSettingsMutationHookResult = ReturnType<typeof useUpdateUserSettingsMutation>;
-export type UpdateUserSettingsMutationResult = Apollo.MutationResult<UpdateUserSettingsMutation>;
-export type UpdateUserSettingsMutationOptions = Apollo.BaseMutationOptions<UpdateUserSettingsMutation, UpdateUserSettingsMutationVariables>;
+export type UpdateUserProfileMutationHookResult = ReturnType<typeof useUpdateUserProfileMutation>;
+export type UpdateUserProfileMutationResult = Apollo.MutationResult<UpdateUserProfileMutation>;
+export type UpdateUserProfileMutationOptions = Apollo.BaseMutationOptions<UpdateUserProfileMutation, UpdateUserProfileMutationVariables>;
 export const UserDocument = gql`
     query User {
   profile {

@@ -19,4 +19,10 @@ query Moods {
       name
     }
   }
+  profile {
+    id
+    nickname
+    settings
+    refreshToken
+  }
 }
