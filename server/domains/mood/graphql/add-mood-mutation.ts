@@ -100,6 +100,7 @@ export class AddMoodMutation {
         });
       }
 
+      // TODO TRANSACTION
       await this.userRepository.save(context.user);
       return this.moodRepository.save(mood);
     } catch (e) {
