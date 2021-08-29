@@ -7,6 +7,7 @@ import { TagInputType, TagType } from "../../tags/graphql/tag-type";
 import { User } from "../../user/entities/user-entity";
 import { Emotion, Mood } from "../entities/mood-entity";
 import { MoodType } from "./mood-type";
+import { DateTime as time } from "luxon";
 
 @InputType()
 export class AddMoodInputType {
@@ -42,30 +43,67 @@ export class AddMoodMutation {
       throw new Error("No user set on context");
     }
     const tags = await this.tagRepository.find({
-      where: { name: In(data.tags.map(tag => tag.name)) },
+      where: { name: In(data.tags.map(tag => tag.name)), user: context.user },
     });
 
-    const mood = this.moodRepository.create();
-    mood.user = context.user;
-    mood.emotion = data.emotion;
-    mood.date = data.date;
-    mood.description = data.description;
+    try {
+      const mood = this.moodRepository.create();
+      mood.user = context.user;
+      mood.emotion = data.emotion;
+      mood.date = data.date;
+      mood.description = data.description;
 
-    mood.tags = tags;
+      mood.tags = tags;
 
-    for (const tag of data.tags) {
-      if (!tags.find(existingTag => existingTag.name === tag.name)) {
-        const newTag = this.tagRepository.create();
-        newTag.name = tag.name;
-        newTag.icon = "";
-        newTag.user = context.user;
-        await this.tagRepository.save(newTag);
-        mood.tags = [...mood.tags, newTag];
+      for (const tag of data.tags) {
+        if (!tags.find(existingTag => existingTag.name === tag.name)) {
+          const newTag = this.tagRepository.create();
+          newTag.name = tag.name;
+          newTag.icon = "";
+          newTag.user = context.user;
+          await this.tagRepository.save(newTag);
+          mood.tags = [...mood.tags, newTag];
+        }
       }
-    }
 
-    // todo STREAK
-    // await this.userRepository.save(context.user)
-    return this.moodRepository.save(mood);
+      // for streak calculations
+      const lastAddedMood = await this.moodRepository.findOne({
+        relations: ["user"],
+        where: { user: { authId: context.authId } },
+        order: { date: "DESC" },
+      });
+
+      if (!lastAddedMood) {
+        context.user.currentStreak++;
+        context.user.longestStreak++;
+        console.log("i get here");
+      } else {
+        const todayDate = time.now().startOf("day");
+        const lastAddedMoodDate = time.fromJSDate(lastAddedMood.date).startOf("day");
+        const differenceInDays = todayDate.diff(lastAddedMoodDate, "days").toObject().days;
+
+        if (differenceInDays === 1) {
+          context.user.currentStreak++;
+        }
+
+        if (differenceInDays && differenceInDays > 1) {
+          context.user.currentStreak = 0;
+        }
+
+        if (context.user.currentStreak > context.user.longestStreak) {
+          context.user.longestStreak = context.user.currentStreak;
+        }
+        console.log({
+          streak: context.user.currentStreak,
+          long: context.user.longestStreak,
+          differenceInDays,
+        });
+      }
+
+      await this.userRepository.save(context.user);
+      return this.moodRepository.save(mood);
+    } catch (e) {
+      console.log({ e });
+    }
   }
 }

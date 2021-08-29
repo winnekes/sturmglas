@@ -48,7 +48,7 @@ export class EditMoodMutation {
     }
 
     const tags = await this.tagRepository.find({
-      where: { name: In(data.tags.map(tag => tag.name)) },
+      where: { name: In(data.tags.map(tag => tag.name)), user: context.user },
     });
 
     mood.tags = tags;
