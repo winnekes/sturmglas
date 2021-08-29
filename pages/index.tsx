@@ -21,7 +21,7 @@ export default function Home() {
   }, [user, isLoading]);
 
   return (
-    <PageWrapper>
+    <PageWrapper hideNavigation>
       <VStack>
         <Title>sturmglas.</Title>
         <Subtitle pb={20}>your mental weather tracker</Subtitle>

@@ -8,6 +8,7 @@ import { Subtitle, Title } from "./text/titles";
 type Props = {
   pageTitle?: string;
   pageSubtitle?: string;
+  hideNavigation?: boolean;
 };
 
 export const PageWrapper: FunctionComponent<Props> = ({ children, ...props }) => {
@@ -23,7 +24,7 @@ const DesktopPageWrapper: FunctionComponent<Props> = ({ children, ...props }) =>
   return (
     <Box display={{ base: "none", sm: "none", md: "none", lg: "block" }}>
       <Container maxW={width} py={[6, 0]}>
-        <DesktopNavigation />
+        {!props.hideNavigation && <DesktopNavigation />}
         <Box mx={spacing}>
           <Title>{props.pageTitle}</Title>
           <Subtitle>{props.pageSubtitle}</Subtitle>
@@ -45,7 +46,7 @@ const MobilePageWrapper: FunctionComponent<Props> = ({ children, ...props }) => 
 
         {children}
       </Container>
-      <MobileNavigation />
+      {!props.hideNavigation && <MobileNavigation />}
     </Box>
   );
 };
