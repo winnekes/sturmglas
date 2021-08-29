@@ -1,5 +1,10 @@
-import { Center, Text, Image } from "@chakra-ui/react";
+import { Box, Center, Text } from "@chakra-ui/react";
+import Image from "next/image";
 
 export const Splash = () => {
-  return <Image src="/mentali.png" width="400px" />;
+  return (
+    <Center height="90vh" width="80%" position="relative">
+      <Image src="/mentali.png" layout="fill" objectFit="contain" quality={100} />
+    </Center>
+  );
 };

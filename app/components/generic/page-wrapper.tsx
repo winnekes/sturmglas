@@ -1,8 +1,9 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { Box, Container } from "@chakra-ui/react";
 import { spacing, width } from "../../styles/theme";
 import { DesktopNavigation } from "../navigation/desktop-navigation";
 import { MobileNavigation } from "../navigation/mobile-navigation";
+import { Splash } from "./splash";
 import { Subtitle, Title } from "./text/titles";
 
 type Props = {
@@ -12,6 +13,20 @@ type Props = {
 };
 
 export const PageWrapper: FunctionComponent<Props> = ({ children, ...props }) => {
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowSplash(false);
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+  if (showSplash) {
+    return <Splash />;
+  }
+
   return (
     <>
       <MobilePageWrapper {...props}>{children}</MobilePageWrapper>
