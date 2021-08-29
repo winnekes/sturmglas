@@ -7,7 +7,7 @@ export const colors = {
     background03: "gray.900",
   },
   text01: "#d9d9d9",
-  text02: "#dcdcdc",
+  text02: "#ffffff",
   brand01: "#704573",
 };
 
@@ -54,7 +54,6 @@ export const theme = extendTheme({
       body: {
         bgGradient: `radial(${colors.ui.background01}, ${colors.ui.background02})`,
         backgroundAttachment: "fixed",
-        color: "gray.100",
       },
     }),
   },

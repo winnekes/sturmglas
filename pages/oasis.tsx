@@ -1,5 +1,6 @@
 import { Companion } from "../app/components/companion/companion";
 import { Loading } from "../app/components/generic/loading";
+import { Splash } from "../app/components/generic/splash";
 import { MoodsTimeline } from "../app/components/mood/moods-timeline";
 import { PageWrapper } from "../app/components/generic/page-wrapper";
 import { Panel } from "../app/components/generic/panel";
@@ -14,7 +15,7 @@ export default function Oasis() {
   const pageSubtitle = "How are you doing today?";
 
   if (loading) {
-    return <Loading />;
+    return <Splash />;
   }
 
   // todo error components

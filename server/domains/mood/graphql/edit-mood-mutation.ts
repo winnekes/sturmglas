@@ -1,7 +1,9 @@
-import { IsDate, IsEnum } from "class-validator";
+import { IsDate, IsEnum, ValidateNested } from "class-validator";
 import { Arg, Authorized, Ctx, Field, InputType, Int, Mutation, Resolver } from "type-graphql";
-import { getRepository, Repository } from "typeorm";
+import { getRepository, In, Repository } from "typeorm";
 import { ServerContext } from "../../../context";
+import { Tag } from "../../tags/entities/tag-entity";
+import { TagInputType, TagType } from "../../tags/graphql/tag-type";
 import { Emotion, Mood } from "../entities/mood-entity";
 import { MoodType } from "./mood-type";
 
@@ -14,17 +16,18 @@ export class EditMoodInputType {
   @Field(type => Emotion)
   emotion!: Emotion;
 
-  @IsDate()
-  @Field()
-  date!: Date;
-
   @Field()
   description!: string;
+
+  @Field(type => [TagInputType])
+  @ValidateNested()
+  tags!: TagType[];
 }
 
 @Resolver()
 export class EditMoodMutation {
   private moodRepository = getRepository("Mood") as Repository<Mood>;
+  private tagRepository = getRepository("Tag") as Repository<Tag>;
 
   @Authorized()
   @Mutation(returns => MoodType)
@@ -44,9 +47,25 @@ export class EditMoodMutation {
       throw new Error("Mood not found");
     }
 
+    const tags = await this.tagRepository.find({
+      where: { name: In(data.tags.map(tag => tag.name)) },
+    });
+
+    mood.tags = tags;
+
+    for (const tag of data.tags) {
+      if (!tags.find(existingTag => existingTag.name === tag.name)) {
+        const newTag = this.tagRepository.create();
+        newTag.name = tag.name;
+        newTag.icon = "";
+        newTag.user = context.user;
+        await this.tagRepository.save(newTag);
+        mood.tags = [...mood.tags, newTag];
+      }
+    }
+
     mood.user = context.user;
     mood.emotion = data.emotion;
-    mood.date = data.date;
     mood.description = data.description;
 
     return this.moodRepository.save(mood);

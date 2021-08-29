@@ -1,6 +1,7 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { Box, Container } from "@chakra-ui/react";
 import { spacing, width } from "../../styles/theme";
+import { Footer } from "../landing/footer";
 import { DesktopNavigation } from "../navigation/desktop-navigation";
 import { MobileNavigation } from "../navigation/mobile-navigation";
 import { Splash } from "./splash";
@@ -10,6 +11,7 @@ type Props = {
   pageTitle?: string;
   pageSubtitle?: string;
   hideNavigation?: boolean;
+  showFooter?: boolean;
 };
 
 export const PageWrapper: FunctionComponent<Props> = ({ children, ...props }) => {
@@ -38,7 +40,7 @@ export const PageWrapper: FunctionComponent<Props> = ({ children, ...props }) =>
 const DesktopPageWrapper: FunctionComponent<Props> = ({ children, ...props }) => {
   return (
     <Box display={{ base: "none", sm: "none", md: "none", lg: "block" }}>
-      <Container maxW={width} py={[6, 0]}>
+      <Container maxW={width} py={[6]}>
         {!props.hideNavigation && <DesktopNavigation />}
         <Box mx={spacing}>
           <Title>{props.pageTitle}</Title>
@@ -46,6 +48,7 @@ const DesktopPageWrapper: FunctionComponent<Props> = ({ children, ...props }) =>
         </Box>
         <Box my={spacing}>{children}</Box>
       </Container>
+      {props.showFooter && <Footer />}
     </Box>
   );
 };
@@ -53,7 +56,7 @@ const DesktopPageWrapper: FunctionComponent<Props> = ({ children, ...props }) =>
 const MobilePageWrapper: FunctionComponent<Props> = ({ children, ...props }) => {
   return (
     <Box display={{ base: "block", lg: "none" }}>
-      <Container maxW={width} px={spacing} pt={2} pb={120}>
+      <Container maxW={width} px={spacing} pb={120}>
         <Box p={spacing}>
           <Title>{props.pageTitle}</Title>
           <Subtitle>{props.pageSubtitle}</Subtitle>
@@ -62,6 +65,7 @@ const MobilePageWrapper: FunctionComponent<Props> = ({ children, ...props }) => 
         {children}
       </Container>
       {!props.hideNavigation && <MobileNavigation />}
+      {props.showFooter && <Footer />}
     </Box>
   );
 };

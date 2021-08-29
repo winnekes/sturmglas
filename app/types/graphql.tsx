@@ -39,8 +39,8 @@ export type DeleteMoodInputType = {
 export type EditMoodInputType = {
   id: Scalars['Int'];
   emotion: Emotion;
-  date: Scalars['DateTime'];
   description: Scalars['String'];
+  tags: Array<TagInputType>;
 };
 
 export enum Emotion {
@@ -65,8 +65,8 @@ export type MoodType = {
   emotion: Emotion;
   date: Scalars['DateTime'];
   description: Scalars['String'];
-  tags?: Maybe<Array<TagType>>;
   createdAt: Scalars['DateTime'];
+  tags?: Maybe<Array<TagType>>;
 };
 
 export type Mutation = {
