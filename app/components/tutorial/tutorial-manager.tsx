@@ -9,25 +9,38 @@ import {
   ModalOverlay,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { FunctionComponent, useState } from "react";
-import { useBluetooth } from "../../hooks/use-bluetooth";
-import { MoodsDocument, MoodsQuery, useUpdateUserProfileMutation } from "../../types/graphql";
+import { Dispatch, FunctionComponent, SetStateAction, useState } from "react";
+import { MoodsQuery, useUpdateUserProfileMutation } from "../../types/graphql";
+import { FinishedTutorial } from "./finished-tutorial";
 import { GetDeviceSettings } from "./get-device-settings";
 import { GetUserDetails } from "./get-user-details";
 import { InitialView } from "./initial-view";
 
 type Props = {
   profile: MoodsQuery["profile"];
+  setShowAddFirstMood: Dispatch<SetStateAction<boolean>>;
+  refetchData: () => void;
 };
 
-export const TutorialManager: FunctionComponent<Props> = ({ profile }) => {
+export const TutorialManager: FunctionComponent<Props> = ({
+  profile,
+  setShowAddFirstMood,
+  refetchData,
+}) => {
+  const modalSize = useBreakpointValue({ base: "full", lg: "md" });
   const [formStep, setFormStep] = useState(0);
   const [nickname, setNickname] = useState("");
   const [hasCompanion, setHasCompanion] = useState(false);
   const [hasGoogleFitness, setHasGoogleFitness] = useState(false);
-  const [hasFinishedTutorial, setHasFinishedTutorial] = useState(false);
 
-  const [mutate] = useUpdateUserProfileMutation({ refetchQueries: [MoodsDocument] });
+  const [mutate] = useUpdateUserProfileMutation();
+
+  const handleStepChange = (direction: "prev" | "next") => {
+    const nextStep = formStep + (direction === "next" ? 1 : -1);
+    if (steps[nextStep]) {
+      setFormStep(nextStep);
+    }
+  };
 
   const updateProfile = async () => {
     try {
@@ -39,6 +52,7 @@ export const TutorialManager: FunctionComponent<Props> = ({ profile }) => {
           },
         },
       });
+      handleStepChange("next");
     } catch (e) {
       console.log(e);
     }
@@ -62,14 +76,11 @@ export const TutorialManager: FunctionComponent<Props> = ({ profile }) => {
         />
       ),
     },
+    {
+      title: "",
+      content: <FinishedTutorial />,
+    },
   ];
-
-  const handleStepChange = (direction: "prev" | "next") => {
-    const nextStep = formStep + (direction === "next" ? 1 : -1);
-    if (steps[nextStep]) {
-      setFormStep(nextStep);
-    }
-  };
 
   return (
     <Modal
@@ -81,25 +92,39 @@ export const TutorialManager: FunctionComponent<Props> = ({ profile }) => {
       closeOnEsc={false}
     >
       <ModalOverlay />
-      <ModalContent minHeight="500px">
+      <ModalContent>
         <ModalHeader>{steps[formStep].title}</ModalHeader>
 
         <ModalBody as={Flex} direction="column" justifyContent="center">
           {steps[formStep].content}
         </ModalBody>
         <ModalFooter>
-          {formStep > 0 && (
+          {formStep > 0 && formStep < steps.length - 1 && (
             <Button onClick={() => handleStepChange("prev")} variant="ghost">
-              Take a step back
+              Go back
             </Button>
           )}
-          {formStep < steps.length - 1 ? (
+          {formStep < steps.length - 2 && (
             <Button onClick={() => handleStepChange("next")} variant="primary">
               Continue
             </Button>
-          ) : (
+          )}
+
+          {formStep === steps.length - 2 && (
             <Button onClick={updateProfile} variant="primary">
-              Let's go!
+              Save your settings
+            </Button>
+          )}
+
+          {formStep === steps.length - 1 && (
+            <Button
+              onClick={async () => {
+                setShowAddFirstMood(true);
+                await refetchData();
+              }}
+              variant="primary"
+            >
+              Let's get started
             </Button>
           )}
         </ModalFooter>

@@ -211,7 +211,7 @@ export type UpdateUserProfileMutationVariables = Exact<{
 }>;
 
 
-export type UpdateUserProfileMutation = { __typename?: 'Mutation', updateUserProfile: { __typename?: 'UserType', id: number, nickname?: Maybe<string>, settings: any } };
+export type UpdateUserProfileMutation = { __typename?: 'Mutation', updateUserProfile: { __typename?: 'UserType', id: number, nickname?: Maybe<string> } };
 
 export type UserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -568,7 +568,6 @@ export const UpdateUserProfileDocument = gql`
   updateUserProfile(data: $data) {
     id
     nickname
-    settings
   }
 }
     `;

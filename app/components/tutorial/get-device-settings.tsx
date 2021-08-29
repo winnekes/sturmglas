@@ -34,7 +34,7 @@ export const GetDeviceSettings: FunctionComponent<Props> = ({
 
   return (
     <>
-      <Flex justify="space-between" align="flex-start" mb={10} w="full">
+      <Flex justify="space-between" align="flex-start" w="full">
         <Box mr={10}>
           <Text fontSize="lg">
             Do you have a <strong>Companion</strong>?
@@ -51,7 +51,7 @@ export const GetDeviceSettings: FunctionComponent<Props> = ({
         />
       </Flex>
 
-      <Box visibility={hasCompanion ? "visible" : "hidden"}>
+      <Box visibility={hasCompanion ? "visible" : "hidden"} mt={2}>
         {!bluetooth.state.connected ? (
           <Button
             leftIcon={<BiBluetooth />}
@@ -71,7 +71,7 @@ export const GetDeviceSettings: FunctionComponent<Props> = ({
         )}
       </Box>
 
-      <Flex justify="space-between" align="flex-start" my={10} w="full">
+      <Flex justify="space-between" align="flex-start" my={2} w="full">
         <Box mr={10}>
           <Text fontSize="lg">
             Do you have a <strong>Google Fitness</strong> account?
