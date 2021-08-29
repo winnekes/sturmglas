@@ -16,7 +16,6 @@ export default function Oasis() {
   const [showAddFirstMood, setShowAddFirstMood] = useState(false);
   const { data, error, loading, refetch } = useMoodsQuery();
 
-  console.log({ data, error, loading });
   const pageTitle = "Oasis";
   const pageSubtitle = "How are you doing today?";
 

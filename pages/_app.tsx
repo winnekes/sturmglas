@@ -29,7 +29,6 @@ const ApolloApp: FunctionComponent = ({ children }) => {
   const status = useApolloNetworkStatus();
 
   useEffect(() => {
-    console.log(toast.isActive(toastId));
     !toast.isActive(toastId) &&
       (status.queryError || status.mutationError) &&
       toast({

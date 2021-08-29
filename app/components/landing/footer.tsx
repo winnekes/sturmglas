@@ -23,20 +23,16 @@ const SocialButton = ({
 }) => {
   return (
     <chakra.button
-      bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
-      rounded={"full"}
+      rounded="full"
       w={8}
       h={8}
-      cursor={"pointer"}
-      as={"a"}
+      cursor="pointer"
+      as="a"
       href={href}
-      display={"inline-flex"}
-      alignItems={"center"}
-      justifyContent={"center"}
-      transition={"background 0.3s ease"}
-      _hover={{
-        bg: useColorModeValue("blackAlpha.200", "whiteAlpha.200"),
-      }}
+      display="inline-flex"
+      alignItems="center"
+      justifyContent="center"
+      transition="background 0.3s ease"
     >
       <VisuallyHidden>{label}</VisuallyHidden>
       {children}
@@ -46,11 +42,8 @@ const SocialButton = ({
 
 export const Footer = () => {
   return (
-    <Box
-      bg={useColorModeValue("gray.50", "gray.900")}
-      color={useColorModeValue("gray.700", "gray.200")}
-    >
-      <Container as={Stack} maxW={"6xl"} py={4} spacing={4} justify={"center"} align={"center"}>
+    <Box>
+      <Container as={Stack} maxW="6xl" py={4} spacing={4} justify="center" align="center">
         <Box position="relative" boxSize="100px">
           <Image
             src="/logo.png"
@@ -61,17 +54,12 @@ export const Footer = () => {
             quality={100}
           />
         </Box>
-        <Stack direction={"row"} spacing={6}></Stack>
       </Container>
 
-      <Box
-        borderTopWidth={1}
-        borderStyle={"solid"}
-        borderColor={useColorModeValue("gray.200", "gray.700")}
-      >
+      <Box borderTopWidth={1} borderStyle="solid">
         <Container
           as={Stack}
-          maxW={"6xl"}
+          maxW="6xl"
           py={4}
           direction={{ base: "column", md: "row" }}
           spacing={4}
@@ -79,14 +67,14 @@ export const Footer = () => {
           align={{ base: "center", md: "center" }}
         >
           <Text>© 2021 sturmglas. Made by Simona. All rights reserved</Text>
-          <Stack direction={"row"} spacing={6}>
-            <SocialButton label={"Twitter"} href={"#"}>
+          <Stack direction="row" spacing={6}>
+            <SocialButton label="Twitter" href="#">
               <FaTwitter />
             </SocialButton>
-            <SocialButton label={"YouTube"} href={"#"}>
+            <SocialButton label="YouTube" href="#">
               <FaYoutube />
             </SocialButton>
-            <SocialButton label={"Instagram"} href={"#"}>
+            <SocialButton label="Instagram" href="#">
               <FaInstagram />
             </SocialButton>
           </Stack>
