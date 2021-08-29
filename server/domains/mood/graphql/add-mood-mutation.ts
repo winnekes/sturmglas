@@ -104,7 +104,7 @@ export class AddMoodMutation {
       await this.userRepository.save(context.user);
       return this.moodRepository.save(mood);
     } catch (e) {
-      console.log({ e });
+      throw new Error("Could not save");
     }
   }
 }
