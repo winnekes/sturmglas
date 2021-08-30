@@ -79,7 +79,7 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
           )}
         </ModalBody>
         <ModalFooter>
-          <Button onClick={onClose} variant="ghost">
+          <Button onClick={onClose} variant="secondary">
             Cancel
           </Button>
           {formStep > 1 ? (

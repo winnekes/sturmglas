@@ -20,10 +20,10 @@ export const MoodsTimeline: FunctionComponent<Props> = ({ moods }) => {
 
       <Button
         display={{ base: "none", lg: "block" }}
-        bg={colors.brand01}
         mb={spacing}
         w="100%"
         onClick={() => setShowAddMoodModal(true)}
+        variant="primary"
       >
         How are you feeling today? Record your mood
       </Button>

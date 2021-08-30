@@ -100,7 +100,7 @@ export const TutorialManager: FunctionComponent<Props> = ({
         </ModalBody>
         <ModalFooter>
           {formStep > 0 && formStep < steps.length - 1 && (
-            <Button onClick={() => handleStepChange("prev")} variant="ghost">
+            <Button onClick={() => handleStepChange("prev")} variant="secondary">
               Go back
             </Button>
           )}

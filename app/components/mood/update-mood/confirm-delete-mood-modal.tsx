@@ -50,7 +50,7 @@ export const ConfirmDeleteMoodModal: FunctionComponent<Props> = ({
           <AlertDialogBody>Are you sure? You can't undo this action afterwards.</AlertDialogBody>
 
           <AlertDialogFooter>
-            <Button ref={leastDestructiveRef} onClick={onClose}>
+            <Button ref={leastDestructiveRef} onClick={onClose} variant="secondary">
               Cancel
             </Button>
             <Button variant="primary" onClick={deleteMood} ml={3} isLoading={loading}>

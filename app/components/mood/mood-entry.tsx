@@ -71,7 +71,7 @@ export const MoodEntry: FunctionComponent<Props> = ({ mood }) => {
           <Text fontWeight="bold" textTransform="capitalize" color={emotions[mood.emotion].color}>
             {emotions[mood.emotion].name}
           </Text>
-          <Text> {mood.description}</Text>
+          <Text whiteSpace="pre-wrap">{mood.description}</Text>
           <HStack spacing={3} mt={6}>
             {mood.tags?.map(tag => (
               <Tag key={tag.id} bg="gray.700" color="gray.500">

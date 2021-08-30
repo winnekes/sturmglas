@@ -41,7 +41,9 @@ export const Companion: FunctionComponent<Props> = ({ latestMood }) => {
             <Subheading fontSize="sm" color="gray.500">
               {time.fromISO(latestMood.date).toLocaleString(time.DATETIME_SHORT)}
             </Subheading>
-            <Text noOfLines={1}>{latestMood.description}</Text>
+            <Text noOfLines={1} whiteSpace="pre-wrap">
+              {latestMood.description}
+            </Text>
           </Box>
         </>
       ) : (

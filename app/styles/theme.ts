@@ -9,6 +9,7 @@ export const colors = {
   text01: "#d9d9d9",
   text02: "#ffffff",
   brand01: "#704573",
+  brand02: "#49244b",
 };
 
 export const width = ["100%", "container.lg"];
@@ -26,24 +27,31 @@ export const theme = extendTheme({
         color: colors.text01,
       },
     },
-    Text: {
-      baseStyle: {
-        color: colors.text02,
-      },
-    },
+    // Text: {
+    //   baseStyle: {
+    //     color: colors.text02,
+    //   },
+    // },
     Divider: {
       baseStyle: {
         borderColor: "gray.700",
       },
     },
     Button: {
+      baseStyle: {
+        _hover: {
+          bg: colors.brand02,
+        },
+      },
       variants: {
         primary: {
           bg: colors.ui.background01,
           marginLeft: "10px",
-          _hover: { bg: colors.ui.background02 },
+          __hover: {
+            bg: colors.brand02,
+          },
         },
-        secondary: { bg: "gray.700", _hover: { bg: "red" } },
+        secondary: { bg: "transparent", _hover: { bg: colors.brand02 } },
       },
     },
     Modal: {
@@ -57,6 +65,7 @@ export const theme = extendTheme({
     global: props => ({
       body: {
         bgGradient: `radial(${colors.ui.background01}, ${colors.ui.background02})`,
+        color: "gray.200",
         backgroundAttachment: "fixed",
       },
     }),

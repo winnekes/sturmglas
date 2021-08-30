@@ -109,9 +109,8 @@ export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
                   ml={0}
                   mt={2}
                   leftIcon={<MdBluetoothConnected />}
-                  variant="primary"
+                  variant="secondary"
                   onClick={bluetooth.connect}
-                  w="80%"
                 >
                   Connect
                 </Button>
@@ -120,9 +119,8 @@ export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
                   ml={0}
                   mt={2}
                   leftIcon={<MdBluetoothDisabled />}
-                  variant="primary"
+                  variant="secondary"
                   onClick={bluetooth.disconnect}
-                  w="80%"
                 >
                   Disconnect
                 </Button>

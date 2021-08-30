@@ -26,7 +26,6 @@ export const BluetoothContextProvider: FunctionComponent = ({ children }) => {
 
   const textEncoder = new TextEncoder();
 
-  console.log({ connection, service, deviceName });
   const connect = async () => {
     try {
       const device = await navigator.bluetooth.requestDevice({
@@ -34,7 +33,7 @@ export const BluetoothContextProvider: FunctionComponent = ({ children }) => {
         filters: [{ services: [serviceUuid] }],
       });
 
-      setDeviceName(device?.name as string);
+      setDeviceName(device?.name || "");
       const server = await device.gatt?.connect();
       if (server) {
         setConnection(server);
@@ -55,9 +54,7 @@ export const BluetoothContextProvider: FunctionComponent = ({ children }) => {
       if (connection && service) {
         const commandCharacteristic = await service.getCharacteristic(commandCharacteristicUuid);
 
-        console.log("command");
         await commandCharacteristic.writeValue(textEncoder.encode(command));
-        console.log("command send");
       }
       setError(false);
     } catch (e) {
@@ -79,6 +76,7 @@ export const BluetoothContextProvider: FunctionComponent = ({ children }) => {
   const disconnect = () => {
     if (connection) {
       connection.disconnect();
+      setDeviceName("");
       setService(undefined);
       setConnection(undefined);
       setConnected(false);
@@ -94,7 +92,6 @@ export const BluetoothContextProvider: FunctionComponent = ({ children }) => {
       setTimeout(() => connect(), 2000);
       setError(false);
     } catch (e) {
-      console.log({ e });
       setError(e);
     }
   };
