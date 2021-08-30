@@ -58,8 +58,8 @@ export default function Insights() {
                       {data.profile.currentStreak > data.profile.longestStreak
                         ? "You are on fire! Keep it up."
                         : data.profile.currentStreak === data.profile.longestStreak
-                        ? "Awesome"
-                        : "Almost there"}
+                        ? "Awesome!"
+                        : "Almost there!"}
                     </strong>
                   </StatHelpText>
                 </Stat>
