@@ -1,0 +1,17 @@
+query Statistics {
+  statistics {
+    moodCounts {
+      count
+      emotion
+    }
+  }
+  profile {
+    id
+    nickname
+    pictureUrl
+    refreshToken
+    settings
+    longestStreak
+    currentStreak
+  }
+}

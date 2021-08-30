@@ -8,6 +8,7 @@ import { emotions } from "../../types/mood";
 import { Subheading } from "../generic/text/subheading";
 import { ConfirmDeleteMoodModal } from "./update-mood/confirm-delete-mood-modal";
 import { EditMoodModal } from "./update-mood/edit-mood-modal";
+import { ShareMoodModal } from "./update-mood/share-mood-modal";
 
 type Props = {
   mood: MoodsQuery["moods"][number];
@@ -16,7 +17,8 @@ type Props = {
 export const MoodEntry: FunctionComponent<Props> = ({ mood }) => {
   const [showInteractionMenu, setShowInteractionMenu] = useState(false);
   const [selectedEditMoodId, setSelectedEditMoodId] = useState<number | null>(null);
-  const [selectedDeleteMoodId, setSelectedDeleteEditMoodId] = useState<number | null>(null);
+  const [selectedDeleteMoodId, setSelectedDeleteMoodId] = useState<number | null>(null);
+  const [selectedShareMoodId, setSelectedShareMoodId] = useState<number | null>(null);
 
   return (
     <>
@@ -44,7 +46,7 @@ export const MoodEntry: FunctionComponent<Props> = ({ mood }) => {
                 icon={<BiShareAlt />}
                 color="gray.500"
                 aria-label="Download as image"
-                onClick={() => setSelectedEditMoodId(mood.id)}
+                onClick={() => setSelectedShareMoodId(mood.id)}
                 variant="ghost"
                 size="sm"
               />
@@ -62,7 +64,7 @@ export const MoodEntry: FunctionComponent<Props> = ({ mood }) => {
                 aria-label=""
                 variant="ghost"
                 size="sm"
-                onClick={() => setSelectedDeleteEditMoodId(mood.id)}
+                onClick={() => setSelectedDeleteMoodId(mood.id)}
               />
             </HStack>
           </HStack>
@@ -80,14 +82,15 @@ export const MoodEntry: FunctionComponent<Props> = ({ mood }) => {
         </Box>
       </HStack>
 
+      {selectedShareMoodId && (
+        <ShareMoodModal mood={mood} onClose={() => setSelectedShareMoodId(null)} />
+      )}
+
       {selectedEditMoodId && (
         <EditMoodModal mood={mood} onClose={() => setSelectedEditMoodId(null)} />
       )}
       {selectedDeleteMoodId && (
-        <ConfirmDeleteMoodModal
-          moodId={mood.id}
-          onClose={() => setSelectedDeleteEditMoodId(null)}
-        />
+        <ConfirmDeleteMoodModal moodId={mood.id} onClose={() => setSelectedDeleteMoodId(null)} />
       )}
     </>
   );

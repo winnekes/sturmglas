@@ -20,10 +20,10 @@ export class UserType {
   @Field(type => GraphQLJSON)
   settings!: UserSettings;
 
-  @Field(type => Int, { nullable: true })
+  @Field(type => Int)
   currentStreak!: number;
 
-  @Field(type => Int, { nullable: true })
+  @Field(type => Int)
   longestStreak!: number;
 
   @Field()

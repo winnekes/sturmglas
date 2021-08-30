@@ -66,10 +66,10 @@ export class User {
   @CreateDateColumn()
   createdAt!: Date;
 
-  @Column({ default: 0, nullable: true })
+  @Column({ default: 0 })
   currentStreak!: number;
 
-  @Column({ default: 0, nullable: true })
+  @Column({ default: 0 })
   longestStreak!: number;
 
   @UpdateDateColumn()

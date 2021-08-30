@@ -30,7 +30,7 @@ const ApolloApp: FunctionComponent = ({ children }) => {
 
   useEffect(() => {
     !toast.isActive(toastId) &&
-      (status.queryError || status.mutationError) &&
+      status.queryError &&
       toast({
         title: "Something went wrong",
         description: "Please try again",

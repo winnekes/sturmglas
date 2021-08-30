@@ -24,5 +24,7 @@ query Moods {
     nickname
     settings
     refreshToken
+    longestStreak
+    currentStreak
   }
 }

@@ -59,6 +59,12 @@ export type FitnessType = {
 };
 
 
+export type MoodCountType = {
+  __typename?: 'MoodCountType';
+  emotion: Emotion;
+  count: Scalars['Int'];
+};
+
 export type MoodType = {
   __typename?: 'MoodType';
   id: Scalars['Int'];
@@ -109,6 +115,7 @@ export type Query = {
   latestMood?: Maybe<MoodType>;
   mood: MoodType;
   moods: Array<MoodType>;
+  statistics: StatisticsType;
   tags: Array<TagType>;
   profile: UserType;
 };
@@ -120,6 +127,11 @@ export type QueryMoodArgs = {
 
 export type SaveRefreshTokenInputType = {
   authToken: Scalars['String'];
+};
+
+export type StatisticsType = {
+  __typename?: 'StatisticsType';
+  moodCounts: Array<MoodCountType>;
 };
 
 export type TagInputType = {
@@ -145,8 +157,8 @@ export type UserType = {
   pictureUrl: Scalars['String'];
   lastLogin: Scalars['DateTime'];
   settings: Scalars['JSON'];
-  currentStreak?: Maybe<Scalars['Int']>;
-  longestStreak?: Maybe<Scalars['Int']>;
+  currentStreak: Scalars['Int'];
+  longestStreak: Scalars['Int'];
   refreshToken: Scalars['String'];
   createdAt: Scalars['DateTime'];
 };
@@ -192,7 +204,7 @@ export type MoodQuery = { __typename?: 'Query', mood: { __typename?: 'MoodType',
 export type MoodsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MoodsQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any, tags?: Maybe<Array<{ __typename?: 'TagType', id: number, name: string }>> }>, latestMood?: Maybe<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any, tags?: Maybe<Array<{ __typename?: 'TagType', id: number, name: string }>> }>, profile: { __typename?: 'UserType', id: number, nickname?: Maybe<string>, settings: any, refreshToken: string } };
+export type MoodsQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any, tags?: Maybe<Array<{ __typename?: 'TagType', id: number, name: string }>> }>, latestMood?: Maybe<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any, tags?: Maybe<Array<{ __typename?: 'TagType', id: number, name: string }>> }>, profile: { __typename?: 'UserType', id: number, nickname?: Maybe<string>, settings: any, refreshToken: string, longestStreak: number, currentStreak: number } };
 
 export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -205,6 +217,11 @@ export type SaveRefreshTokenMutationVariables = Exact<{
 
 
 export type SaveRefreshTokenMutation = { __typename?: 'Mutation', saveRefreshToken: { __typename?: 'UserType', id: number, refreshToken: string } };
+
+export type StatisticsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type StatisticsQuery = { __typename?: 'Query', statistics: { __typename?: 'StatisticsType', moodCounts: Array<{ __typename?: 'MoodCountType', count: number, emotion: Emotion }> }, profile: { __typename?: 'UserType', id: number, nickname?: Maybe<string>, pictureUrl: string, refreshToken: string, settings: any, longestStreak: number, currentStreak: number } };
 
 export type TagsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -464,6 +481,8 @@ export const MoodsDocument = gql`
     nickname
     settings
     refreshToken
+    longestStreak
+    currentStreak
   }
 }
     `;
@@ -566,6 +585,52 @@ export function useSaveRefreshTokenMutation(baseOptions?: Apollo.MutationHookOpt
 export type SaveRefreshTokenMutationHookResult = ReturnType<typeof useSaveRefreshTokenMutation>;
 export type SaveRefreshTokenMutationResult = Apollo.MutationResult<SaveRefreshTokenMutation>;
 export type SaveRefreshTokenMutationOptions = Apollo.BaseMutationOptions<SaveRefreshTokenMutation, SaveRefreshTokenMutationVariables>;
+export const StatisticsDocument = gql`
+    query Statistics {
+  statistics {
+    moodCounts {
+      count
+      emotion
+    }
+  }
+  profile {
+    id
+    nickname
+    pictureUrl
+    refreshToken
+    settings
+    longestStreak
+    currentStreak
+  }
+}
+    `;
+
+/**
+ * __useStatisticsQuery__
+ *
+ * To run a query within a React component, call `useStatisticsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStatisticsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStatisticsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useStatisticsQuery(baseOptions?: Apollo.QueryHookOptions<StatisticsQuery, StatisticsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<StatisticsQuery, StatisticsQueryVariables>(StatisticsDocument, options);
+      }
+export function useStatisticsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StatisticsQuery, StatisticsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<StatisticsQuery, StatisticsQueryVariables>(StatisticsDocument, options);
+        }
+export type StatisticsQueryHookResult = ReturnType<typeof useStatisticsQuery>;
+export type StatisticsLazyQueryHookResult = ReturnType<typeof useStatisticsLazyQuery>;
+export type StatisticsQueryResult = Apollo.QueryResult<StatisticsQuery, StatisticsQueryVariables>;
 export const TagsDocument = gql`
     query Tags {
   tags {

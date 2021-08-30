@@ -10,6 +10,7 @@ import { LatestMoodQuery } from "./domains/mood/graphql/latest-mood-query";
 import { MoodQuery } from "./domains/mood/graphql/mood-query";
 import { MoodResolver } from "./domains/mood/graphql/mood-resolver";
 import { MoodsQuery } from "./domains/mood/graphql/moods-query";
+import { StatisticsQuery } from "./domains/statistics/graphql/statistics-query";
 import { TagsQuery } from "./domains/tags/graphql/tags-query";
 import { ProfileQuery } from "./domains/user/graphql/profile-query";
 import { SaveRefreshTokenMutation } from "./domains/user/graphql/save-refresh-token-mutation";
@@ -24,6 +25,7 @@ export const startGraphqlServer = async (req: IncomingMessage, res: ServerRespon
     MoodsQuery,
     MoodQuery,
     ProfileQuery,
+    StatisticsQuery,
     TagsQuery,
     MoodResolver,
   ];
