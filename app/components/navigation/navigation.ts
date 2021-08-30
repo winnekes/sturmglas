@@ -5,7 +5,6 @@ export const PAGES = {
   root: "/",
   oasis: "/oasis",
   insights: "/insights",
-  settings: "/settings",
 };
 
 export interface NavigationItem {
@@ -28,12 +27,7 @@ export const authNavigationItems: NavigationItem[] = [
     href: PAGES.insights,
     type: "internal",
   },
-  {
-    label: "Settings",
-    icon: BiCog,
-    href: PAGES.settings,
-    type: "internal",
-  },
+
   {
     label: "Logout",
     icon: BiLogOut,

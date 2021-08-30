@@ -24,6 +24,7 @@ import { useBluetooth } from "../../hooks/use-bluetooth";
 import { useTimeOfDay } from "../../hooks/use-time-of-day";
 import { colors } from "../../styles/theme";
 import { useProfileQuery } from "../../types/graphql";
+import { FitnessLogin } from "../fitness-login";
 import { ErrorAlert } from "../generic/error-alert";
 import { Loading } from "../generic/loading";
 import { authNavigationItems, openNavigationItems } from "./navigation";
@@ -43,7 +44,6 @@ export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
   const drawerSize = useBreakpointValue({ base: "xs", lg: "md" });
   const { greeting } = useTimeOfDay();
   const { user } = useUser();
-  console.log({ user });
 
   const navigationItems = authNavigationItems;
 
@@ -128,6 +128,7 @@ export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
               )}
             </Box>
           )}
+          {data?.profile.settings.hasGoogleFitness && <FitnessLogin />}
         </DrawerBody>
       </DrawerContent>
     </Drawer>

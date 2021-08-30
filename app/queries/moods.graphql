@@ -27,4 +27,14 @@ query Moods {
     longestStreak
     currentStreak
   }
+  fitness {
+    steps {
+      today
+      yesterday
+    }
+    heartRate {
+      today
+      yesterday
+    }
+  }
 }
