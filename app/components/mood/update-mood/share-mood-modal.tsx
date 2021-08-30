@@ -39,17 +39,18 @@ export const ShareMoodModal: FunctionComponent<Props> = ({ mood, onClose }) => {
     }
   }, []);
 
-  const onButtonClick = useCallback(() => {
+  const onButtonClick = useCallback(async () => {
     if (componentRef?.current === null) {
       return;
     }
-
-    EI?.current.toPng(componentRef?.current, { cacheBust: true }).then((dataUrl: any) => {
-      const link = document.createElement("a");
-      link.download = "sturmglas.png";
-      link.href = dataUrl;
-      link.click();
-    });
+    EI?.current
+      .toPng(componentRef?.current, { cacheBust: true, style: { fontFamily: "Nunito" } })
+      .then((dataUrl: any) => {
+        const link = document.createElement("a");
+        link.download = "sturmglas.png";
+        link.href = dataUrl;
+        link.click();
+      });
   }, [componentRef]);
 
   return (
