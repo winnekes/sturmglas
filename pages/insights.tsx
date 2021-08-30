@@ -3,7 +3,6 @@ import {
   Heading,
   HStack,
   Stat,
-
   Stack,
   StatHelpText,
   StatLabel,
@@ -29,7 +28,7 @@ export default function Insights() {
   const pageTitle = "Insights";
   const subTitle = "This is an overview of you";
 
-  const emotion = emotions[data?.statistics.moodCounts[0].emotion];
+  const emotion = data?.statistics.moodCounts && emotions[data.statistics.moodCounts[0].emotion];
 
   return (
     <PageWrapper pageTitle={pageTitle} pageSubtitle={subTitle}>

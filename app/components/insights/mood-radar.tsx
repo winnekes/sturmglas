@@ -1,29 +1,11 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
 import { FunctionComponent } from "react";
 import { PolarArea } from "react-chartjs-2";
-import { colors } from "../../styles/theme";
-
 import { StatisticsQuery } from "../../types/graphql";
 import { emotions } from "../../types/mood";
 
 type Props = {
   moodCounts: StatisticsQuery["statistics"]["moodCounts"];
-};
-const options = {
-  scales: {
-    r: {
-      ticks: { display: false },
-      grid: {
-        color: "transparent",
-      },
-      angleLines: {
-        color: colors.brand01,
-      },
-      pointLabels: {
-        color: colors.brand01,
-      },
-    },
-  },
 };
 
 const config = {
