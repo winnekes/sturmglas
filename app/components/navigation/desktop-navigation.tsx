@@ -15,7 +15,7 @@ export const DesktopNavigation = () => {
       <Flex justify="space-between" align="center" py={spacing} color="white">
         <Link onClick={() => router.push("/")}>
           <HStack>
-            <Image src="/logo.png" boxSize="34px" />
+            <Image src="/logo.png" boxSize="34px" alt="Emotional cloud" />
             <Text fontWeight="bold" fontFamily="heading">
               sturmglas.
             </Text>

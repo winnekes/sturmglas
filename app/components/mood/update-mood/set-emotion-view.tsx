@@ -26,7 +26,14 @@ export const SetEmotionView: FunctionComponent<Props> = ({ selectedEmotion, setE
               setEmotion(Emotion[emotion.name]);
             }}
           >
-            <Image src={emotion.imageUrl} height="75px" width="75px" priority quality={100} />
+            <Image
+              src={emotion.imageUrl}
+              height="75px"
+              width="75px"
+              priority
+              quality={100}
+              alt="Image of emotional cloud"
+            />
           </Box>
 
           <Text>{emotion.name}</Text>

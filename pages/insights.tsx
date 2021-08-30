@@ -71,7 +71,12 @@ export default function Insights() {
                     You are often
                   </Heading>
                   <Stack minHeight="100px" w="full" position="relative">
-                    <Image src={emotion.imageUrl} layout="fill" objectFit="contain" alt="" />
+                    <Image
+                      src={emotion.imageUrl}
+                      layout="fill"
+                      objectFit="contain"
+                      alt="Image of emotional cloud"
+                    />
                   </Stack>
                   <Subheading>{emotion.name}</Subheading>
                 </Panel>

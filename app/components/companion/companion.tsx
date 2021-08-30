@@ -47,7 +47,14 @@ export const Companion: FunctionComponent<Props> = ({ latestMood }) => {
           </Box>
         </>
       ) : (
-        <Image src="/logo.png" height={"300px"} width={"300px"} priority={true} quality={100} />
+        <Image
+          src="/logo.png"
+          height={"300px"}
+          width={"300px"}
+          priority={true}
+          quality={100}
+          alt="Image of emotional cloud"
+        />
       )}
     </VStack>
   );

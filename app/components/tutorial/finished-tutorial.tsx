@@ -5,7 +5,13 @@ export const FinishedTutorial = () => {
   return (
     <VStack>
       <Box height="200px" width="150px" position="relative" mb={2}>
-        <Image src="/mentali.png" layout="fill" objectFit="contain" quality={100} />
+        <Image
+          src="/mentali.png"
+          layout="fill"
+          objectFit="contain"
+          quality={100}
+          alt="Brand image"
+        />
       </Box>
       <Heading fontSize="2xl">Congratulations!</Heading>
       <Text fontSize="lg">

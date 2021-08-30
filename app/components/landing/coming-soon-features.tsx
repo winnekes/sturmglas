@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { Box, SimpleGrid, Icon, Text, VStack, Flex, Heading } from "@chakra-ui/react";
+import { Box, HStack, Icon, Text, VStack, Flex, Heading, Stack } from "@chakra-ui/react";
 import { FcAssistant, FcDonate, FcInTransit } from "react-icons/fc";
 
 interface FeatureProps {
@@ -11,16 +11,7 @@ interface FeatureProps {
 const Feature = ({ title, text, icon }: FeatureProps) => {
   return (
     <VStack>
-      <Flex
-        w={16}
-        h={16}
-        align="center"
-        justify="center"
-        color="white"
-        rounded="full"
-        bg="gray.100"
-        mb={1}
-      >
+      <Flex w={16} h={16} align="center" justify="center" color="white" rounded="full" mb={4}>
         {icon}
       </Flex>
       <Text fontWeight={600}>{title}</Text>
@@ -31,25 +22,27 @@ const Feature = ({ title, text, icon }: FeatureProps) => {
 
 export const ComingSoonFeatures = () => {
   return (
-    <Box p={4} my={5}>
-      <Heading>Features coming very soon</Heading>
-      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} mt={10}>
+    <Box p={4} mt={10} mb={5}>
+      <Heading as="h2" textAlign="center">
+        Coming soon
+      </Heading>
+      <Stack direction={["column", "row"]} spacing={10} mt={10} justifyContent="center">
         <Feature
-          icon={<Icon as={FcAssistant} w={10} h={10} />}
+          icon={<Icon as={FcAssistant} w={20} h={20} />}
           title="Lifetime Support"
           text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore..."
         />
         <Feature
-          icon={<Icon as={FcDonate} w={10} h={10} />}
+          icon={<Icon as={FcDonate} w={20} h={20} />}
           title="Unlimited Donations"
           text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore..."
         />
         <Feature
-          icon={<Icon as={FcInTransit} w={10} h={10} />}
+          icon={<Icon as={FcInTransit} w={20} h={20} />}
           title="Instant Delivery"
           text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore..."
         />
-      </SimpleGrid>
+      </Stack>
     </Box>
   );
 };

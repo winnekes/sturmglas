@@ -6,29 +6,21 @@ import { ComingSoonFeatures } from "../app/components/landing/coming-soon-featur
 import { Hero } from "../app/components/landing/hero";
 import { PAGES } from "../app/components/navigation/navigation";
 import { PageWrapper } from "../app/components/generic/page-wrapper";
-
 import {
-  Button,
-  Container,
   Text,
   Heading,
   Stack,
   VStack,
   Flex,
-  Link,
   StackDivider,
-  useColorModeValue,
   SimpleGrid,
   Image as ChakraImage,
   Icon,
+  useBreakpointValue,
 } from "@chakra-ui/react";
-import Image from "next/image";
-import { Subtitle, Title } from "../app/components/generic/text/titles";
 
 export default function Home() {
-  // TODO landing page
-  // TODO seo
-
+  const isMobile = useBreakpointValue({ base: true, lg: false });
   const { user, isLoading } = useUser();
   const router = useRouter();
 
@@ -45,7 +37,11 @@ export default function Home() {
     <PageWrapper hideNavigation showFooter>
       <Hero />
 
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+      <Heading as="h2" textAlign="center">
+        Features coming very soon
+      </Heading>
+
+      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10} my="50px">
         <Stack spacing={4}>
           <Text
             textTransform="uppercase"
@@ -63,7 +59,7 @@ export default function Home() {
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
             invidunt ut labore
           </Text>
-          <Stack spacing={4} divider={<StackDivider />}>
+          <Stack spacing={4}>
             <Feature
               icon={<Icon as={IoLogoBitcoin} color="yellow.500" w={5} h={5} />}
               text="Business Planning"
@@ -86,9 +82,9 @@ export default function Home() {
             objectFit="cover"
           />
         </Flex>
-      </SimpleGrid>
+      </>
 
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+      <SimpleGrid columns={{ base: 1, md: 2 }}>
         <Flex>
           <ChakraImage
             rounded="md"
@@ -114,7 +110,7 @@ export default function Home() {
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
             invidunt ut labore
           </Text>
-          <Stack spacing={4} divider={<StackDivider />}>
+          <Stack spacing={4}>
             <Feature
               icon={<Icon as={IoLogoBitcoin} color="yellow.500" w={5} h={5} />}
               text="Business Planning"
