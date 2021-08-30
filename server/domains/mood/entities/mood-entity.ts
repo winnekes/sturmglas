@@ -27,7 +27,7 @@ export class Mood {
   id!: number;
 
   @Column("text")
-  emotion!: Emotion;
+  emotion!: string;
 
   @IsDate()
   @Column()

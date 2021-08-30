@@ -8,7 +8,7 @@ type Props = {
 
 export const ErrorAlert: FunctionComponent<Props> = ({ title, description }) => {
   return (
-    <Alert status="error">
+    <Alert status="error" variant="subtle" bg="red">
       <AlertIcon />
       <AlertTitle>{title ? title : "Oh no"}</AlertTitle>
       <AlertDescription display="block">
