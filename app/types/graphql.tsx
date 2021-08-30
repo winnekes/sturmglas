@@ -204,7 +204,7 @@ export type MoodQuery = { __typename?: 'Query', mood: { __typename?: 'MoodType',
 export type MoodsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MoodsQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any, tags?: Maybe<Array<{ __typename?: 'TagType', id: number, name: string }>> }>, latestMood?: Maybe<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any, tags?: Maybe<Array<{ __typename?: 'TagType', id: number, name: string }>> }>, profile: { __typename?: 'UserType', id: number, nickname?: Maybe<string>, settings: any, refreshToken: string, longestStreak: number, currentStreak: number }, fitness: { __typename?: 'FitnessType', steps: { __typename?: 'DatasetOutputType', today: number, yesterday: number }, heartRate: { __typename?: 'DatasetOutputType', today: number, yesterday: number } } };
+export type MoodsQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any, tags?: Maybe<Array<{ __typename?: 'TagType', id: number, name: string }>> }>, latestMood?: Maybe<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any, tags?: Maybe<Array<{ __typename?: 'TagType', id: number, name: string }>> }>, profile: { __typename?: 'UserType', id: number, nickname?: Maybe<string>, settings: any, refreshToken: string, longestStreak: number, currentStreak: number } };
 
 export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -483,16 +483,6 @@ export const MoodsDocument = gql`
     refreshToken
     longestStreak
     currentStreak
-  }
-  fitness {
-    steps {
-      today
-      yesterday
-    }
-    heartRate {
-      today
-      yesterday
-    }
   }
 }
     `;
