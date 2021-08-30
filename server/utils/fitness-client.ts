@@ -27,46 +27,46 @@ export const getHeartRate = async (refreshToken: string) => {
   const client = await fitnessClient(refreshToken);
 
   const dataTypeName = "com.google.heart_rate.bpm";
-  const bucketTimeInMs = 600000; // 1 minute
-  const endTimeInMs = time.now();
-  const startTimeInMs = endTimeInMs.minus(20 * bucketTimeInMs);
-
-  console.log({ end: endTimeInMs.toString(), start: startTimeInMs.toString() });
+  const durationInMs = 86400000; // 24 hours
+  const endTimeInMs = time.now().minus(durationInMs);
+  const startTimeInMs = endTimeInMs.startOf("day");
 
   const result = await client.users.dataset.aggregate({
     userId: "me",
     requestBody: {
       aggregateBy: [
         {
-          dataSourceId:
-            "raw:com.google.heart_rate.bpm:com.xiaomi.hm.health:GoogleFitSyncHelper - heartrate",
+          dataTypeName,
         },
       ],
       bucketByTime: {
-        durationMillis: bucketTimeInMs,
+        durationMillis: durationInMs,
       },
       startTimeMillis: startTimeInMs.toMillis(),
       endTimeMillis: endTimeInMs.toMillis(),
     },
   });
-
-  return result.data;
+  // console.log(util.inspect({ result: result.data }, { showHidden: false, depth: null }));
+  return (
+    (result.data?.bucket?.[0].dataset?.[0]?.point?.[0]?.value?.[0]?.fpVal as number) || undefined
+  );
 };
 
 export const getSteps = async (refreshToken: string) => {
   const client = await fitnessClient(refreshToken);
 
   const dataTypeName = "com.google.step_count.delta";
-  const durationInMs = 100000; // 24 hours
-  const endTimeInMs = time.now();
+  const durationInMs = 86400000; // 24 hours
+  const endTimeInMs = time.now().minus(durationInMs);
   const startTimeInMs = endTimeInMs.startOf("day");
 
-  console.log({ end: endTimeInMs.toString(), start: startTimeInMs.toString() });
+  console.log({ endTimeInMs, startTimeInMs });
   const result = await client.users.dataset.aggregate({
     userId: "me",
     requestBody: {
       aggregateBy: [
         {
+          // dataTypeName,
           dataSourceId:
             "derived:com.google.step_count.delta:com.google.android.gms:estimated_steps",
         },
@@ -78,8 +78,8 @@ export const getSteps = async (refreshToken: string) => {
       endTimeMillis: endTimeInMs.toMillis(),
     },
   });
-
-  // const filtered = result.data.bucket[0].dataset[0].point.filter(data => data.originDataSourceId === "raw:com.google.step_count.delta:com.xiaomi.hm.health:GoogleFitSyncHelper- steps")
-  //
-  return result.data;
+  //console.log(util.inspect({ result: result.data }, { showHidden: false, depth: null }));
+  return (
+    (result.data?.bucket?.[0].dataset?.[0]?.point?.[0]?.value?.[0]?.intVal as number) || undefined
+  );
 };

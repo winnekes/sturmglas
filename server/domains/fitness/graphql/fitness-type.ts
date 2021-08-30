@@ -2,11 +2,8 @@ import { Field, Int, ObjectType } from "type-graphql";
 
 @ObjectType()
 class DatasetOutputType {
-  @Field(type => Int)
-  yesterday!: number;
-
-  @Field(type => Int)
-  today!: number;
+  @Field(type => Int, { nullable: true })
+  today!: number | undefined;
 }
 
 @ObjectType()

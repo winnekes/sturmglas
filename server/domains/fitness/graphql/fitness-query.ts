@@ -12,6 +12,11 @@ export class FitnessQuery {
     if (!context.authId || !context.user) {
       throw new Error("No user set on context");
     }
+
+    if (!context.user.refreshToken) {
+      throw new Error("User has not granted access to Google Fitness");
+    }
+
     try {
       const heartRate = await getHeartRate(context.user.refreshToken);
       const steps = await getSteps(context.user.refreshToken);
@@ -23,8 +28,8 @@ export class FitnessQuery {
         return (row.fpVal as number) || 0;
       };
       return {
-        steps: { today: 0, yesterday: 0 },
-        heartRate: { today: 0, yesterday: 0 },
+        steps: { today: heartRate },
+        heartRate: { today: steps },
       };
     } catch (e) {
       console.log({ e });
