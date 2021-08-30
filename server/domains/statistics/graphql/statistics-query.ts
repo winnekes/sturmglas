@@ -25,16 +25,15 @@ export class StatisticsQuery {
       relations: ["moods"],
     });
 
-    console.log({ tags });
+    const emotionKeys = Object.keys(Emotion).map(key => key) as Emotion[];
 
     const moodCounts = moods.reduce((allMoods, currentMood) => {
       const existingMood = allMoods.find(mood => mood.emotion === currentMood.emotion);
       if (existingMood) {
         existingMood.count++;
-      } else allMoods.push({ emotion: currentMood.emotion, count: 1 });
+      } else allMoods.push({ emotion: currentMood.emotion as Emotion, count: 1 });
       return allMoods;
     }, [] as Array<{ emotion: Emotion; count: number }>);
-    const emotionKeys = Object.keys(Emotion).map(key => key) as Emotion[];
 
     for (const key of emotionKeys) {
       if (!moodCounts.find(mood => mood.emotion === key)) {

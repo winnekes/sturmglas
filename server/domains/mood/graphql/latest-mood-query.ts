@@ -10,7 +10,7 @@ export class LatestMoodQuery {
 
   @Authorized()
   @Query(returns => MoodType, { nullable: true })
-  async latestMood(@Ctx() context: ServerContext): Promise<MoodType | undefined> {
+  async latestMood(@Ctx() context: ServerContext): Promise<Mood | undefined> {
     if (!context.authId || !context.user) {
       throw new Error("No user set on context");
     }

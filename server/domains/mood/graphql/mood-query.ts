@@ -16,7 +16,7 @@ export class MoodQuery {
 
   @Authorized()
   @Query(returns => MoodType)
-  mood(@Args() args: GetMoodArgs, @Ctx() context: ServerContext): Promise<MoodType | undefined> {
+  mood(@Args() args: GetMoodArgs, @Ctx() context: ServerContext): Promise<Mood | undefined> {
     if (!context.authId || !context.user) {
       throw new Error("No user set on context");
     }
