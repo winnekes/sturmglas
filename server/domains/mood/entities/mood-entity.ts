@@ -26,11 +26,7 @@ export class Mood {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @IsEnum(Emotion)
-  @Column({
-    type: "enum",
-    enum: Emotion,
-  })
+  @Column("text")
   emotion!: Emotion;
 
   @IsDate()
