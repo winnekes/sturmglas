@@ -46,7 +46,7 @@ export const ShareMoodModal: FunctionComponent<Props> = ({ mood, onClose }) => {
 
     EI?.current
       .toPng(componentRef?.current, { cacheBust: true })
-      .then(dataUrl => {
+      .then((dataUrl: string) => {
         const link = document.createElement("a");
         link.download = "sturmglas.png";
         link.href = dataUrl;
