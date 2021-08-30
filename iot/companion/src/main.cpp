@@ -219,7 +219,6 @@ int faces = 0;
 void drawFace() {
     faces = buf[0];
     if (currentFace >= faces) {
-        delete buf;
         buf = face.getData();
 
         faces = buf[0];
