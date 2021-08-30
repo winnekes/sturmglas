@@ -44,10 +44,10 @@ export const ShareMoodModal: FunctionComponent<Props> = ({ mood, onClose }) => {
       return;
     }
     EI?.current
-      .toPng(componentRef?.current, { cacheBust: true, style: { fontFamily: "Nunito" } })
+      .toJpeg(componentRef?.current, { cacheBust: true, style: { fontFamily: "Nunito" } })
       .then((dataUrl: any) => {
         const link = document.createElement("a");
-        link.download = "sturmglas.png";
+        link.download = "sturmglas.jpeg";
         link.href = dataUrl;
         link.click();
       });
