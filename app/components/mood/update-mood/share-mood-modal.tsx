@@ -44,17 +44,12 @@ export const ShareMoodModal: FunctionComponent<Props> = ({ mood, onClose }) => {
       return;
     }
 
-    EI?.current
-      .toPng(componentRef?.current, { cacheBust: true })
-      .then((dataUrl: any) => {
-        const link = document.createElement("a");
-        link.download = "sturmglas.png";
-        link.href = dataUrl;
-        link.click();
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    EI?.current.toPng(componentRef?.current, { cacheBust: true }).then((dataUrl: any) => {
+      const link = document.createElement("a");
+      link.download = "sturmglas.png";
+      link.href = dataUrl;
+      link.click();
+    });
   }, [componentRef]);
 
   return (
@@ -99,6 +94,7 @@ const ComponentToPrint = forwardRef<HTMLDivElement, { mood: MoodsQuery["moods"][
             width="300px"
             priority={true}
             quality={100}
+            alt="Image of emotional cloud"
           />
           <Panel>
             <Subheading fontSize="xs" color="gray.500">
@@ -106,7 +102,7 @@ const ComponentToPrint = forwardRef<HTMLDivElement, { mood: MoodsQuery["moods"][
             </Subheading>
             <Flex mb={4} spacing={4} justifyContent="center" flexWrap="wrap">
               {props.mood.tags?.map(tag => (
-                <Tag bg="gray.700" color="gray.500" mr={1} mb={1}>
+                <Tag key={tag.name} bg="gray.700" color="gray.500" mr={1} mb={1}>
                   {tag.name}
                 </Tag>
               ))}

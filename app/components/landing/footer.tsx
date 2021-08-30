@@ -1,13 +1,4 @@
-import {
-  Box,
-  chakra,
-  Container,
-  Link,
-  Stack,
-  Text,
-  useColorModeValue,
-  VisuallyHidden,
-} from "@chakra-ui/react";
+import { Box, chakra, Container, Link, Stack, Text, VisuallyHidden } from "@chakra-ui/react";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { ReactNode } from "react";
 import Image from "next/image";
@@ -56,7 +47,7 @@ export const Footer = () => {
         </Box>
       </Container>
 
-      <Box borderTopWidth={1} borderStyle="solid">
+      <Box borderTopWidth={1} borderStyle="solid" borderColor="gray.800">
         <Container
           as={Stack}
           maxW="6xl"
@@ -66,18 +57,13 @@ export const Footer = () => {
           justify={{ base: "center", md: "space-between" }}
           align={{ base: "center", md: "center" }}
         >
-          <Text>© 2021 sturmglas. Made by Simona. All rights reserved</Text>
-          <Stack direction="row" spacing={6}>
-            <SocialButton label="Twitter" href="#">
-              <FaTwitter />
-            </SocialButton>
-            <SocialButton label="YouTube" href="#">
-              <FaYoutube />
-            </SocialButton>
-            <SocialButton label="Instagram" href="#">
-              <FaInstagram />
-            </SocialButton>
-          </Stack>
+          <Text>
+            © 2021 sturmglas. Made by{" "}
+            <Link href="https://winnekes.com" isExternal>
+              @winnekes
+            </Link>
+            . All rights reserved
+          </Text>
         </Container>
       </Box>
     </Box>
