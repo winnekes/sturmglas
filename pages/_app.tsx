@@ -10,6 +10,9 @@ import { ChakraProvider, Progress, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client";
 import { createNetworkStatusNotifier } from "react-apollo-network-status";
+import { Chart } from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
+Chart.register(ChartDataLabels);
 
 const { link, useApolloNetworkStatus } = createNetworkStatusNotifier();
 
