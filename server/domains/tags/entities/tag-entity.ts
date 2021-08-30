@@ -15,7 +15,7 @@ export class Tag {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column("text", { unique: true })
+  @Column("text")
   name!: string;
 
   @Column("text", { default: "" })
