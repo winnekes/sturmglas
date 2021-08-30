@@ -34,7 +34,7 @@ export class EditMoodMutation {
   async editMood(
     @Arg("data") data: EditMoodInputType,
     @Ctx() context: ServerContext
-  ): Promise<MoodType> {
+  ): Promise<Mood> {
     if (!context.authId || !context.user) {
       throw new Error("No user set on context");
     }
