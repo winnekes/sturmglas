@@ -219,9 +219,12 @@ int faces = 0;
 void drawFace() {
     faces = buf[0];
     if (currentFace >= faces) {
+        delete buf;
         buf = face.getData();
+
         faces = buf[0];
         pref.putBytes(CFG_STATE, buf, 3 + faces*bitmapLength/8);
+        pref.putInt(CFG_STATE_LEN, 3 + faces*bitmapLength/8);
         refreshRate = buf[1] << 8 | buf[2];
         currentFace = 0;
     }
