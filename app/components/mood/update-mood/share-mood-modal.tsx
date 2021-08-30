@@ -31,7 +31,7 @@ type Props = {
 
 export const ShareMoodModal: FunctionComponent<Props> = ({ mood, onClose }) => {
   const componentRef = useRef<HTMLDivElement>(null);
-  const EI = useRef<typeof any | undefined>();
+  const EI = useRef<any | undefined>();
 
   useEffect(() => {
     if (typeof window !== undefined) {
