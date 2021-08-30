@@ -3,6 +3,8 @@ import {
   Button,
   Flex,
   Heading,
+  HStack,
+  Icon,
   Modal,
   ModalBody,
   ModalContent,
@@ -14,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import React, { forwardRef, FunctionComponent, useEffect, useRef, useCallback } from "react";
+import { AiFillHeart } from "react-icons/ai";
 import { colors } from "../../../styles/theme";
 import { MoodsQuery } from "../../../types/graphql";
 import { emotions } from "../../../types/mood";
@@ -116,6 +119,12 @@ const ComponentToPrint = forwardRef<HTMLDivElement, { mood: MoodsQuery["moods"][
               right now
             </Heading>
             <Text whiteSpace="pre-wrap">{props.mood.description}</Text>
+            <Flex justifyContent="flex-end" w="full" mt={5} fontSize="sm">
+              <HStack>
+                <Text>made with</Text> <Icon as={AiFillHeart} color="red" /> <Text>by</Text>{" "}
+                <strong>sturmglas.com</strong>
+              </HStack>
+            </Flex>
           </Panel>
         </Box>
       </div>
