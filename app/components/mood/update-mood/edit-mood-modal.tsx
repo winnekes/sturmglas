@@ -13,7 +13,10 @@ import { FunctionComponent, useState } from "react";
 import { useBluetooth } from "../../../hooks/use-bluetooth";
 import {
   Emotion,
+  LatestMoodDocument,
+  MoodsDocument,
   MoodsQuery,
+  TagsDocument,
   useAddMoodMutation,
   useEditMoodMutationMutation,
 } from "../../../types/graphql";
@@ -37,7 +40,7 @@ export const EditMoodModal: FunctionComponent<Props> = ({ mood, onClose }) => {
   const [formStep, setFormStep] = useState(1);
 
   const [mutate] = useEditMoodMutationMutation({
-    refetchQueries: ["Moods", "LatestMood"],
+    refetchQueries: [LatestMoodDocument, MoodsDocument, TagsDocument],
   });
 
   const editMood = async () => {

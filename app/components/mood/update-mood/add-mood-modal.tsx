@@ -11,7 +11,13 @@ import {
 } from "@chakra-ui/react";
 import { FunctionComponent, useState } from "react";
 import { useBluetooth } from "../../../hooks/use-bluetooth";
-import { Emotion, useAddMoodMutation } from "../../../types/graphql";
+import {
+  Emotion,
+  LatestMoodDocument,
+  MoodsDocument,
+  TagsDocument,
+  useAddMoodMutation,
+} from "../../../types/graphql";
 import { emotions } from "../../../types/mood";
 
 import { SetEmotionView } from "./set-emotion-view";
@@ -29,7 +35,7 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
   const [formStep, setFormStep] = useState(1);
 
   const [mutate] = useAddMoodMutation({
-    refetchQueries: ["Moods", "LatestMood"],
+    refetchQueries: [LatestMoodDocument, MoodsDocument, TagsDocument],
   });
 
   const addMood = async () => {

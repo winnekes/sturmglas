@@ -33,10 +33,10 @@ const ApolloApp: FunctionComponent = ({ children }) => {
 
   useEffect(() => {
     !toast.isActive(toastId) &&
-      status.queryError &&
+      (status.queryError || status.mutationError) &&
       toast({
         title: "Something went wrong",
-        description: "Please try again",
+        description: "Please try again or let the team know if the error persists.",
         status: "error",
         duration: 9000,
         isClosable: true,

@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { Button, AlertDialog } from "@chakra-ui/react";
 import { FunctionComponent, useRef } from "react";
-import { MoodsDocument, useDeleteMoodMutation } from "../../../types/graphql";
+import { LatestMoodDocument, MoodsDocument, useDeleteMoodMutation } from "../../../types/graphql";
 
 type Props = {
   moodId: number;
@@ -21,15 +21,7 @@ export const ConfirmDeleteMoodModal: FunctionComponent<Props> = ({
 }) => {
   const leastDestructiveRef = useRef<HTMLButtonElement>(null);
   const [mutate, { loading }] = useDeleteMoodMutation({
-    // refetchQueries: [LatestMoodDocument, MoodsDocument],
-    update(cache, { data }) {
-      const existingMoods: any = cache.readQuery({ query: MoodsDocument });
-      const newMoods = existingMoods!.moods.filter((mood: any) => mood.id !== moodId);
-      cache.writeQuery({
-        query: MoodsDocument,
-        data: { moods: existingMoods },
-      });
-    },
+    refetchQueries: [LatestMoodDocument, MoodsDocument],
   });
 
   const deleteMood = async () => {

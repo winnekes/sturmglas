@@ -97,7 +97,9 @@ export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
           {data?.profile.settings.hasCompanion && (
             <Box position="absolute" bottom={0} pb={10} w="full">
               <Divider my={5} />
-              <Text fontWeight="bold">Your companion, {bluetooth.deviceName}</Text>
+              <Text fontWeight="bold">
+                Your companion{bluetooth.deviceName && <>, {bluetooth.deviceName} </>}
+              </Text>
               <Text>
                 <strong>Status</strong>: {bluetooth.state.connected ? "connected" : "disconnected"}
               </Text>
