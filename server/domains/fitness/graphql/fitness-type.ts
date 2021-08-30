@@ -1,8 +1,8 @@
-import { Field, Int, ObjectType } from "type-graphql";
+import { Field, Float, ObjectType } from "type-graphql";
 
 @ObjectType()
 class DatasetOutputType {
-  @Field(type => Int, { nullable: true })
+  @Field(type => Float, { nullable: true })
   today!: number | undefined;
 }
 

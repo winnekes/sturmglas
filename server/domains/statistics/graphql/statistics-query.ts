@@ -3,7 +3,7 @@ import { getRepository, Repository } from "typeorm";
 import { ServerContext } from "../../../context";
 import { Emotion, Mood } from "../../mood/entities/mood-entity";
 import { Tag } from "../../tags/entities/tag-entity";
-import { MoodCountType, StatisticsType } from "./statistics-type";
+import { StatisticsType } from "./statistics-type";
 
 type EmotionKey = keyof typeof Emotion;
 
@@ -19,10 +19,12 @@ export class StatisticsQuery {
       throw new Error("No user set on context");
     }
 
-    const moods = await this.moodRepository.find({ where: { user: context.user } });
+    const moods = await this.moodRepository.find({
+      where: { user: context.user },
+      relations: ["tags"],
+    });
     const tags = await this.tagRepository.find({
       where: { user: context.user },
-      relations: ["moods"],
     });
 
     const emotionKeys = Object.keys(Emotion).map(key => key) as Emotion[];
@@ -35,13 +37,25 @@ export class StatisticsQuery {
       return allMoods;
     }, [] as Array<{ emotion: Emotion; count: number }>);
 
+    const tagUsageCounts = tags.map(tag => ({ tag: tag.name, count: 0 }));
+
     for (const key of emotionKeys) {
       if (!moodCounts.find(mood => mood.emotion === key)) {
         moodCounts.push({ emotion: key, count: 0 });
       }
     }
 
+    moods.map(mood =>
+      mood.tags.map(tag => {
+        const tagCount = tagUsageCounts.find(tagCount => tagCount.tag === tag.name);
+        tagCount && tagCount.count++;
+        return tag;
+      })
+    );
+
     moodCounts.sort((a, b) => (a.count === b.count ? 0 : a.count > b.count ? -1 : 1));
-    return { moodCounts };
+    tagUsageCounts.sort((a, b) => (a.count === b.count ? 0 : a.count > b.count ? -1 : 1));
+    console.log({ moodCounts, tagUsageCounts });
+    return { moodCounts, tagUsageCounts };
   }
 }

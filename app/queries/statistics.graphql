@@ -4,6 +4,10 @@ query Statistics {
       count
       emotion
     }
+    tagUsageCounts {
+      tag
+      count
+    }
   }
   profile {
     id

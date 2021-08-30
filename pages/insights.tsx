@@ -16,6 +16,7 @@ import { PageWrapper } from "../app/components/generic/page-wrapper";
 import { Panel } from "../app/components/generic/panel";
 import { Subheading } from "../app/components/generic/text/subheading";
 import { MoodRadar } from "../app/components/insights/mood-radar";
+import { WordCloud } from "../app/components/insights/word-cloud";
 import { Emotion, useStatisticsQuery } from "../app/types/graphql";
 import { EmotionDescription, Emotions, emotions } from "../app/types/mood";
 import Image from "next/image";
@@ -77,6 +78,7 @@ export default function Insights() {
               )}
             </Stack>
             <MoodRadar moodCounts={data.statistics.moodCounts} />
+            <WordCloud tagUsageCounts={data.statistics.tagUsageCounts} />
           </>
         )}
       </Panel>

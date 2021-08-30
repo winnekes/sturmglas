@@ -27,8 +27,7 @@ export type AddMoodInputType = {
 
 export type DatasetOutputType = {
   __typename?: 'DatasetOutputType';
-  yesterday: Scalars['Int'];
-  today: Scalars['Int'];
+  today?: Maybe<Scalars['Int']>;
 };
 
 
@@ -132,6 +131,13 @@ export type SaveRefreshTokenInputType = {
 export type StatisticsType = {
   __typename?: 'StatisticsType';
   moodCounts: Array<MoodCountType>;
+  tagUsageCounts: Array<TagCountType>;
+};
+
+export type TagCountType = {
+  __typename?: 'TagCountType';
+  tag: Emotion;
+  count: Scalars['Int'];
 };
 
 export type TagInputType = {
@@ -187,7 +193,7 @@ export type EditMoodMutationMutation = { __typename?: 'Mutation', editMood: { __
 export type FitnessQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FitnessQueryQuery = { __typename?: 'Query', fitness: { __typename?: 'FitnessType', steps: { __typename?: 'DatasetOutputType', today: number, yesterday: number }, heartRate: { __typename?: 'DatasetOutputType', today: number, yesterday: number } } };
+export type FitnessQueryQuery = { __typename?: 'Query', fitness: { __typename?: 'FitnessType', steps: { __typename?: 'DatasetOutputType', today?: Maybe<number> }, heartRate: { __typename?: 'DatasetOutputType', today?: Maybe<number> } } };
 
 export type LatestMoodQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -204,7 +210,7 @@ export type MoodQuery = { __typename?: 'Query', mood: { __typename?: 'MoodType',
 export type MoodsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MoodsQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any, tags?: Maybe<Array<{ __typename?: 'TagType', id: number, name: string }>> }>, latestMood?: Maybe<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any, tags?: Maybe<Array<{ __typename?: 'TagType', id: number, name: string }>> }>, profile: { __typename?: 'UserType', id: number, nickname?: Maybe<string>, settings: any, refreshToken: string, longestStreak: number, currentStreak: number }, fitness: { __typename?: 'FitnessType', steps: { __typename?: 'DatasetOutputType', today: number, yesterday: number }, heartRate: { __typename?: 'DatasetOutputType', today: number, yesterday: number } } };
+export type MoodsQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any, tags?: Maybe<Array<{ __typename?: 'TagType', id: number, name: string }>> }>, latestMood?: Maybe<{ __typename?: 'MoodType', id: number, emotion: Emotion, description: string, date: any, tags?: Maybe<Array<{ __typename?: 'TagType', id: number, name: string }>> }>, profile: { __typename?: 'UserType', id: number, nickname?: Maybe<string>, settings: any, refreshToken: string, longestStreak: number, currentStreak: number }, fitness: { __typename?: 'FitnessType', steps: { __typename?: 'DatasetOutputType', today?: Maybe<number> }, heartRate: { __typename?: 'DatasetOutputType', today?: Maybe<number> } } };
 
 export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -221,7 +227,7 @@ export type SaveRefreshTokenMutation = { __typename?: 'Mutation', saveRefreshTok
 export type StatisticsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type StatisticsQuery = { __typename?: 'Query', statistics: { __typename?: 'StatisticsType', moodCounts: Array<{ __typename?: 'MoodCountType', count: number, emotion: Emotion }> }, profile: { __typename?: 'UserType', id: number, nickname?: Maybe<string>, pictureUrl: string, refreshToken: string, settings: any, longestStreak: number, currentStreak: number } };
+export type StatisticsQuery = { __typename?: 'Query', statistics: { __typename?: 'StatisticsType', moodCounts: Array<{ __typename?: 'MoodCountType', count: number, emotion: Emotion }>, tagUsageCounts: Array<{ __typename?: 'TagCountType', tag: Emotion, count: number }> }, profile: { __typename?: 'UserType', id: number, nickname?: Maybe<string>, pictureUrl: string, refreshToken: string, settings: any, longestStreak: number, currentStreak: number } };
 
 export type TagsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -344,11 +350,9 @@ export const FitnessQueryDocument = gql`
   fitness {
     steps {
       today
-      yesterday
     }
     heartRate {
       today
-      yesterday
     }
   }
 }
@@ -487,11 +491,9 @@ export const MoodsDocument = gql`
   fitness {
     steps {
       today
-      yesterday
     }
     heartRate {
       today
-      yesterday
     }
   }
 }
@@ -601,6 +603,10 @@ export const StatisticsDocument = gql`
     moodCounts {
       count
       emotion
+    }
+    tagUsageCounts {
+      tag
+      count
     }
   }
   profile {

@@ -1,6 +1,5 @@
 import GraphQLJSON from "graphql-type-json";
 import { Field, Int, ObjectType } from "type-graphql";
-import { Column } from "typeorm";
 import { UserSettings } from "../entities/user-entity";
 
 @ObjectType()

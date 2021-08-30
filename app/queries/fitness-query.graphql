@@ -2,11 +2,9 @@ query FitnessQuery {
   fitness {
     steps {
       today
-      yesterday
     }
     heartRate {
       today
-      yesterday
     }
   }
 }

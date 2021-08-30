@@ -18,16 +18,14 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { MutableRefObject } from "react";
-
 import { MdBluetoothDisabled, MdBluetoothConnected } from "react-icons/md";
 import { useBluetooth } from "../../hooks/use-bluetooth";
 import { useTimeOfDay } from "../../hooks/use-time-of-day";
 import { colors } from "../../styles/theme";
 import { useProfileQuery } from "../../types/graphql";
-import { FitnessLogin } from "../fitness-login";
 import { ErrorAlert } from "../generic/error-alert";
 import { Loading } from "../generic/loading";
-import { authNavigationItems, openNavigationItems } from "./navigation";
+import { authNavigationItems } from "./navigation";
 import Link from "next/link";
 import React from "react";
 
@@ -110,8 +108,8 @@ export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
                   mt={2}
                   leftIcon={<MdBluetoothConnected />}
                   variant="primary"
-                  w="full"
                   onClick={bluetooth.connect}
+                  w="80%"
                 >
                   Connect
                 </Button>
@@ -122,13 +120,13 @@ export const DrawerMenu = ({ finalFocusRef, isOpen, onClose }: Props) => {
                   leftIcon={<MdBluetoothDisabled />}
                   variant="primary"
                   onClick={bluetooth.disconnect}
+                  w="80%"
                 >
                   Disconnect
                 </Button>
               )}
             </Box>
           )}
-          {data?.profile.settings.hasGoogleFitness && <FitnessLogin />}
         </DrawerBody>
       </DrawerContent>
     </Drawer>

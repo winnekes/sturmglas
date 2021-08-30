@@ -22,12 +22,7 @@ export const FitnessLogin = () => {
       clientId={process.env.NEXT_PUBLIC_GOOGLE_FITNESS_CLIENT_ID || ""}
       buttonText="Login"
       render={renderProps => (
-        <Button
-          onClick={renderProps.onClick}
-          disabled={renderProps.disabled}
-          variant="primary"
-          w="100%"
-        >
+        <Button onClick={renderProps.onClick} disabled={renderProps.disabled} variant="primary">
           Sign into Google Fitness and allow access (required)
         </Button>
       )}
@@ -35,12 +30,10 @@ export const FitnessLogin = () => {
       responseType="code"
       onSuccess={responseGoogle}
       onFailure={responseGoogle}
-      cookiePolicy={"single_host_origin"}
+      cookiePolicy="single_host_origin"
       isSignedIn={true}
       prompt="consent"
-      scope={
-        "https://www.googleapis.com/auth/fitness.activity.read https://www.googleapis.com/auth/fitness.heart_rate.read https://www.googleapis.com/auth/fitness.sleep.read"
-      }
+      scope="https://www.googleapis.com/auth/fitness.activity.read https://www.googleapis.com/auth/fitness.heart_rate.read https://www.googleapis.com/auth/fitness.sleep.read"
     />
   );
 };
