@@ -35,10 +35,7 @@ export class AddMoodMutation {
 
   @Authorized()
   @Mutation(returns => MoodType)
-  async addMood(
-    @Arg("data") data: AddMoodInputType,
-    @Ctx() context: ServerContext
-  ): Promise<MoodType> {
+  async addMood(@Arg("data") data: AddMoodInputType, @Ctx() context: ServerContext): Promise<Mood> {
     if (!context.authId || !context.user) {
       throw new Error("No user set on context");
     }
