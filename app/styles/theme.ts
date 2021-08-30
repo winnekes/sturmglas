@@ -8,8 +8,8 @@ export const colors = {
   },
   text01: "#d9d9d9",
   text02: "#ffffff",
-  brand01: "#704573",
-  brand02: "#49244b",
+  brand01: "#b70d67",
+  brand02: "#790851",
 };
 
 export const width = ["100%", "container.lg"];
@@ -39,13 +39,14 @@ export const theme = extendTheme({
     },
     Button: {
       baseStyle: {
+        color: "white",
         _hover: {
           bg: colors.brand02,
         },
       },
       variants: {
         primary: {
-          bg: colors.ui.background01,
+          bg: colors.brand01,
           marginLeft: "10px",
           __hover: {
             bg: colors.brand02,

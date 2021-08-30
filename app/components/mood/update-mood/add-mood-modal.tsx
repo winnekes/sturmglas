@@ -17,8 +17,11 @@ import {
   MoodsDocument,
   TagsDocument,
   useAddMoodMutation,
+  useTagsQuery,
 } from "../../../types/graphql";
 import { emotions } from "../../../types/mood";
+import { ErrorAlert } from "../../generic/error-alert";
+import { Loading } from "../../generic/loading";
 
 import { SetEmotionView } from "./set-emotion-view";
 import { SetMoodContext } from "./set-mood-context";
@@ -28,6 +31,8 @@ type Props = {
 export type TagInput = { name: string };
 
 export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
+  const { data, error, loading } = useTagsQuery();
+
   const bluetooth = useBluetooth();
   const [selectedEmotion, setSelectedEmotion] = useState<Emotion | null>(null);
   const [note, setNote] = useState("");
@@ -67,15 +72,22 @@ export const AddMoodModal: FunctionComponent<Props> = ({ onClose }) => {
         <ModalHeader>{formStep === 1 ? "How are you?" : "Give a bit of context"}</ModalHeader>
 
         <ModalBody as={Flex} direction="column" justifyContent="center">
-          {formStep === 1 ? (
-            <SetEmotionView selectedEmotion={selectedEmotion} setEmotion={setSelectedEmotion} />
-          ) : (
-            <SetMoodContext
-              note={note}
-              setNote={setNote}
-              selectedTags={selectedTags}
-              setSelectedTags={setSelectedTags}
-            />
+          {loading && <Loading />}
+          {error && <ErrorAlert />}
+          {data && (
+            <>
+              {formStep === 1 ? (
+                <SetEmotionView selectedEmotion={selectedEmotion} setEmotion={setSelectedEmotion} />
+              ) : (
+                <SetMoodContext
+                  note={note}
+                  setNote={setNote}
+                  selectedTags={selectedTags}
+                  setSelectedTags={setSelectedTags}
+                  tags={data.tags}
+                />
+              )}
+            </>
           )}
         </ModalBody>
         <ModalFooter>

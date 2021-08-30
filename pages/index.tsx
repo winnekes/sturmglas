@@ -82,7 +82,7 @@ export default function Home() {
             objectFit="cover"
           />
         </Flex>
-      </>
+      </SimpleGrid>
 
       <SimpleGrid columns={{ base: 1, md: 2 }}>
         <Flex>
