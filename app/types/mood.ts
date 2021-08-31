@@ -2,7 +2,7 @@ import { Emotion, MoodsQuery } from "./graphql";
 
 export type SplitMoods = {
   name: number;
-  months: Array<{ name: string; moods: MoodsQuery["moods"] }>;
+  months: Array<{ name: string; order: number; moods: MoodsQuery["moods"] }>;
 }[];
 
 export type EmotionDescription = {
