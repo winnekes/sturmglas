@@ -1,10 +1,26 @@
 # sturmglas
 
-Track your mental weather.
+Track your mental weather with the help of a Companion. An open-source project.
 
-# Get started
+# Getting started
 
-# Technologies
+## Requirements
+- Nodejs > 12
+- Docker and Docker Compose
+
+
+## Environment variables
+Use the following command to create a copy of the `.env.example`:
+```sh
+cp .env.example .env.local
+```
+
+# Start dev enviroment
+```sh
+npm run dev:start-services # This will initialise a Postgres instance
+npm run dev # Start the Next.js server
+npm run graphql:generate # Start the graphql-codegen in watch mode, necessary when making changes to queries and mutations
+```
 
 # Directory structure
 
@@ -51,4 +67,7 @@ Track your mental weather.
 
 ```
 
-#
+# Contributing
+- See [License](LICENSE.md)
+- See [Contributing](CONTRIBUTING.md)
+- See [Code of Conduct](CODE_OF_CONDUCT.md)
