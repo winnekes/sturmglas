@@ -9,7 +9,6 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { ReactElement } from "react";
-import { IoLogoBitcoin } from "react-icons/io";
 
 export const Features = () => {
   const isMobile = useBreakpointValue({ base: true, lg: false });
@@ -19,7 +18,7 @@ export const Features = () => {
         Features
       </Heading>
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10} mb="100px">
-        <Stack spacing={4} order={isMobile ? 1 : 0}>
+        <Stack spacing={4} order={isMobile ? 1 : 0} justifyContent="center">
           <Text
             textTransform="uppercase"
             color="purple.400"
@@ -36,7 +35,8 @@ export const Features = () => {
             Sometimes you just want to curl up with a book, or stare out of a window and be alone in
             your thoughts. Your companion is a personalized device that's connected to you and your
             moods. Look at it as a reflection of yourself and as a way to communicate with the
-            outside world without words. Your companion comes in various forms and colors!
+            outside world without words. Your <strong>Companion</strong> comes in various forms and
+            colors!
           </Text>
         </Stack>
         <Flex justify="center">
@@ -48,7 +48,7 @@ export const Features = () => {
         <Flex justify="center">
           <Image src="/landing/timeline.png" alt=" " borderRadius="25px" />
         </Flex>
-        <Stack spacing={4}>
+        <Stack spacing={4} justifyContent="center">
           <Text
             textTransform="uppercase"
             color="purple.400"
@@ -62,15 +62,14 @@ export const Features = () => {
           </Text>
           <Heading>Take a moment to meditate on your thoughts</Heading>
           <Text fontSize="lg">
-            Life gets hectic and crowded, and it's hard to catch a break. The Oasis is a place of
-            solace - to sit down, take a deep breath, think and note down your current mood before
-            you are called to action again.
+            Life gets hectic and crowded, and it's hard to catch a break. The <strong>Oasis</strong>{" "}
+            is a place of solace - to sit down, take a deep breath, think and note down your current
+            mood before you are called to action again.
           </Text>
-          <Stack spacing={4}></Stack>
         </Stack>
       </SimpleGrid>
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10} mb="100px">
-        <Stack spacing={4} order={isMobile ? 1 : 0}>
+        <Stack spacing={4} order={isMobile ? 1 : 0} justifyContent="center">
           <Text
             textTransform="uppercase"
             color="purple.400"
@@ -86,8 +85,8 @@ export const Features = () => {
           <Text fontSize="lg">
             It's not easy to remember feelings and tracking what's been bothering you when you're
             caught up in the middle of it. It's best to reflect when you're calm, and take positive
-            action instead of a rushed reaction. The Weathervane shows you how you've been doing and
-            what makes you happy and what gets you down.
+            action instead of a rushed reaction. The <strong>Weathervane</strong> shows you how
+            you've been doing and what makes you happy and what gets you down.
           </Text>
         </Stack>
         <Flex justify="center">
@@ -99,7 +98,7 @@ export const Features = () => {
         <Flex justify="center">
           <Image src="/landing/share-mood.png" alt=" " borderRadius="25px" />
         </Flex>
-        <Stack spacing={4}>
+        <Stack spacing={4} justifyContent="center">
           <Text
             textTransform="uppercase"
             color="purple.400"
@@ -113,10 +112,9 @@ export const Features = () => {
           </Text>
           <Heading>Spread the love ❤️</Heading>
           <Text fontSize="lg">
-            Feeling proud? Excited? Loved? Let the world know! Share the moment with your loved
-            ones!
+            Feeling proud? Excited? Loved? Let the world know!{" "}
+            <strong>Share the moment with your loved ones!</strong>
           </Text>
-          <Stack spacing={4}></Stack>
         </Stack>
       </SimpleGrid>
     </>
