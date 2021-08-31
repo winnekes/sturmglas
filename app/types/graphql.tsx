@@ -70,8 +70,8 @@ export type MoodType = {
   emotion: Emotion;
   date: Scalars['DateTime'];
   description: Scalars['String'];
-  createdAt: Scalars['DateTime'];
   tags?: Maybe<Array<TagType>>;
+  createdAt: Scalars['DateTime'];
 };
 
 export type Mutation = {
