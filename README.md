@@ -39,16 +39,16 @@ npm run graphql:generate # Start the graphql-codegen in watch mode, necessary wh
 │   ├── styles
 │   ├── types
 │   └── utils
-├── iot                            # For the hardware, 3d models and companion code
+├── iot                          # For the hardware, 3d models and companion code
 │   ├── companion
 │   │   └── src
 │   └── models
 ├── pages
-│   └── api                 # Auth0 and GraphQL endpoint
+│   └── api                      # Auth0 and GraphQL endpoint
 │       └── auth           
 ├── public
 │
-└── server                        # All server logic, sorted by domains
+└── server                       # All server logic, sorted by domains
     ├── domains
     │   ├── fitness
     │   │   └── graphql
