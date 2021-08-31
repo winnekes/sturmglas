@@ -12,6 +12,7 @@ type Props = {
   pageSubtitle?: string;
   hideNavigation?: boolean;
   showFooter?: boolean;
+  fullWidth?: boolean;
 };
 
 export const PageWrapper: FunctionComponent<Props> = ({ children, ...props }) => {
@@ -26,7 +27,7 @@ export const PageWrapper: FunctionComponent<Props> = ({ children, ...props }) =>
 const DesktopPageWrapper: FunctionComponent<Props> = ({ children, ...props }) => {
   return (
     <Box display={{ base: "none", sm: "none", md: "none", lg: "block" }}>
-      <Container maxW={width} py={[6]}>
+      <Container maxW={props.fullWidth ? "70%" : width} py={[6]}>
         {!props.hideNavigation && <DesktopNavigation />}
         <Box mx={spacing}>
           <Title>{props.pageTitle}</Title>

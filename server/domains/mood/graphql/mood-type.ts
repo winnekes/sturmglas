@@ -18,6 +18,9 @@ export class MoodType {
   @Field()
   description!: string;
 
+  @Field(type => [TagType], { nullable: true })
+  tags!: TagType[];
+
   @Field()
   createdAt!: Date;
 }
