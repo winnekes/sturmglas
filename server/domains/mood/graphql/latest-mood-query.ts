@@ -16,7 +16,7 @@ export class LatestMoodQuery {
     }
 
     return this.moodRepository.findOne({
-      relations: ["user"],
+      relations: ["user", "tags"],
       where: { user: { authId: context.authId } },
       order: { date: "DESC" },
     });

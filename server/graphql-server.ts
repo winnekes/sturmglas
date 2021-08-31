@@ -27,7 +27,7 @@ export const startGraphqlServer = async (req: IncomingMessage, res: ServerRespon
     ProfileQuery,
     StatisticsQuery,
     TagsQuery,
-    MoodResolver,
+    // MoodResolver,
   ];
   const mutations: NonEmptyArray<Function> = [
     AddMoodMutation,

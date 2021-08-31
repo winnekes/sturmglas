@@ -16,7 +16,7 @@ export class MoodsQuery {
     }
 
     return this.moodRepository.find({
-      relations: ["user"],
+      relations: ["user", "tags"],
       where: { user: { authId: context.authId } },
     });
   }
