@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { Box, HStack, Icon, Text, VStack, Flex, Heading, Stack } from "@chakra-ui/react";
-import { FcAssistant, FcDonate, FcInTransit } from "react-icons/fc";
+import { FcMindMap, FcDonate, FcInTransit } from "react-icons/fc";
 
 interface FeatureProps {
   title: string;
@@ -10,7 +10,7 @@ interface FeatureProps {
 
 const Feature = ({ title, text, icon }: FeatureProps) => {
   return (
-    <VStack>
+    <VStack flexGrow={1} flexBasis={0}>
       <Flex w={16} h={16} align="center" justify="center" color="white" rounded="full" mb={4}>
         {icon}
       </Flex>
@@ -26,20 +26,28 @@ export const ComingSoonFeatures = () => {
       <Heading as="h2" textAlign="center">
         Coming soon
       </Heading>
-      <Stack direction={["column", "row"]} spacing={10} mt={10} justifyContent="center">
-        <Feature
-          icon={<Icon as={FcAssistant} w={20} h={20} />}
-          title="Lifetime Support"
-          text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore..."
-        />
+      <Stack
+        direction={["column", "row"]}
+        spacing={10}
+        mt={10}
+        flexGrow={1}
+        flexBasis={0}
+        justifyContent="space-between"
+      >
         <Feature
           icon={<Icon as={FcDonate} w={20} h={20} />}
-          title="Unlimited Donations"
-          text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore..."
+          title="Missions"
+          text="sturmglas will actively help you achieve your goals to improve your mental health."
         />
         <Feature
+          icon={<Icon as={FcMindMap} w={20} h={20} />}
+          title="Cocoons"
+          text="Get together with people from all around, create or and join groups, exchange mental health tips and more."
+        />
+
+        <Feature
           icon={<Icon as={FcInTransit} w={20} h={20} />}
-          title="Instant Delivery"
+          title="Habits"
           text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore..."
         />
       </Stack>

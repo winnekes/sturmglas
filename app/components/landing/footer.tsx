@@ -47,7 +47,7 @@ export const Footer = () => {
         </Box>
       </Container>
 
-      <Box borderTopWidth={1} borderStyle="solid" borderColor="gray.800">
+      <Box>
         <Container
           as={Stack}
           maxW="6xl"

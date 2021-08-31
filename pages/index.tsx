@@ -17,6 +17,7 @@ import {
   Image as ChakraImage,
   Icon,
   useBreakpointValue,
+  Image,
 } from "@chakra-ui/react";
 
 export default function Home() {
@@ -38,7 +39,7 @@ export default function Home() {
       <Hero />
 
       <Heading as="h2" textAlign="center">
-        Features coming very soon
+        Features
       </Heading>
 
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10} my="50px">
@@ -52,22 +53,23 @@ export default function Home() {
             alignSelf="flex-start"
             rounded="md"
           >
-            Our Story
+            Feature
           </Text>
-          <Heading>A digital Product design agency</Heading>
+          <Heading>Say hello to your Companion</Heading>
           <Text fontSize="lg">
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
             invidunt ut labore
           </Text>
           <Stack spacing={4}>
             <Feature
-              icon={<Icon as={IoLogoBitcoin} color="yellow.500" w={5} h={5} />}
-              text="Business Planning"
-            />
-            <Feature
               icon={<Icon as={IoLogoBitcoin} color="green.500" w={5} h={5} />}
               text="Financial Planning"
             />
+            <Feature
+              icon={<Icon as={IoLogoBitcoin} color="yellow.500" w={5} h={5} />}
+              text="Business Planning"
+            />
+
             <Feature
               icon={<Icon as={IoLogoBitcoin} color="purple.500" w={5} h={5} />}
               text="Market Analysis"
@@ -75,24 +77,13 @@ export default function Home() {
           </Stack>
         </Stack>
         <Flex>
-          <ChakraImage
-            rounded="md"
-            alt="feature image"
-            src="https://images.unsplash.com/photo-1554200876-56c2f25224fa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-            objectFit="cover"
-          />
+          <Image src="/landing/companion_octo.jpg" alt=" " borderRadius="25px" />
         </Flex>
-      </SimpleGrid>
 
-      <SimpleGrid columns={{ base: 1, md: 2 }}>
         <Flex>
-          <ChakraImage
-            rounded="md"
-            alt="feature image"
-            src="https://images.unsplash.com/photo-1554200876-56c2f25224fa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-            objectFit="cover"
-          />
+          <Image src="/landing/share-mood.jpeg" alt=" " borderRadius="25px" />
         </Flex>
+
         <Stack spacing={4}>
           <Text
             textTransform="uppercase"
@@ -103,22 +94,23 @@ export default function Home() {
             alignSelf="flex-start"
             rounded="md"
           >
-            Our Story
+            Feature
           </Text>
-          <Heading>A digital Product design agency</Heading>
+          <Heading>Say hello to your Companion</Heading>
           <Text fontSize="lg">
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
             invidunt ut labore
           </Text>
           <Stack spacing={4}>
             <Feature
-              icon={<Icon as={IoLogoBitcoin} color="yellow.500" w={5} h={5} />}
-              text="Business Planning"
-            />
-            <Feature
               icon={<Icon as={IoLogoBitcoin} color="green.500" w={5} h={5} />}
               text="Financial Planning"
             />
+            <Feature
+              icon={<Icon as={IoLogoBitcoin} color="yellow.500" w={5} h={5} />}
+              text="Business Planning"
+            />
+
             <Feature
               icon={<Icon as={IoLogoBitcoin} color="purple.500" w={5} h={5} />}
               text="Market Analysis"
@@ -126,6 +118,49 @@ export default function Home() {
           </Stack>
         </Stack>
       </SimpleGrid>
+
+      {/*<SimpleGrid columns={{ base: 1, md: 2 }}>*/}
+      {/*  <Flex>*/}
+      {/*    <ChakraImage*/}
+      {/*      rounded="md"*/}
+      {/*      alt="feature image"*/}
+      {/*      src="https://images.unsplash.com/photo-1554200876-56c2f25224fa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"*/}
+      {/*      objectFit="cover"*/}
+      {/*    />*/}
+      {/*  </Flex>*/}
+      {/*  <Stack spacing={4}>*/}
+      {/*    <Text*/}
+      {/*      textTransform="uppercase"*/}
+      {/*      color="blue.400"*/}
+      {/*      fontWeight={600}*/}
+      {/*      fontSize="sm"*/}
+      {/*      p={2}*/}
+      {/*      alignSelf="flex-start"*/}
+      {/*      rounded="md"*/}
+      {/*    >*/}
+      {/*      Our Story*/}
+      {/*    </Text>*/}
+      {/*    <Heading>A digital Product design agency</Heading>*/}
+      {/*    <Text fontSize="lg">*/}
+      {/*      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor*/}
+      {/*      invidunt ut labore*/}
+      {/*    </Text>*/}
+      {/*    <Stack spacing={4}>*/}
+      {/*      <Feature*/}
+      {/*        icon={<Icon as={IoLogoBitcoin} color="yellow.500" w={5} h={5} />}*/}
+      {/*        text="Business Planning"*/}
+      {/*      />*/}
+      {/*      <Feature*/}
+      {/*        icon={<Icon as={IoLogoBitcoin} color="green.500" w={5} h={5} />}*/}
+      {/*        text="Financial Planning"*/}
+      {/*      />*/}
+      {/*      <Feature*/}
+      {/*        icon={<Icon as={IoLogoBitcoin} color="purple.500" w={5} h={5} />}*/}
+      {/*        text="Market Analysis"*/}
+      {/*      />*/}
+      {/*    </Stack>*/}
+      {/*  </Stack>*/}
+      {/*</SimpleGrid>*/}
 
       <ComingSoonFeatures />
     </PageWrapper>

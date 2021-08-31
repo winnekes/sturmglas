@@ -12,29 +12,28 @@ export const Hero = () => {
             lineHeight="110%"
             mb={10}
           >
-            Track your{" "}
+            Take control of your{" "}
             <Text as="span" color="purple.400">
               mental weather
             </Text>
           </Heading>
           <Text maxW="3xl" fontSize={{ base: "xl", md: "2xl" }}>
-            Never miss a meeting. Never be late for one too. Keep track of your meetings and receive
-            smart reminders in appropriate times. Read your smart “Daily Agenda” every morning.
+            Emotions and feelings are never easy. Sometimes it seems impossible to put into words
+            what's going in your mind.
           </Text>
 
           <Stack spacing={6} direction="row" mb={100}>
-            <Button as={Link} href="/api/auth/login" rounded="full" px={6} variant="primary">
-              Get started
-            </Button>{" "}
             <Button
               as={Link}
               href="/api/auth/login"
               rounded="full"
               px={6}
-              colorScheme="orange"
-              variant="secondary"
-              _hover={{ bg: "orange.500" }}
+              variant="primary"
+              bg="#7fff7f"
             >
+              Get started
+            </Button>{" "}
+            <Button as={Link} href="/api/auth/login" rounded="full" px={6} variant="secondary">
               Login
             </Button>
           </Stack>
