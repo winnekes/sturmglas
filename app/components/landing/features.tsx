@@ -31,14 +31,16 @@ export const Features = () => {
           >
             Companion
           </Text>
-          <Heading>Say Hello to your Companion</Heading>
+          <Heading>Say Hi to your new friend!</Heading>
           <Text fontSize="lg">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-            invidunt ut labore
+            Sometimes you just want to curl up with a book, or stare out of a window and be alone in
+            your thoughts. Your companion is a personalized device that's connected to you and your
+            moods. Look at it as a reflection of yourself and as a way to communicate with the
+            outside world without words. Your companion comes in various forms and colors!
           </Text>
         </Stack>
         <Flex justify="center">
-          <Image src="/landing/companion_octo.jpg" alt=" " borderRadius="25px" />
+          <Image src="/landing/companion_cloud.jpg" alt=" " borderRadius="25px" />
         </Flex>
       </SimpleGrid>
 
@@ -56,12 +58,13 @@ export const Features = () => {
             alignSelf="flex-start"
             rounded="md"
           >
-            Mood timeline
+            Oasis
           </Text>
-          <Heading>Mood timeline</Heading>
+          <Heading>Take a moment to meditate on your thoughts</Heading>
           <Text fontSize="lg">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-            invidunt ut labore
+            Life gets hectic and crowded, and it's hard to catch a break. The Oasis is a place of
+            solace - to sit down, take a deep breath, think and note down your current mood before
+            you are called to action again.
           </Text>
           <Stack spacing={4}></Stack>
         </Stack>
@@ -77,12 +80,14 @@ export const Features = () => {
             alignSelf="flex-start"
             rounded="md"
           >
-            Insights
+            Weathervane
           </Text>
-          <Heading>Insights</Heading>
+          <Heading>Reflect on your mental health</Heading>
           <Text fontSize="lg">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-            invidunt ut labore
+            It's not easy to remember feelings and tracking what's been bothering you when you're
+            caught up in the middle of it. It's best to reflect when you're calm, and take positive
+            action instead of a rushed reaction. The Weathervane shows you how you've been doing and
+            what makes you happy and what gets you down.
           </Text>
         </Stack>
         <Flex justify="center">
@@ -106,10 +111,10 @@ export const Features = () => {
           >
             Share
           </Text>
-          <Heading>Share</Heading>
+          <Heading>Spread the love ❤️</Heading>
           <Text fontSize="lg">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-            invidunt ut labore
+            Feeling proud? Excited? Loved? Let the world know! Share the moment with your loved
+            ones!
           </Text>
           <Stack spacing={4}></Stack>
         </Stack>

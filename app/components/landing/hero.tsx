@@ -37,11 +37,11 @@ export const Hero = () => {
         </Heading>
         <Text fontSize={{ base: "xl", md: "2xl" }}>
           Emotions and feelings are never easy. Sometimes it seems impossible to put into words
-          what's going in your mind.
+          what&apos;s going on in your mind.
           <br />
           And you{" "}
           <Text as="span" color="purple.400" fontWeight="bold">
-            don't have to do it alone
+            don&apos;t have to do it alone
           </Text>
           .
         </Text>

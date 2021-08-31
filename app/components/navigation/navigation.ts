@@ -4,7 +4,7 @@ import { BiNetworkChart, BiHome, BiLogIn, BiLogOut, BiSpa, BiCog } from "react-i
 export const PAGES = {
   root: "/",
   oasis: "/oasis",
-  insights: "/insights",
+  weathervane: "/weathervane",
 };
 
 export interface NavigationItem {
@@ -22,9 +22,9 @@ export const authNavigationItems: NavigationItem[] = [
     type: "internal",
   },
   {
-    label: "Insights",
+    label: "Weathervane",
     icon: BiNetworkChart,
-    href: PAGES.insights,
+    href: PAGES.weathervane,
     type: "internal",
   },
 

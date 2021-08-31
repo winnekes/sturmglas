@@ -46,19 +46,19 @@ export const ComingSoonFeatures = () => {
       >
         <Feature
           icon={<Icon as={BiTask} w={20} h={20} />}
-          title="Missions"
-          text="sturmglas will actively help you achieve your goals to improve your mental health."
+          title="Challenges"
+          text="sturmglas will actively help you achieve your goals to boost your mental health with actions and challenges"
         />
         <Feature
           icon={<Icon as={RiGroup2Line} w={20} h={20} />}
-          title="Cocoons"
-          text="Get together with people from all around, create or and join groups, exchange mental health tips and more."
+          title="Bonfires"
+          text="Get together with people from all around the world, create or join like minded groups, exchange mental health tips and more."
         />
 
         <Feature
           icon={<Icon as={TiThListOutline} w={20} h={20} />}
           title="Habits"
-          text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore..."
+          text="sturmglas will help you build healthy habits for a healthy mind, complementing your overall mental and physical wellness."
         />
       </Stack>
     </Box>
