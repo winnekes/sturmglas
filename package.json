@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "dev:start-services": "docker-compose --env-file .env.local --project-name=mentali up",
+    "dev:start-services": "docker-compose --env-file .env.local --project-name=sturmglas up",
     "graphql:generate": "graphql-codegen --watch app/queries"
   },
   "dependencies": {
