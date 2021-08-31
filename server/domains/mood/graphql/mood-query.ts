@@ -22,7 +22,7 @@ export class MoodQuery {
     }
 
     return this.moodRepository.findOne({
-      relations: ["user"],
+      relations: ["user", "tags"],
       where: { user: { authId: context.authId }, id: args.id },
     });
   }
