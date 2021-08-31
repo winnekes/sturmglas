@@ -17,6 +17,7 @@ BLECharacteristic command(COMMAND_UUID, BLECharacteristic::PROPERTY_READ | BLECh
 #define ADC_PIN             34
 #define BUZZER_PIN          27
 #define BUZZER_CHANNEL      0
+#define LED_CHANNEL         1
 
 #define _RGB(r, g, b) ((r & 0xF8) << 8) | ((g & 0xFC) << 3) | (b >> 3)
 
@@ -28,6 +29,7 @@ BLECharacteristic command(COMMAND_UUID, BLECharacteristic::PROPERTY_READ | BLECh
 #define CFG_BUZZ_OFF  "BUZZ_OFF"
 #define CFG_BUZZ_CONF "BUZZ_CONF"
 #define CFG_VERSION   "VERSION"
+#define CFG_BACKLIGHT "BACKLIGHT"
 
 Preferences pref;
 
@@ -47,13 +49,10 @@ class MyServerCallbacks: public BLEServerCallbacks {
 };
 
 void toggle_tft(bool turn_on) {
-    if (TFT_BL > 0) { // TFT_BL has been set in the TFT_eSPI library in the User Setup file TTGO_T_Display.h
-        pinMode(TFT_BL, OUTPUT); // Set backlight pin to output mode
-        if (turn_on)
-            digitalWrite(TFT_BL, TFT_BACKLIGHT_ON);
-        else
-            digitalWrite(TFT_BL, TFT_BACKLIGHT_ON == HIGH ? LOW : HIGH);
-    }
+    if (turn_on)
+        ledcWrite(LED_CHANNEL, pref.getString(CFG_BACKLIGHT).toInt());
+    else
+        ledcWrite(LED_CHANNEL, 0);
 }
 
 void clearScreen(int red = 0, int green = 0, int blue = 0) {
@@ -154,6 +153,8 @@ void setup() {
     init();
 
     Serial.println("Starting screen...");
+    ledcSetup(LED_CHANNEL, 5000, 8);
+    ledcAttachPin(TFT_BL, LED_CHANNEL);
     tft.init();
     tft.setRotation(1);
     tft.setTextSize(3);
@@ -218,7 +219,7 @@ int currentFace = 0;
 int faces = 0;
 void drawFace() {
     faces = buf[0];
-    if (currentFace >= faces) {
+    if (currentFace >= faces) {                  
         buf = face.getData();
 
         faces = buf[0];
@@ -262,6 +263,10 @@ void init() {
 
     if (!pref.isKey(CFG_BUZZ_CONF)) {
         pref.putString(CFG_BUZZ_CONF, "1000");
+    }
+
+    if (!pref.isKey(CFG_BACKLIGHT)) {
+        pref.putString(CFG_BACKLIGHT, "255");
     }
 }
 
