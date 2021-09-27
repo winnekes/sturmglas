@@ -1,8 +1,8 @@
 import "reflect-metadata";
 import type { PageConfig } from "next";
 import Cors from "micro-cors";
-import { initializeDatabase } from "../../server/database-connection";
-import { startGraphqlServer } from "../../server/graphql-server";
+import { initializeDatabase } from "../../legacy-server/database-connection";
+import { startGraphqlServer } from "../../legacy-server/graphql-server";
 
 const cors = Cors();
 // TODO: check if this is acceptable or if I need to create connection on demand
