@@ -5,7 +5,7 @@ import {
   handleLogin,
   handleProfile,
 } from "@auth0/nextjs-auth0";
-import { afterCallback } from "../../../legacy-server/utils/after-login-callback";
+import { afterCallback } from "../../../server/utils/after-login-callback";
 
 export default handleAuth({
   async profile(req, res) {
